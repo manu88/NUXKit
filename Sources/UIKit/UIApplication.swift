@@ -175,7 +175,6 @@ class UIApplication
     {
         assert(win != nil)
         
-        print("showWindow")
         
         if( win!.prepare())
         {

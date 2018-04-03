@@ -55,5 +55,10 @@ static inline GtkFixed* toGtkFixed( gpointer instance)
     return  G_TYPE_CHECK_INSTANCE_CAST ((instance), GTK_TYPE_FIXED, GtkFixed);
 }
 
+static inline GtkLabel* toGtkLabel( gpointer instance)
+{
+    return  G_TYPE_CHECK_INSTANCE_CAST ((instance), GTK_TYPE_LABEL, GtkLabel);
+}
+
 
 #endif /* test_h */

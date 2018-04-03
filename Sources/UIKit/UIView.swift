@@ -23,8 +23,16 @@ open class UIView : UIResponder/*, NSCoding, UIAppearance, UIAppearanceContainer
         if (_impl == nil)
         {
             _impl = gtk_fixed_new()// gtk_button_new()
+            
+            var defaultColor = GdkRGBA()
+            defaultColor.alpha = 1.0
+            defaultColor.red   = 1.0
+            defaultColor.green = 1.0
+            defaultColor.blue  = 1.0
+            gtk_widget_override_background_color( _impl, GTK_STATE_FLAG_BACKDROP, &defaultColor)
             assert(_impl != nil)
         }
+        
         
         return _impl != nil
  
@@ -47,6 +55,12 @@ open class UIView : UIResponder/*, NSCoding, UIAppearance, UIAppearanceContainer
             
             gtk_widget_destroy( _impl)
         }
+    }
+    
+    
+    open func didAddSubview(_ subview: UIView)
+    {
+        
     }
     
     
@@ -175,6 +189,8 @@ extension UIView // Hierarchy
         
         //gtk_container_add ( toGtkContainer( _impl) , view._impl);
         _subviews.append(view)
+        
+        didAddSubview(view)
 
         //setNeedsDisplay()
     }

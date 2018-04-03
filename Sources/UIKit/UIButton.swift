@@ -16,7 +16,7 @@ open class UIButton : UIControl/*, NSCoding */
     
     open func setTitle(_ title: String?, for state: UIControlState) // default is nil. title is assumed to be single line
     {
-        print("Button set title to \(String(describing: title))")
+        
         _titles[state.rawValue] = title
         
         prepare()
@@ -53,9 +53,7 @@ open class UIButton : UIControl/*, NSCoding */
             
             //return true
         }
-        print("Button prepare")
-        
-        
+
         if let normalTitle = _titles[UIControlState.normal.rawValue]
         {
             gtk_button_set_label(toGtkButton( _impl), normalTitle )

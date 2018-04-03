@@ -11,9 +11,10 @@
 class ViewController: UIViewController {
     
     var button : UIButton!
+    var  label : UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("ViewController.viewDidLoad")
+        print("ViewController.viewDidLoad  \(view.description)")
         
         button = UIButton(frame: CGRect(x: 100, y: 100, width: 100, height: 50))
         button.backgroundColor = .green
@@ -21,11 +22,26 @@ class ViewController: UIViewController {
         view.addSubview(button)
         button.addTarget(self, action: #selector(ViewController.buttonAction), for: .touchUpInside)
         
+        
+        label = UILabel(frame: CGRect(x: 100, y: 200, width: 100, height: 20))
+        label.text = "Some text"
+        view.addSubview(label)
+        
+        
+        
     }
     
     @objc func buttonAction(/*sender: UIButton!*/) {
         print("Button tapped")
         
+        if( label.text == "Some text")
+        {
+            label.text = "Some other text"
+        }
+        else
+        {
+            label.text = "Some text"
+        }
         if( button.title(for: .normal) == "Hello")
         {
             button.setTitle("Other title", for: .normal)
@@ -35,6 +51,9 @@ class ViewController: UIViewController {
             button.setTitle("Hello", for: .normal)
         }
         
+        present(ViewController2(), animated: true) {
+            print("Transition ended")
+        }
     }
     
     override func didReceiveMemoryWarning() {

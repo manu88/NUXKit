@@ -46,8 +46,21 @@ open class UIWindow : UIView
         
         UIApplication.shared.win = self
         
-
+        didAddSubview(rootViewController!.view!)
+        
+        
         //UIApplication.shared.showWindow()
         
     }
+    
+    
+    
+    
+    
+}
+
+
+extension UIWindow
+{
+    
 }

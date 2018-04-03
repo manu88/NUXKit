@@ -127,7 +127,8 @@ open class UIControl : UIView
         {
             for action in list
             {
-                action.target?.perform(action.select)
+                
+                _ = action.target?.perform(action.select)
             }
         }
         //if let action = _actions[

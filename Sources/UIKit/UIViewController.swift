@@ -11,11 +11,29 @@ import Foundation
 //@objc(UIViewController)
 open class UIViewController : UIResponder, NSCoding /*,UIAppearanceContainer, UITraitEnvironment, UIContentContainer, UIFocusEnvironment*/
 {
-    // TEST !!!
-    required override public init()
+
+    
+    
+    /*
+     The designated initializer. If you subclass UIViewController, you must call the super implementation of this
+     method, even if you aren't using a NIB.  (As a convenience, the default init method will do this for you,
+     and specify nil for both of this methods arguments.) In the specified NIB, the File's Owner proxy should
+     have its class set to your view controller subclass, with the view outlet connected to the main view. If you
+     invoke this method with a nil nib name, then this class' -loadView method will attempt to load a NIB whose
+     name is the same as your view controller's class. If no such NIB in fact exists then you must either call
+     -setView: before -view is invoked, or override the -loadView method to set up your views programatically.
+     */
+    public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
     {
         
     }
+    
+    // Where is this located in UIKit?
+    convenience override init()
+    {
+        self.init(nibName: nil, bundle: nil)
+    }
+    
     public func encode(with aCoder: NSCoder) {
         
     }
@@ -54,4 +72,32 @@ open class UIViewController : UIResponder, NSCoding /*,UIAppearanceContainer, UI
     open func didReceiveMemoryWarning() // Called when the parent application receives a memory warning. On iOS 6.0 it will no longer clear the view by default.
     {}
     
+    
+    /*
+     The next two methods are replacements for presentModalViewController:animated and
+     dismissModalViewControllerAnimated: The completion handler, if provided, will be invoked after the presented
+     controllers viewDidAppear: callback is invoked.
+     */
+    @available(iOS 5.0, *)
+    open func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Swift.Void)? = nil)
+    {
+        print("Begin UIViewController.present")
+        
+        print("End UIViewController.present")
+        
+        if (completion != nil)
+        {
+            DispatchQueue.main.async {
+                completion!()
+            }
+        }
+        
+    }
+    
+    // The completion handler, if provided, will be invoked after the dismissed controller's viewDidDisappear: callback is invoked.
+    @available(iOS 5.0, *)
+    open func dismiss(animated flag: Bool, completion: (() -> Swift.Void)? = nil)
+    {
+        
+    }
 }

@@ -19,9 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         assert(window == nil)
         
         
-        window = UIWindow(frame: UIScreen.main.bounds)
+        window = Window(frame: UIScreen.main.bounds)
         
         window!.rootViewController = ViewController()
+        print("AppDelegate.didFinishLaunchingWithOptions rootView is \(String(describing: window!.rootViewController?.view))")
         window!.rootViewController?.view.backgroundColor = UIColor.white
         
         
