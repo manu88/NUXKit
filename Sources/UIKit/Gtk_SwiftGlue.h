@@ -39,6 +39,11 @@ static inline bool GtkIsWidget( gpointer instance)
     return GTK_IS_WIDGET(instance);
 }
 
+static inline bool GtkIsButton( gpointer instance)
+{
+    return GTK_IS_BUTTON(instance);
+}
+
 static inline GtkContainer* toGtkContainer( gpointer instance)
 {
     return  G_TYPE_CHECK_INSTANCE_CAST ((instance), GTK_TYPE_CONTAINER, GtkContainer);

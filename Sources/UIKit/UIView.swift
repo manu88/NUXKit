@@ -42,6 +42,7 @@ open class UIView : UIResponder/*, NSCoding, UIAppearance, UIAppearanceContainer
     public init(frame: CGRect)
     {
         _frame = frame
+        
     }
     
     public init?(coder aDecoder: NSCoder)
@@ -86,6 +87,7 @@ open class UIView : UIResponder/*, NSCoding, UIAppearance, UIAppearanceContainer
         _viewController = vc
     }
     
+    
     private var _viewController : UIViewController? = nil
     //private var _view: UnsafeMutablePointer<GtkWidget>? = nil
     private var _superview : UIView? = nil
@@ -101,7 +103,26 @@ extension UIView // Color and parameters
     
     open var isHidden: Bool // default is NO. doesn't check superviews
     {
-        get{ return false}
+        get
+        {
+            
+            
+            return gtk_widget_get_visible( _impl) == 0
+            
+        }
+        
+        set
+        {
+            if( newValue == true)
+            {
+                gtk_widget_set_visible(_impl, 0 )
+            }
+            else
+            {
+                gtk_widget_set_visible(_impl, 1 )
+            }
+            
+        }
     }
     open var backgroundColor: UIColor? // default is nil. Can be useful with the appearance proxy on custom UIView subclasses.
     {
@@ -126,7 +147,6 @@ extension UIView // Color and parameters
                 if( _impl != nil)
                 {
                     gtk_widget_override_background_color( _impl, GTK_STATE_FLAG_NORMAL, &color)
-                    
                 }
                 
             }
@@ -214,6 +234,7 @@ extension UIView // Hierarchy
         }
         
         gtk_widget_show(view._impl);
+
         gtk_fixed_put(toGtkFixed(_impl), view._impl, gint( view.frame.origin.x ), gint( view.frame.origin.y ) )
         
         doAddSubview(subview: view)

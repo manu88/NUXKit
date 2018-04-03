@@ -9,6 +9,15 @@
 import Foundation
 
 
+func bridgeRetained<T : AnyObject>(obj : T) -> UnsafeMutableRawPointer
+{
+    return UnsafeMutableRawPointer(Unmanaged.passRetained(obj).toOpaque())
+}
+
+func bridgeTransfer<T : AnyObject>(ptr : UnsafeRawPointer) -> T {
+    return Unmanaged<T>.fromOpaque(UnsafeRawPointer(ptr)).takeRetainedValue()
+}
+
 open class UIWindow : UIView
 {
     // will go private
@@ -23,19 +32,34 @@ open class UIWindow : UIView
     }
  */
     
+    deinit {
+        gtk_widget_destroy( _windowImpl)
+    }
+    var _windowImpl : UnsafeMutablePointer<GtkWidget>? = nil
+    
     public override func prepare() -> Bool
     {
         if( _impl == nil)
         {
-            _impl = gtk_window_new(GTK_WINDOW_TOPLEVEL)
+            _impl = gtk_fixed_new()
             g_object_ref(_impl)
             
-            gtk_container_set_border_width (toGtkContainer(_impl) , 10);
-            gtk_window_set_title (toGtkWindow (_impl), "Test UIKit");
-            
-            gtk_window_set_default_size( toGtkWindow (_impl), gint(frame.size.width), gint( frame.size.height) )
         }
-        return _impl != nil
+        
+        if( _windowImpl == nil)
+        {
+            _windowImpl = gtk_window_new(GTK_WINDOW_TOPLEVEL)
+            gtk_window_set_default_size( toGtkWindow (_windowImpl), gint(frame.size.width), gint( frame.size.height) )
+            gtk_window_set_resizable( toGtkWindow (_windowImpl), 0)
+            gtk_widget_set_size_request(_windowImpl, gint(frame.size.width), gint( frame.size.height) )
+            
+            gtk_window_set_title (toGtkWindow (_windowImpl), "Test UIKit");
+            //gtk_fixed_put(toGtkFixed(_impl), view._impl, gint( view.frame.origin.x ), gint( view.frame.origin.y ) )
+            
+            gtk_container_add (toGtkContainer(_windowImpl), _impl);
+        }
+
+        return _impl != nil && _windowImpl != nil
     }
     
 
@@ -94,8 +118,68 @@ open class UIWindow : UIView
         viewController.viewWillAppear(flag)
         
         viewController.view._window = self
-        gtk_container_add ( toGtkContainer( _impl), viewController.view._impl);
-        gtk_widget_show_all( _impl )
+        
+        
+        //viewOrigin.y += 100
+        let viewOrigin = viewController.view.frame.origin
+        gtk_fixed_put(toGtkFixed(_impl), viewController.view._impl, gint( viewOrigin.x ), gint( viewOrigin.y ) )
+        
+        gtk_widget_show_all( _windowImpl )
+        
+        
+        if( true)// flag )
+        {
+            class AnimContext
+            {
+                init()
+                {
+                    
+                }
+                var window : UIWindow!
+                var startOrigin = CGPoint()
+                var currentPoint = CGPoint()
+                var endOrigin = CGPoint()
+                
+                var view : UIView!
+            }
+            
+            let animContext = AnimContext()
+            animContext.window = self
+            animContext.startOrigin = CGPoint(x: 0, y: frame.size.height)
+            animContext.currentPoint = CGPoint(x: 0, y: frame.size.height)
+            animContext.endOrigin = viewController.view.frame.origin
+            animContext.view = viewController.view
+            
+            
+            let ptr = UnsafeMutableRawPointer(Unmanaged.passRetained(animContext).toOpaque())
+            // milliseconds
+            g_timeout_add_full(G_PRIORITY_DEFAULT, 25, { (data) -> gboolean in
+                // timeout
+                let animContext = Unmanaged<AnimContext>.fromOpaque(data!).takeUnretainedValue()
+                
+                gtk_widget_set_size_request(animContext.window._impl, gint(animContext.window.frame.size.width), gint( animContext.window.frame.size.height) )
+                gtk_widget_set_size_request(animContext.window._windowImpl, gint(animContext.window.frame.size.width), gint( animContext.window.frame.size.height) )
+                gtk_fixed_move ( toGtkFixed( animContext.window._impl),
+                                animContext.view._impl,
+                    gint( animContext.currentPoint.x),
+                    gint( animContext.currentPoint.y)
+                )
+                
+                animContext.currentPoint.y -= 100
+                print("Y pos \(animContext.currentPoint.y) \(animContext.endOrigin.y )")
+                
+                if( animContext.currentPoint.y <= animContext.endOrigin.y )
+                {
+                    return 0
+                }
+                return 1
+            }, ptr, { (data) in
+                // GDestroyNotify
+                print("Anim ended")
+                
+            })
+        
+        }
         viewController.viewDidAppear(flag)
     }
     open func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Swift.Void)? = nil)

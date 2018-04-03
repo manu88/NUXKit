@@ -53,6 +53,9 @@ open class UIButton : UIControl/*, NSCoding */
             
             //return true
         }
+        
+        assert(_impl != nil)
+        assert( GtkIsButton(_impl))
 
         if let normalTitle = _titles[UIControlState.normal.rawValue]
         {
