@@ -16,7 +16,7 @@ class ViewController2: UIViewController
     
     
     var button : UIButton!
-    
+    var buttonNext : UIButton!
     
     override func viewWillAppear(_ animated: Bool) // Called when the view is about to made visible. Default does nothing
     {
@@ -47,6 +47,13 @@ class ViewController2: UIViewController
         button.setTitle("Back", for: .normal)
         view.addSubview(button)
         button.addTarget(self, action: #selector(ViewController.buttonAction), for: .touchUpInside)
+        
+        
+        buttonNext = UIButton(frame: CGRect(x: 100, y: 400, width: 100, height: 50))
+        buttonNext.backgroundColor = .red
+        buttonNext.setTitle("Next", for: .normal)
+        view.addSubview(buttonNext)
+        buttonNext.addTarget(self, action: #selector(ViewController2.buttonActionNext), for: .touchUpInside)
     }
     
     override func didReceiveMemoryWarning() {
@@ -60,6 +67,18 @@ class ViewController2: UIViewController
         
         dismiss(animated: false) {
             print("ViewController2.dismiss.completion")
+        }
+    }
+    
+    @objc func buttonActionNext(/*sender: UIButton!*/) {
+        print("Next Button tapped")
+        
+        present(ViewController3(), animated: false)
+        {
+            print("Transition ended")
+            assert(self.view.window == nil)
+            assert(self.view.superview == nil )
+            assert( self.view.isHidden == false  )// not hidden
         }
     }
     
