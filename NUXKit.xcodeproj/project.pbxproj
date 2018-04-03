@@ -220,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				59EB412F207110AD00F29CA5 /* TestAPI-Bridging-Header.h */,
+				59EB412E207110AD00F29CA5 /* Gtk_SwiftGlue.h */,
 				59EB4131207110AD00F29CA5 /* UIResponder.swift */,
 				594FE37D207286550098613B /* UIScreen.swift */,
 				594FE35B20727E5E0098613B /* UIButton.swift */,
@@ -227,7 +228,6 @@
 				594FE35D20727E840098613B /* UIControl.swift */,
 				594FE359207269430098613B /* UIColor.swift */,
 				59EB412D207110AD00F29CA5 /* UIView.swift */,
-				59EB412E207110AD00F29CA5 /* Gtk_SwiftGlue.h */,
 				59EB4132207110AD00F29CA5 /* UIViewController.swift */,
 				59EB4133207110AD00F29CA5 /* UIWindow.swift */,
 				59EB4134207110AD00F29CA5 /* UIApplication.swift */,
@@ -597,6 +597,8 @@
 					"$(inherited)",
 					"/usr/local/Cellar/gtk+3/3.22.29_1/lib",
 				);
+				MODULE_NAME = "";
+				PRODUCT_MODULE_NAME = TestNoStoryboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Sources/UIKit/TestAPI-Bridging-Header.h";
@@ -629,6 +631,8 @@
 					"$(inherited)",
 					"/usr/local/Cellar/gtk+3/3.22.29_1/lib",
 				);
+				MODULE_NAME = "";
+				PRODUCT_MODULE_NAME = TestNoStoryboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Sources/UIKit/TestAPI-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -661,7 +665,8 @@
 					"$(inherited)",
 					"/usr/local/Cellar/gtk+3/3.22.29_1/lib",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_MODULE_NAME = TestGtk;
+				PRODUCT_NAME = TestGtk;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -692,7 +697,8 @@
 					"$(inherited)",
 					"/usr/local/Cellar/gtk+3/3.22.29_1/lib",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_MODULE_NAME = TestGtk;
+				PRODUCT_NAME = TestGtk;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

@@ -34,7 +34,10 @@ static inline void g_signal_connect2(gpointer instance ,
 }
 
 
-
+static inline bool GtkIsWidget( gpointer instance)
+{
+    return GTK_IS_WIDGET(instance);
+}
 
 static inline GtkContainer* toGtkContainer( gpointer instance)
 {

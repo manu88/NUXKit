@@ -10,6 +10,33 @@ import Foundation
 
 
 
+// If nil is specified for principalClassName, the value for NSPrincipalClass from the Info.plist is used. If there is no
+// NSPrincipalClass key specified, the UIApplication class is used. The delegate class will be instantiated using init.
+func UIApplicationMain(_ argc: Int32, _ argv: UnsafeMutablePointer<UnsafeMutablePointer<Int8>>!, _ principalClassName: String?, _ delegateClassName: String?) -> Int32
+{
+    
+
+    guard let delegateClassName = delegateClassName else
+    {
+        return 1
+    }
+    
+    let app = UIApplication.shared
+    
+    if let delegateClass = NSClassFromString(delegateClassName) , let deleg = delegateClass.alloc() as? UIApplicationDelegate
+    {
+        
+        app.delegate = deleg
+        return  app.UIApplicationMain(0, nil, nil, nil)
+    }
+    else
+    {
+        print("[Warning] unable to create class '\(delegateClassName)'")
+    }
+    
+    return 2
+}
+
 public struct UIApplicationLaunchOptionsKey : Hashable, Equatable, RawRepresentable {
     public var rawValue: String
     
@@ -171,10 +198,10 @@ class UIApplication : UIResponder
         
         
         
-        showWindow()
+        win!.presentRootViewController(animated: true) {
+            self.delegate?.applicationDidBecomeActive(self)
+        }
         
-        
-        delegate?.applicationDidBecomeActive(self)
         
         gtk_main();
         return 0
@@ -203,19 +230,7 @@ class UIApplication : UIResponder
         
     }
     
-    func showWindow()
-    {
-        assert(win != nil)
-        
-        
-        if( win!.prepare())
-        {
-            _ = win!.rootViewController?.view.prepare()
-            
-            gtk_container_add (toGtkContainer(win!._impl), win!.rootViewController!.view._impl);
-            gtk_widget_show_all( win!._impl )
-        }
-    }
+    
     
     private func quitSignal()
     {

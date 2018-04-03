@@ -37,7 +37,7 @@ open class UIButton : UIControl/*, NSCoding */
         if( _impl == nil)
         {
             _impl = gtk_button_new()
-            
+            g_object_ref(_impl)
             let ptr = UnsafeMutableRawPointer(Unmanaged.passUnretained(self).toOpaque())
             
             g_signal_connect_with_data(_impl, "clicked", { (widget, data) in

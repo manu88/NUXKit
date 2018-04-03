@@ -29,6 +29,7 @@ class UILabel : UIView
         if( _impl == nil)
         {
             _impl = gtk_label_new("Test")
+            g_object_ref(_impl)
         }
         
         if let t = text

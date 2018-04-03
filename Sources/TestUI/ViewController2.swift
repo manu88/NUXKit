@@ -7,24 +7,46 @@
 //
 
 
+#if os(iOS)
+import UIKit
+#endif
 
-class ViewController2: UIViewController {
+class ViewController2: UIViewController
+{
+    
+    
+    var button : UIButton!
+    
+    
+    override func viewWillAppear(_ animated: Bool) // Called when the view is about to made visible. Default does nothing
+    {
+        assert(view.window == nil)
+        assert(view.next == self)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) // Called when the view has been fully transitioned onto the screen. Default does nothing
+    {
+        assert(view.window != nil)
+        assert(view.window!.next == UIApplication.shared)
+        assert(view.next == self)
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
-    }
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         
-        print("ViewController2.init nib called")
         
-    }
-    
-    public required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        print("ViewController2.viewDidLoad  \(view.description)")
+        
+        view.backgroundColor = UIColor.blue
+        
+        
+        button = UIButton(frame: CGRect(x: 100, y: 100, width: 100, height: 50))
+        button.backgroundColor = .green
+        button.setTitle("Back", for: .normal)
+        view.addSubview(button)
+        button.addTarget(self, action: #selector(ViewController.buttonAction), for: .touchUpInside)
     }
     
     override func didReceiveMemoryWarning() {
@@ -33,14 +55,15 @@ class ViewController2: UIViewController {
     }
     
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    @objc func buttonAction(/*sender: UIButton!*/) {
+        print("Back Button tapped")
+        
+        dismiss(animated: false) {
+            print("ViewController2.dismiss.completion")
+        }
+    }
+    
+    
     
 }
+

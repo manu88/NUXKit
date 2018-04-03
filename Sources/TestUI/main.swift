@@ -7,18 +7,21 @@
 //
 
 import Foundation
-
+#if os(iOS)
+import UIKit
+#endif
 /*
 let sb = StoryBoardPlugin()
 sb.loadStoryboard("/Users/manueldeneu/Documents/projets/TestPortUIKit/TestSimpleView/TestSimpleView/Base.lproj/Main.storyboard")
 */
-
+/*
 // This code sort of replaces '@UIApplicationMain' 
 let app = UIApplication.shared
 app.delegate = AppDelegate()
 let retCode = app.UIApplicationMain(0, nil, nil, nil)
 exit (retCode)
 
-
+*/
+exit(UIApplicationMain(0,nil , nil, "TestNoStoryboard.AppDelegate"))
     
 

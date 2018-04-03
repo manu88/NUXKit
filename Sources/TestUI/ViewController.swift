@@ -6,7 +6,9 @@
 //  Copyright © 2018 Manuel Deneu. All rights reserved.
 //
 
-
+#if os(iOS)
+import UIKit
+#endif
 
 class ViewController: UIViewController {
     
@@ -34,13 +36,19 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) // Called when the view is about to made visible. Default does nothing
     {
-        assert(view.window == nil)
         print("ViewControler.viewWillAppear")
+        
+        assert(view.window == nil)
+        assert(view.next == self)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) // Called when the view has been fully transitioned onto the screen. Default does nothing
     {
         assert(view.window != nil)
+        assert(view.window!.next == UIApplication.shared)
+        assert(view.next == self)
+        
         print("ViewControler.viewDidAppear")
     }
     
@@ -59,6 +67,7 @@ class ViewController: UIViewController {
         
         super.viewDidLoad()
         assert(view.window == nil)
+        
         assert(view.next == self)
         print("ViewController.viewDidLoad  \(view.description)")
         
@@ -76,6 +85,11 @@ class ViewController: UIViewController {
         
         assert(label.superview == view)
         assert(view.superview == view.window)
+        
+        // must never be called !!
+        dismiss(animated: true) {
+            assert(false)
+        }
         
     }
     
@@ -100,8 +114,12 @@ class ViewController: UIViewController {
         }
         
         
-        present(ViewController2(), animated: true) {
+        present(ViewController2(), animated: false)
+        {
             print("Transition ended")
+            assert(self.view.window == nil)
+            assert(self.view.superview == nil )
+            assert( self.view.isHidden == false  )// not hidden
         }
     }
     

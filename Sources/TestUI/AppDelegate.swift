@@ -6,9 +6,18 @@
 //  Copyright © 2018 Manuel Deneu. All rights reserved.
 //
 
+#if os(iOS)
+import UIKit
+#endif
 
-
-
+/* This is somewhat complicated to do conditional compilation for '@UIApplicationMain' to disapear for NUXKit builds.
+ So for now, a main.swift as to be created with:
+ 
+ `exit(UIApplicationMain(0,nil , nil, APP_DELEGATE_CLASS_NAME))`
+ 
+ note : APP_DELEGATE_CLASS_NAME must be something like ModuleName.AppDelegate , ModuleName being the name of the module/app.
+ */
+//@UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
@@ -22,6 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = Window(frame: UIScreen.main.bounds)
         
         window!.rootViewController = ViewController()
+        
         print("AppDelegate.didFinishLaunchingWithOptions rootView is \(String(describing: window!.rootViewController?.view))")
         window!.rootViewController?.view.backgroundColor = UIColor.white
         
@@ -47,9 +57,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
     }
     
-    func applicationDidBecomeActive(_ application: UIApplication)
-    {
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        
+        // seems that AppDelegate MUST be a UIResponder
         assert(application.next == self)
+        /*
+         if( self is UIResponder)
+         {
+         assert(application.next == self)
+         }
+         else
+         {
+         assert(application.next == nil)
+         }
+         */
     }
     
     func applicationWillTerminate(_ application: UIApplication) {

@@ -6,6 +6,10 @@
 //  Copyright © 2018 Manuel Deneu. All rights reserved.
 //
 
+#if os(iOS)
+import UIKit
+#endif
+
 import Foundation
 
 class Window: UIWindow
@@ -16,7 +20,7 @@ class Window: UIWindow
     {
         super.didAddSubview(subview)
         
-        assert(subview.window == self)
+        //assert(subview.window == self)
         
         print("Window.didAddSubview  \(subview.description)")
         

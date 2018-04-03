@@ -85,24 +85,14 @@ open class UIViewController : UIResponder, NSCoding /*,UIAppearanceContainer, UI
     @available(iOS 5.0, *)
     open func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Swift.Void)? = nil)
     {
-        print("Begin UIViewController.present")
-        
-        print("End UIViewController.present")
-        
-        if (completion != nil)
-        {
-            DispatchQueue.main.async {
-                completion!()
-            }
-        }
-        
+        view.window?.present(viewControllerToPresent, animated: flag, completion: completion)
     }
     
     // The completion handler, if provided, will be invoked after the dismissed controller's viewDidDisappear: callback is invoked.
     @available(iOS 5.0, *)
     open func dismiss(animated flag: Bool, completion: (() -> Swift.Void)? = nil)
     {
-        
+        view.window?.dismiss(animated: flag, completion: completion)
     }
     
     open func viewWillAppear(_ animated: Bool) // Called when the view is about to made visible. Default does nothing

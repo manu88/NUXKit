@@ -23,6 +23,7 @@ open class UIView : UIResponder/*, NSCoding, UIAppearance, UIAppearanceContainer
         if (_impl == nil)
         {
             _impl = gtk_fixed_new()// gtk_button_new()
+            g_object_ref(_impl)
             
             var defaultColor = GdkRGBA()
             defaultColor.alpha = 1.0
@@ -52,7 +53,7 @@ open class UIView : UIResponder/*, NSCoding, UIAppearance, UIAppearanceContainer
     {
         if( _impl != nil)
         {
-            
+            g_object_unref(_impl)
             gtk_widget_destroy( _impl)
         }
     }
@@ -97,6 +98,11 @@ open class UIView : UIResponder/*, NSCoding, UIAppearance, UIAppearanceContainer
 
 extension UIView // Color and parameters
 {
+    
+    open var isHidden: Bool // default is NO. doesn't check superviews
+    {
+        get{ return false}
+    }
     open var backgroundColor: UIColor? // default is nil. Can be useful with the appearance proxy on custom UIView subclasses.
     {
         get
@@ -114,7 +120,7 @@ extension UIView // Color and parameters
                 color.blue  = gdouble( newColor.blue  )
                 color.alpha = gdouble( newColor.alpha )
             
-                prepare()
+                _ = prepare()
                 assert(_impl != nil)
                 
                 if( _impl != nil)
