@@ -12,9 +12,53 @@ class ViewController: UIViewController {
     
     var button : UIButton!
     var  label : UILabel!
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        assert(view != nil )
+        assert(view.next != nil)
+        assert(view.window  == nil)
+        
+        print("\(String(describing: view.next?.description))")
+        
+        
+    }
+    
+    
+    
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) // Called when the view is about to made visible. Default does nothing
+    {
+        assert(view.window == nil)
+        print("ViewControler.viewWillAppear")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) // Called when the view has been fully transitioned onto the screen. Default does nothing
+    {
+        assert(view.window != nil)
+        print("ViewControler.viewDidAppear")
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) // Called when the view is dismissed, covered or otherwise hidden. Default does nothing
+    {
+        print("ViewControler.viewWillDisappear")
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) // Called after the view was dismissed, covered or otherwise hidden. Default does nothing
+    {
+        print("ViewControler.viewDidDisappear")
+    }
+    
+    override func viewDidLoad() {
+        
+        
+        super.viewDidLoad()
+        assert(view.window == nil)
         assert(view.next == self)
         print("ViewController.viewDidLoad  \(view.description)")
         
@@ -33,26 +77,6 @@ class ViewController: UIViewController {
         assert(label.superview == view)
         assert(view.superview == view.window)
         
-    }
-    
-    override func viewWillAppear(_ animated: Bool) // Called when the view is about to made visible. Default does nothing
-    {
-        print("ViewControler.viewWillAppear")
-    }
-    
-    override func viewDidAppear(_ animated: Bool) // Called when the view has been fully transitioned onto the screen. Default does nothing
-    {
-        print("ViewControler.viewDidAppear")
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) // Called when the view is dismissed, covered or otherwise hidden. Default does nothing
-    {
-        print("ViewControler.viewWillDisappear")
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) // Called after the view was dismissed, covered or otherwise hidden. Default does nothing
-    {
-        print("ViewControler.viewDidDisappear")
     }
     
     @objc func buttonAction(/*sender: UIButton!*/) {
@@ -74,6 +98,7 @@ class ViewController: UIViewController {
         {
             button.setTitle("Hello", for: .normal)
         }
+        
         
         present(ViewController2(), animated: true) {
             print("Transition ended")

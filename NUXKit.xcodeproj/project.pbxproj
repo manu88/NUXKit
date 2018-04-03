@@ -219,6 +219,8 @@
 		59EB412C207110AD00F29CA5 /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				59EB412F207110AD00F29CA5 /* TestAPI-Bridging-Header.h */,
+				59EB4131207110AD00F29CA5 /* UIResponder.swift */,
 				594FE37D207286550098613B /* UIScreen.swift */,
 				594FE35B20727E5E0098613B /* UIButton.swift */,
 				594FE37F2072B9F50098613B /* UILabel.swift */,
@@ -226,8 +228,6 @@
 				594FE359207269430098613B /* UIColor.swift */,
 				59EB412D207110AD00F29CA5 /* UIView.swift */,
 				59EB412E207110AD00F29CA5 /* Gtk_SwiftGlue.h */,
-				59EB412F207110AD00F29CA5 /* TestAPI-Bridging-Header.h */,
-				59EB4131207110AD00F29CA5 /* UIResponder.swift */,
 				59EB4132207110AD00F29CA5 /* UIViewController.swift */,
 				59EB4133207110AD00F29CA5 /* UIWindow.swift */,
 				59EB4134207110AD00F29CA5 /* UIApplication.swift */,

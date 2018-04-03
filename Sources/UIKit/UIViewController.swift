@@ -25,6 +25,9 @@ open class UIViewController : UIResponder, NSCoding /*,UIAppearanceContainer, UI
      */
     public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
     {
+        super.init()
+        
+        
         
     }
     
@@ -63,6 +66,7 @@ open class UIViewController : UIResponder, NSCoding /*,UIAppearanceContainer, UI
     open func loadView() // This is where subclasses should create their custom view hierarchy if they aren't using a nib. Should never be called directly.
     {
         _view = UIView(frame: CGRect() )
+        _view.setViewController(self)
         viewDidLoad()
     }
     

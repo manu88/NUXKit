@@ -30,7 +30,7 @@ static inline void g_signal_connect2(gpointer instance ,
                                       GCallback      c_handler
                                     )
 {
-    g_signal_connect_data (instance, detailed_signal, G_CALLBACK(c_handler), NULL, NULL, 0);
+    g_signal_connect_data (instance, detailed_signal, G_CALLBACK(c_handler), NULL, NULL,(GConnectFlags) 0);
 }
 
 

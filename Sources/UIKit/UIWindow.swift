@@ -45,7 +45,7 @@ open class UIWindow : UIView
 
         
         UIApplication.shared.win = self
-        
+        rootViewController?.view._window = self
         didAddSubview(rootViewController!.view!)
         
         

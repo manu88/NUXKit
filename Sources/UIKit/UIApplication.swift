@@ -38,6 +38,9 @@ protocol UIApplicationDelegate //: NSObjectProtocol
     @available(iOS 3.0, *)
     /*optional public*/ func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? /*= nil*/) -> Bool
     
+    @available(iOS 2.0, *)
+    /*optional public*/ func applicationDidBecomeActive(_ application: UIApplication)
+    
 }
 
 extension UIApplicationDelegate
@@ -54,9 +57,12 @@ extension UIApplicationDelegate
     {
         return true
     }
+    
+    func applicationDidBecomeActive(_ application: UIApplication)
+    {}
 }
 
-class UIApplication
+class UIApplication : UIResponder
 {
     
     var win : UIWindow? = nil
@@ -72,9 +78,9 @@ class UIApplication
         }
     
     
-    init()
+    override init()
     {
-        
+        super.init()
         doPlateformInit()
     }
     
@@ -167,8 +173,34 @@ class UIApplication
         
         showWindow()
         
+        
+        delegate?.applicationDidBecomeActive(self)
+        
         gtk_main();
         return 0
+    }
+    
+    override var next: UIResponder?
+    {
+        get
+        {
+            /*
+             The shared UIApplication object normally returns nil, but it returns its app delegate if that object is a subclass of UIResponder and has not already been called to handle the event.
+             */
+            //FIXME : might return delegate
+            
+            if let d = delegate as? NSObject
+            {
+                if( d is UIResponder)
+                {
+                    // '?' or '!' ?
+                    return d as? UIResponder
+                }
+            }
+            return nil
+            
+        }
+        
     }
     
     func showWindow()
@@ -178,7 +210,7 @@ class UIApplication
         
         if( win!.prepare())
         {
-            win!.rootViewController?.view.prepare()
+            _ = win!.rootViewController?.view.prepare()
             
             gtk_container_add (toGtkContainer(win!._impl), win!.rootViewController!.view._impl);
             gtk_widget_show_all( win!._impl )

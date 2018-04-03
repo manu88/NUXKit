@@ -63,10 +63,32 @@ open class UIView : UIResponder/*, NSCoding, UIAppearance, UIAppearanceContainer
         
     }
     
+    /*
+     UIView implements this method and returns the UIViewController object that manages it (if it has one) or its superview (if it doesn’t).
+     */
+    override open var next: UIResponder?
+    {
+        get
+        {
+            if( _viewController != nil)
+            {
+                return _viewController
+            }
+            
+            return _superview
+        }
+    }
     
-    private var view: UnsafeMutablePointer<GtkWidget>? = nil
+    // Temp Method!
+    func setViewController( _ vc: UIViewController?)
+    {
+        _viewController = vc
+    }
+    
+    private var _viewController : UIViewController? = nil
+    //private var _view: UnsafeMutablePointer<GtkWidget>? = nil
     private var _superview : UIView? = nil
-    private var _window : UIWindow? = nil
+    internal var _window : UIWindow? = nil
     private var _subviews = [UIView]()
     
     private var _bounds = CGRect()

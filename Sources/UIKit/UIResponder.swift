@@ -11,7 +11,44 @@ import Foundation
 
 open class UIResponder : NSObject/*, UIResponderStandardEditActions */
 {
-    private var _next : UIResponder? = nil
     
-    open var next: UIResponder? { get {return _next }}
+    open var next: UIResponder? { get {return nil }}
+    
+    
+    
+    open var canBecomeFirstResponder: Bool  // default is NO
+        {
+        get { return false }
+    }
+    
+    // default is NO
+    
+    open func becomeFirstResponder() -> Bool
+    {
+        /*
+        if let nextResp = _next
+        {
+            if( nextResp.canResignFirstResponder == false)
+            {
+                return false
+            }
+        }
+        // Here _next is ok to Resign First Responder
+        
+        //_next = ?
+        */
+        return false
+    }
+    
+    open var canResignFirstResponder: Bool // default is YES
+    {
+        get { return true }
+    }
+    
+    // default is YES
+    
+    open func resignFirstResponder() -> Bool
+    {
+        return true
+    }
 }

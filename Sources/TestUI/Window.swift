@@ -10,8 +10,15 @@ import Foundation
 
 class Window: UIWindow
 {
-    override func didAddSubview(_ subview: UIView) {
+    override var next: UIResponder? { get { return UIApplication.shared}}
+    
+    override func didAddSubview(_ subview: UIView)
+    {
         super.didAddSubview(subview)
+        
+        assert(subview.window == self)
+        
         print("Window.didAddSubview  \(subview.description)")
+        
     }
 }
