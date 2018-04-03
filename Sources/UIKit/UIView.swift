@@ -65,7 +65,7 @@ open class UIView : UIResponder/*, NSCoding, UIAppearance, UIAppearanceContainer
     
     
     private var view: UnsafeMutablePointer<GtkWidget>? = nil
-    private var _superView : UIView? = nil
+    private var _superview : UIView? = nil
     private var _window : UIWindow? = nil
     private var _subviews = [UIView]()
     
@@ -150,8 +150,9 @@ extension UIView // Hierarchy
     open var superview: UIView?
         { get
             {
-                return _superView
+                return _superview
             }
+        
         }
     
     open var subviews: [UIView] { get {return _subviews }}
@@ -187,11 +188,20 @@ extension UIView // Hierarchy
         gtk_widget_show(view._impl);
         gtk_fixed_put(toGtkFixed(_impl), view._impl, gint( view.frame.origin.x ), gint( view.frame.origin.y ) )
         
-        //gtk_container_add ( toGtkContainer( _impl) , view._impl);
-        _subviews.append(view)
+        doAddSubview(subview: view)
         
-        didAddSubview(view)
 
         //setNeedsDisplay()
     }
+    
+    private func doAddSubview( subview : UIView)
+    {
+        _subviews.append( subview )
+        subview._superview = self
+        
+        
+        didAddSubview( subview )
+    }
+    
+    
 }

@@ -11,4 +11,7 @@ import Foundation
 
 open class UIResponder : NSObject/*, UIResponderStandardEditActions */
 {
+    private var _next : UIResponder? = nil
+    
+    open var next: UIResponder? { get {return _next }}
 }

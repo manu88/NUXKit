@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     var  label : UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        assert(view.next == self)
         print("ViewController.viewDidLoad  \(view.description)")
         
         button = UIButton(frame: CGRect(x: 100, y: 100, width: 100, height: 50))
@@ -28,7 +30,29 @@ class ViewController: UIViewController {
         view.addSubview(label)
         
         
+        assert(label.superview == view)
+        assert(view.superview == view.window)
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) // Called when the view is about to made visible. Default does nothing
+    {
+        print("ViewControler.viewWillAppear")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) // Called when the view has been fully transitioned onto the screen. Default does nothing
+    {
+        print("ViewControler.viewDidAppear")
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) // Called when the view is dismissed, covered or otherwise hidden. Default does nothing
+    {
+        print("ViewControler.viewWillDisappear")
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) // Called after the view was dismissed, covered or otherwise hidden. Default does nothing
+    {
+        print("ViewControler.viewDidDisappear")
     }
     
     @objc func buttonAction(/*sender: UIButton!*/) {
