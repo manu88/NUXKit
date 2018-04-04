@@ -49,16 +49,6 @@
 		59EB4163207115AD00F29CA5 /* UIStoryBoard.mm in Sources */ = {isa = PBXBuildFile; fileRef = 59EB4162207115AD00F29CA5 /* UIStoryBoard.mm */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		595FC90D2073A3A700FB6D6B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 595FC9092073A3A600FB6D6B /* TestNoStoryboard.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 594FE368207280AF0098613B;
-			remoteInfo = TestNoStoryboard;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		59261BBA206EB9E100BF9DB7 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -100,7 +90,6 @@
 		594FE37F2072B9F50098613B /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		594FE3832072BFD30098613B /* ViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController2.swift; sourceTree = "<group>"; };
 		594FE3872073592D0098613B /* Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Window.swift; sourceTree = "<group>"; };
-		595FC9092073A3A600FB6D6B /* TestNoStoryboard.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TestNoStoryboard.xcodeproj; path = ../TestNoStoryboard/TestNoStoryboard.xcodeproj; sourceTree = "<group>"; };
 		595FC90F2073A3CE00FB6D6B /* ViewController3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController3.swift; sourceTree = "<group>"; };
 		599930BD206FDC5300102DDE /* TestGtk */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestGtk; sourceTree = BUILT_PRODUCTS_DIR; };
 		599930DC206FDF2600102DDE /* libgtk-3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libgtk-3.0.dylib"; path = "../../../../../../../usr/local/Cellar/gtk+3/3.22.29_1/lib/libgtk-3.0.dylib"; sourceTree = "<group>"; };
@@ -172,7 +161,6 @@
 		59261BB3206EB9E100BF9DB7 = {
 			isa = PBXGroup;
 			children = (
-				595FC9092073A3A600FB6D6B /* TestNoStoryboard.xcodeproj */,
 				59EB412A207110AD00F29CA5 /* Sources */,
 				59EB41272071109B00F29CA5 /* TestStoryBoard */,
 				59EB41242071107400F29CA5 /* TestGtk */,
@@ -201,14 +189,6 @@
 				59261BCA206EBB7A00BF9DB7 /* libxml2.2.dylib */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		595FC90A2073A3A600FB6D6B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				595FC90E2073A3A700FB6D6B /* TestNoStoryboard.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		59EB41242071107400F29CA5 /* TestGtk */ = {
@@ -395,12 +375,6 @@
 			mainGroup = 59261BB3206EB9E100BF9DB7;
 			productRefGroup = 59261BBD206EB9E100BF9DB7 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 595FC90A2073A3A600FB6D6B /* Products */;
-					ProjectRef = 595FC9092073A3A600FB6D6B /* TestNoStoryboard.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				59261BBB206EB9E100BF9DB7 /* StoryBoardParser */,
@@ -409,16 +383,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		595FC90E2073A3A700FB6D6B /* TestNoStoryboard.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = TestNoStoryboard.app;
-			remoteRef = 595FC90D2073A3A700FB6D6B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
 		59261BB8206EB9E100BF9DB7 /* Sources */ = {

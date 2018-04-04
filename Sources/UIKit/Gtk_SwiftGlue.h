@@ -10,6 +10,7 @@
 #define test_h
 
 #include <gtk/gtk.h>
+#include <gtk/gtkstyleprovider.h>
 #include <gobject/gsignal.h>
 
 
@@ -66,6 +67,11 @@ static inline GtkFixed* toGtkFixed( gpointer instance)
 static inline GtkLabel* toGtkLabel( gpointer instance)
 {
     return  G_TYPE_CHECK_INSTANCE_CAST ((instance), GTK_TYPE_LABEL, GtkLabel);
+}
+
+static inline GtkStyleProvider* toGtkStyleProvider( gpointer instance)
+{
+    return  G_TYPE_CHECK_INSTANCE_CAST ((instance), GTK_TYPE_CSS_PROVIDER, GtkStyleProvider);
 }
 
 

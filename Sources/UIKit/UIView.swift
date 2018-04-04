@@ -25,12 +25,14 @@ open class UIView : UIResponder/*, NSCoding, UIAppearance, UIAppearanceContainer
             _impl = gtk_fixed_new()// gtk_button_new()
             g_object_ref(_impl)
             
+            /*
             var defaultColor = GdkRGBA()
             defaultColor.alpha = 1.0
             defaultColor.red   = 1.0
             defaultColor.green = 1.0
             defaultColor.blue  = 1.0
-            gtk_widget_override_background_color( _impl, GTK_STATE_FLAG_BACKDROP, &defaultColor)
+            gtk_widget_override_background_color( _impl, GTK_STATE_FLAG_NORMAL, &defaultColor)
+ */
             assert(_impl != nil)
         }
         
@@ -96,19 +98,22 @@ open class UIView : UIResponder/*, NSCoding, UIAppearance, UIAppearanceContainer
     
     private var _bounds = CGRect()
     private var _frame = CGRect()
+    private var _tag = 0
 }
 
 extension UIView // Color and parameters
 {
-    
+    open var tag: Int // default is 0
+    {
+        get {return _tag}
+        set { _tag = newValue }
+        
+    }
     open var isHidden: Bool // default is NO. doesn't check superviews
     {
         get
         {
-            
-            
-            return gtk_widget_get_visible( _impl) == 0
-            
+            return gtk_widget_get_visible( _impl) == 0   
         }
         
         set
@@ -144,15 +149,32 @@ extension UIView // Color and parameters
                 _ = prepare()
                 assert(_impl != nil)
                 
-                if( _impl != nil)
-                {
-                    gtk_widget_override_background_color( _impl, GTK_STATE_FLAG_NORMAL, &color)
-                }
+                
+                let context = gtk_widget_get_style_context(_impl);
+                
+                let provider = gtk_css_provider_new()
+                
+                let cssStr = "button { color: red; background-color: yellow; }"
+                
+                
+                gtk_css_provider_load_from_data( provider, cssStr ,-1,  nil)
+                
+                gtk_style_context_add_provider(context, toGtkStyleProvider(provider), guint(GTK_STYLE_PROVIDER_PRIORITY_USER))
+                
+                g_object_unref(provider)
+                
+                /*
+                gtk_style_context_add_provider_for_screen(gdk_display_get_default_screen(gdk_display_get_default()), toGtkStyleProvider(provider), guint(GTK_STYLE_PROVIDER_PRIORITY_USER))
+                */
+                //gtk_widget_override_background_color( _impl!, GTK_STATE_FLAG_NORMAL, &color)
+
                 
             }
             
         }
     }
+    
+    
     
     open var alpha: CGFloat // animatable. default is 1.0
         {
@@ -252,5 +274,11 @@ extension UIView // Hierarchy
         didAddSubview( subview )
     }
     
+    
+    internal func applyDefaultStyleBase()
+    {
+        assert(_impl != nil)
+        
+    }
     
 }

@@ -13,13 +13,30 @@ open class UIButton : UIControl/*, NSCoding */
 {
     
     var _titles : [UInt : String? ] = [ UIControlState.normal.rawValue : "Button"]
+    var _colors = [UInt : UIColor? ]()
     
     open func setTitle(_ title: String?, for state: UIControlState) // default is nil. title is assumed to be single line
     {
         
         _titles[state.rawValue] = title
         
-        prepare()
+        _ = prepare()
+    }
+    
+    open func setTitleColor(_ color: UIColor?, for state: UIControlState) // default if nil. use opaque white
+    {
+        _colors[state.rawValue] = color
+    }
+    
+    open func titleColor(for state: UIControlState) -> UIColor?
+    {
+        
+        if let c = _colors[state.rawValue]
+        {
+            return c
+        }
+        
+        return nil
     }
     
     open func title(for state: UIControlState) -> String? // these getters only take a single state value

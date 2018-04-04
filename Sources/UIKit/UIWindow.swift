@@ -43,7 +43,6 @@ open class UIWindow : UIView
         {
             _impl = gtk_fixed_new()
             g_object_ref(_impl)
-            
         }
         
         if( _windowImpl == nil)
@@ -54,7 +53,11 @@ open class UIWindow : UIView
             gtk_widget_set_size_request(_windowImpl, gint(frame.size.width), gint( frame.size.height) )
             
             gtk_window_set_title (toGtkWindow (_windowImpl), "Test UIKit");
-            //gtk_fixed_put(toGtkFixed(_impl), view._impl, gint( view.frame.origin.x ), gint( view.frame.origin.y ) )
+            
+            var color = GdkRGBA()
+            color.alpha = 0.0
+            gtk_widget_override_background_color( _impl, GTK_STATE_FLAG_NORMAL, &color)
+            gtk_widget_override_background_color( _windowImpl, GTK_STATE_FLAG_NORMAL, &color)
             
             gtk_container_add (toGtkContainer(_windowImpl), _impl);
         }
@@ -98,7 +101,7 @@ open class UIWindow : UIView
             _vcList.append(rootViewController!)
             
             
-            doAddView( rootViewController! ,animated:  flag)
+            doAddView( rootViewController! ,animationMode:  UIWindow.AnimationMode.PresentAnim)
             //gtk_container_add ( toGtkContainer( _impl), rootViewController!.view._impl);
             //gtk_widget_show_all( _impl )
             
@@ -110,12 +113,24 @@ open class UIWindow : UIView
 
     }
     
-    internal func doAddView( _ viewController : UIViewController , animated flag: Bool)
+    internal enum AnimationMode
+    {
+        case NoAnim
+        case PresentAnim
+        case DismissAnim
+        
+        func isAnimated() -> Bool
+        {
+            return self != UIWindow.AnimationMode.NoAnim
+        }
+    }
+    
+    internal func doAddView( _ viewController : UIViewController , animationMode flag: AnimationMode)
     {
         assert( viewController.view!._impl != nil)
         assert( GtkIsWidget(viewController.view!._impl))
         
-        viewController.viewWillAppear(flag)
+        viewController.viewWillAppear( flag.isAnimated() )
         
         viewController.view._window = self
         
@@ -127,10 +142,13 @@ open class UIWindow : UIView
         gtk_widget_show_all( _windowImpl )
         
         
-        if( true)// flag )
+        if( flag.isAnimated() )// flag )
         {
             class AnimContext
             {
+                static let DeltaMS :UInt32  = 25
+                static let DeltaY  :CGFloat = 100
+                
                 init()
                 {
                     
@@ -139,48 +157,77 @@ open class UIWindow : UIView
                 var startOrigin = CGPoint()
                 var currentPoint = CGPoint()
                 var endOrigin = CGPoint()
-                
+                var mode = UIWindow.AnimationMode.NoAnim // default
                 var view : UIView!
             }
             
             let animContext = AnimContext()
             animContext.window = self
-            animContext.startOrigin = CGPoint(x: 0, y: frame.size.height)
-            animContext.currentPoint = CGPoint(x: 0, y: frame.size.height)
-            animContext.endOrigin = viewController.view.frame.origin
-            animContext.view = viewController.view
             
+            if( flag == UIWindow.AnimationMode.PresentAnim)
+            {
+                animContext.startOrigin = CGPoint(x: 0, y: frame.size.height)
+                animContext.currentPoint = animContext.startOrigin
+            
+                animContext.endOrigin = viewController.view.frame.origin
+            }
+            else if( flag == UIWindow.AnimationMode.DismissAnim)
+            {
+                animContext.startOrigin = viewOrigin
+                animContext.currentPoint = animContext.startOrigin
+                
+                animContext.endOrigin = CGPoint(x: 0, y: frame.size.height)
+            }
+            
+            animContext.view = viewController.view
+            animContext.mode = flag
             
             let ptr = UnsafeMutableRawPointer(Unmanaged.passRetained(animContext).toOpaque())
             // milliseconds
-            g_timeout_add_full(G_PRIORITY_DEFAULT, 25, { (data) -> gboolean in
+            g_timeout_add_full(G_PRIORITY_DEFAULT, AnimContext.DeltaMS, { (data) -> gboolean in
                 // timeout
                 let animContext = Unmanaged<AnimContext>.fromOpaque(data!).takeUnretainedValue()
                 
                 gtk_widget_set_size_request(animContext.window._impl, gint(animContext.window.frame.size.width), gint( animContext.window.frame.size.height) )
                 gtk_widget_set_size_request(animContext.window._windowImpl, gint(animContext.window.frame.size.width), gint( animContext.window.frame.size.height) )
+                
                 gtk_fixed_move ( toGtkFixed( animContext.window._impl),
                                 animContext.view._impl,
                     gint( animContext.currentPoint.x),
                     gint( animContext.currentPoint.y)
                 )
                 
-                animContext.currentPoint.y -= 100
-                print("Y pos \(animContext.currentPoint.y) \(animContext.endOrigin.y )")
-                
-                if( animContext.currentPoint.y <= animContext.endOrigin.y )
+                if( animContext.mode == UIWindow.AnimationMode.PresentAnim)
                 {
-                    return 0
+                    animContext.currentPoint.y -= AnimContext.DeltaY
+                    if( animContext.currentPoint.y <= animContext.endOrigin.y )
+                    {
+                        return 0
+                    }
                 }
+                else if( animContext.mode == UIWindow.AnimationMode.DismissAnim)
+                {
+                    animContext.currentPoint.y += AnimContext.DeltaY
+                    if( animContext.currentPoint.y >= animContext.endOrigin.y )
+                    {
+                        gtk_fixed_move ( toGtkFixed( animContext.window._impl),
+                                         animContext.view._impl,
+                                         gint( animContext.startOrigin.x),
+                                         gint( animContext.startOrigin.y)
+                        )
+                        return 0
+                    }
+                }
+
                 return 1
             }, ptr, { (data) in
                 // GDestroyNotify
                 print("Anim ended")
-                
+                _ = Unmanaged<AnimContext>.fromOpaque(data!).release()
             })
         
         }
-        viewController.viewDidAppear(flag)
+        viewController.viewDidAppear( flag.isAnimated() )
     }
     open func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Swift.Void)? = nil)
     {
@@ -201,7 +248,7 @@ open class UIWindow : UIView
         _vcList.append(rootViewController!)
         
         gtk_container_remove(toGtkContainer( _impl), lastViewController?.view._impl)
-        doAddView( rootViewController! ,animated:  flag)
+        doAddView( rootViewController! ,animationMode:  UIWindow.AnimationMode.PresentAnim)
         
         // configure old View
         lastViewController?.view._window = nil
@@ -246,7 +293,7 @@ open class UIWindow : UIView
         
         rootViewController = _vcList.last!
         
-        doAddView(rootViewController!, animated: flag)
+        doAddView(rootViewController!, animationMode: UIWindow.AnimationMode.DismissAnim )
         
         lastViewController.view._window = nil
         

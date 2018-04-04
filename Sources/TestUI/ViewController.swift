@@ -73,6 +73,12 @@ class ViewController: UIViewController {
         
         button = UIButton(frame: CGRect(x: 100, y: 100, width: 100, height: 50))
         button.backgroundColor = .green
+        
+        
+        button.setTitleColor(UIColor.black, for: .normal)
+        
+        assert(button.titleColor(for: .normal) != nil)
+        
         button.setTitle("Hello", for: .normal)
         view.addSubview(button)
         button.addTarget(self, action: #selector(ViewController.buttonAction), for: .touchUpInside)

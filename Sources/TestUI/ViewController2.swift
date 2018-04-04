@@ -49,6 +49,7 @@ class ViewController2: UIViewController
         button.addTarget(self, action: #selector(ViewController.buttonAction), for: .touchUpInside)
         
         
+        
         buttonNext = UIButton(frame: CGRect(x: 100, y: 400, width: 100, height: 50))
         buttonNext.backgroundColor = .red
         buttonNext.setTitle("Next", for: .normal)
