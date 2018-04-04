@@ -15,6 +15,7 @@
 
 
 typedef void  (*GCallback2)              (GtkWidget *widget,gpointer data);
+typedef void  (*GCallback3)              (GtkWidget *widget, GParamSpec* specs,gpointer data);
 
 static inline void g_signal_connect_with_data(gpointer          instance ,
                                      const gchar     *detailed_signal,
@@ -26,12 +27,23 @@ static inline void g_signal_connect_with_data(gpointer          instance ,
     g_signal_connect_data (instance, detailed_signal, G_CALLBACK(c_handler), data, destroy_data, connect_flags);
 }
 
+
 static inline void g_signal_connect2(gpointer instance ,
                                       const gchar     *detailed_signal,
                                       GCallback      c_handler
                                     )
 {
     g_signal_connect_data (instance, detailed_signal, G_CALLBACK(c_handler), NULL, NULL,(GConnectFlags) 0);
+}
+
+static inline void g_signal_connect_with_data2(gpointer          instance ,
+                                              const gchar     *detailed_signal,
+                                              GCallback3      c_handler,
+                                              gpointer          data,
+                                              GClosureNotify      destroy_data,
+                                              GConnectFlags      connect_flags)
+{
+    g_signal_connect_data (instance, detailed_signal, G_CALLBACK(c_handler), data, destroy_data, connect_flags);
 }
 
 
@@ -67,6 +79,11 @@ static inline GtkFixed* toGtkFixed( gpointer instance)
 static inline GtkLabel* toGtkLabel( gpointer instance)
 {
     return  G_TYPE_CHECK_INSTANCE_CAST ((instance), GTK_TYPE_LABEL, GtkLabel);
+}
+
+static inline GtkSwitch* toGtkSwitch( gpointer instance)
+{
+    return  G_TYPE_CHECK_INSTANCE_CAST ((instance), GTK_TYPE_SWITCH, GtkSwitch);
 }
 
 static inline GtkStyleProvider* toGtkStyleProvider( gpointer instance)

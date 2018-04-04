@@ -3,11 +3,12 @@
 
 #include <stdlib.h>
 #include <gtk/gtk.h>
+#include <assert.h>
 
 /* Create a new hbox with an image and a label packed into it
  * and return the box. */
 
-
+static GtkWidget* toggle = NULL;
 
 /* Our usual callback function */
 static void callback( GtkWidget *widget,
@@ -24,6 +25,15 @@ static void callback( GtkWidget *widget,
     //gtk_widget_show(widget);
 }
 
+
+static void callbackToggle( GtkWidget *widget,
+                           GParamSpec *pSpec,
+                     gpointer   data )
+{
+    assert(widget == toggle);
+    assert(widget == data);
+    
+}
 int main( int   argc,
          char *argv[] )
 {
@@ -68,7 +78,16 @@ int main( int   argc,
     
     gtk_widget_show (button);
     
+    toggle = gtk_switch_new();
+    
+    //g_signal_connect(toggle , "notify::active", G_CALLBACK(callbackToggle) , toggle);
+    
+    
+    g_signal_connect( GTK_SWITCH( toggle ), "notify::active", G_CALLBACK(callbackToggle), toggle);
+    gtk_widget_show (toggle);
+    
     gtk_fixed_put( GTK_FIXED(window2 ), button, 10, 10);// (GTK_CONTAINER (window2), button);
+    gtk_fixed_put( GTK_FIXED(window2 ), toggle, 10, 100);// (GTK_CONTAINER (window2), button);
     gtk_container_add (GTK_CONTAINER (window), window2);
     
     gtk_widget_show (window2);

@@ -13,6 +13,7 @@ import UIKit
 class ViewController: UIViewController {
     
     var button : UIButton!
+    var toggle : UISwitch!
     var  label : UILabel!
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -92,13 +93,23 @@ class ViewController: UIViewController {
         assert(label.superview == view)
         assert(view.superview == view.window)
         
-        // must never be called !!
+        
+        toggle = UISwitch(frame: CGRect(x: 300, y: 220, width: 100, height: 20))
+        toggle.addTarget(self, action: #selector(ViewController.switchAction), for: .valueChanged)
+        view.addSubview(toggle)
+        
+        
+        // closure must never be called !!
         dismiss(animated: true) {
             assert(false)
         }
         
     }
     
+    @objc func switchAction(/*sender: UIButton!*/)
+    {
+        print("Switch is ON? \( toggle.isOn)")
+    }
     @objc func buttonAction(/*sender: UIButton!*/) {
         print("Button tapped")
         

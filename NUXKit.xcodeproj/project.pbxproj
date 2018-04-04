@@ -17,6 +17,7 @@
 		594FE3842072BFD30098613B /* ViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594FE3832072BFD30098613B /* ViewController2.swift */; };
 		594FE3882073592D0098613B /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594FE3872073592D0098613B /* Window.swift */; };
 		595FC9102073A3CE00FB6D6B /* ViewController3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FC90F2073A3CE00FB6D6B /* ViewController3.swift */; };
+		595FC9142075219400FB6D6B /* UISwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FC9132075219400FB6D6B /* UISwitch.swift */; };
 		599930DD206FDF2600102DDE /* libgtk-3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 599930DC206FDF2600102DDE /* libgtk-3.0.dylib */; };
 		599930E1206FDFA300102DDE /* libgobject-2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 599930E0206FDFA300102DDE /* libgobject-2.0.dylib */; };
 		599930E3206FDFCC00102DDE /* libglib-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 599930E2206FDFCC00102DDE /* libglib-2.0.0.dylib */; };
@@ -91,6 +92,7 @@
 		594FE3832072BFD30098613B /* ViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController2.swift; sourceTree = "<group>"; };
 		594FE3872073592D0098613B /* Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Window.swift; sourceTree = "<group>"; };
 		595FC90F2073A3CE00FB6D6B /* ViewController3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController3.swift; sourceTree = "<group>"; };
+		595FC9132075219400FB6D6B /* UISwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISwitch.swift; sourceTree = "<group>"; };
 		599930BD206FDC5300102DDE /* TestGtk */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestGtk; sourceTree = BUILT_PRODUCTS_DIR; };
 		599930DC206FDF2600102DDE /* libgtk-3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libgtk-3.0.dylib"; path = "../../../../../../../usr/local/Cellar/gtk+3/3.22.29_1/lib/libgtk-3.0.dylib"; sourceTree = "<group>"; };
 		599930DE206FDF3D00102DDE /* libgdk-3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libgdk-3.dylib"; path = "../../../../../../../usr/local/lib/libgdk-3.dylib"; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				59EB412F207110AD00F29CA5 /* TestAPI-Bridging-Header.h */,
 				59EB412E207110AD00F29CA5 /* Gtk_SwiftGlue.h */,
 				59EB4131207110AD00F29CA5 /* UIResponder.swift */,
+				595FC9132075219400FB6D6B /* UISwitch.swift */,
 				594FE37D207286550098613B /* UIScreen.swift */,
 				594FE35B20727E5E0098613B /* UIButton.swift */,
 				594FE37F2072B9F50098613B /* UILabel.swift */,
@@ -411,6 +414,7 @@
 				59EB414D207110D800F29CA5 /* UIWindow.swift in Sources */,
 				59EB415D2071117D00F29CA5 /* AppDelegate.swift in Sources */,
 				594FE35A207269430098613B /* UIColor.swift in Sources */,
+				595FC9142075219400FB6D6B /* UISwitch.swift in Sources */,
 				59EB414E207110D800F29CA5 /* UIApplication.swift in Sources */,
 				59EB4150207110D800F29CA5 /* UIStoryboard.swift in Sources */,
 				594FE3802072B9F50098613B /* UILabel.swift in Sources */,
