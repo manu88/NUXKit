@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     var button : UIButton!
     var toggle : UISwitch!
     var  label : UILabel!
+    var  label2 : UILabel!
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         
@@ -89,6 +90,9 @@ class ViewController: UIViewController {
         label.text = "Some text"
         view.addSubview(label)
         
+        let count = view.subviews.count
+        view.addSubview(label)
+        assert(count == view.subviews.count)
         
         assert(label.superview == view)
         assert(view.superview == view.window)
@@ -98,6 +102,10 @@ class ViewController: UIViewController {
         toggle.addTarget(self, action: #selector(ViewController.switchAction), for: .valueChanged)
         view.addSubview(toggle)
         
+        
+        label2 = UILabel(frame: CGRect(x: 120, y: 240, width: 100, height: 20))
+        label2.text = "Some label"
+        view.addSubview(label2)
         
         // closure must never be called !!
         dismiss(animated: true) {
@@ -109,6 +117,15 @@ class ViewController: UIViewController {
     @objc func switchAction(/*sender: UIButton!*/)
     {
         print("Switch is ON? \( toggle.isOn)")
+        
+        if( toggle.isOn)
+        {
+            label2.alpha = 1.0
+        }
+        else
+        {
+            label2.alpha = 0.0
+        }
     }
     @objc func buttonAction(/*sender: UIButton!*/) {
         print("Button tapped")

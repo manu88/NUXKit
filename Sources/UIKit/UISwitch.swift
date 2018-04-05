@@ -20,9 +20,6 @@ class UISwitch : UIControl
             
             let ptr = UnsafeMutableRawPointer(Unmanaged.passUnretained(self).toOpaque())
             
-            
-            print("Switch ptr\(self.description)")
-            
             g_signal_connect_with_data2(_impl, "notify::active", { (widget, specs, data) in
                 
                 if let data = data
