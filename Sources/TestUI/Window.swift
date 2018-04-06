@@ -14,7 +14,7 @@ import Foundation
 
 class Window: UIWindow
 {
-    override var next: UIResponder? { get { return UIApplication.shared}}
+    
     
     override func didAddSubview(_ subview: UIView)
     {

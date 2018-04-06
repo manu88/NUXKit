@@ -17,6 +17,8 @@ class ViewController: UIViewController {
     var  label : UILabel!
     var  label2 : UILabel!
     
+    var customView : CustomView!
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -64,19 +66,19 @@ class ViewController: UIViewController {
         print("ViewControler.viewDidDisappear")
     }
     
-    override func viewDidLoad() {
-        
-        
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
+
         assert(view.window == nil)
         
         assert(view.next == self)
-        print("ViewController.viewDidLoad  \(view.description)")
+        
+        view.backgroundColor = UIColor.white
         
         button = UIButton(frame: CGRect(x: 100, y: 100, width: 100, height: 50))
         button.backgroundColor = .green
-        
-        
+
         button.setTitleColor(UIColor.black, for: .normal)
         
         assert(button.titleColor(for: .normal) != nil)
@@ -106,6 +108,10 @@ class ViewController: UIViewController {
         label2 = UILabel(frame: CGRect(x: 120, y: 240, width: 100, height: 20))
         label2.text = "Some label"
         view.addSubview(label2)
+        
+        customView = CustomView(frame: CGRect(x: 10, y: 400, width: 200, height: 100))
+        
+        view.addSubview(customView)
         
         // closure must never be called !!
         dismiss(animated: true) {
@@ -148,7 +154,7 @@ class ViewController: UIViewController {
         }
         
         
-        present(ViewController2(), animated: false)
+        present(ViewController2(), animated: toggle.isOn)
         {
             print("Transition ended")
             assert(self.view.window == nil)
@@ -157,7 +163,8 @@ class ViewController: UIViewController {
         }
     }
     
-    override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning()
+    {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }

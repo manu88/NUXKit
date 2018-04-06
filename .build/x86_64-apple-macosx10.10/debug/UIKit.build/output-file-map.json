@@ -1,0 +1,41 @@
+{
+  "": {
+    "swift-dependencies": "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/.build/x86_64-apple-macosx10.10/debug/UIKit.build/master.swiftdeps"
+  },
+  "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/Sources/UIKit/UIApplication.swift": {
+    "dependencies": "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/.build/x86_64-apple-macosx10.10/debug/UIKit.build/UIApplication.d",
+    "object": "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/.build/x86_64-apple-macosx10.10/debug/UIKit.build/UIApplication.swift.o",
+    "swiftmodule": "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/.build/x86_64-apple-macosx10.10/debug/UIKit.build/UIApplication~partial.swiftmodule",
+    "swift-dependencies": "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/.build/x86_64-apple-macosx10.10/debug/UIKit.build/UIApplication.swiftdeps"
+  },
+  "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/Sources/UIKit/UIResponder.swift": {
+    "dependencies": "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/.build/x86_64-apple-macosx10.10/debug/UIKit.build/UIResponder.d",
+    "object": "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/.build/x86_64-apple-macosx10.10/debug/UIKit.build/UIResponder.swift.o",
+    "swiftmodule": "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/.build/x86_64-apple-macosx10.10/debug/UIKit.build/UIResponder~partial.swiftmodule",
+    "swift-dependencies": "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/.build/x86_64-apple-macosx10.10/debug/UIKit.build/UIResponder.swiftdeps"
+  },
+  "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/Sources/UIKit/UIStoryboard.swift": {
+    "dependencies": "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/.build/x86_64-apple-macosx10.10/debug/UIKit.build/UIStoryboard.d",
+    "object": "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/.build/x86_64-apple-macosx10.10/debug/UIKit.build/UIStoryboard.swift.o",
+    "swiftmodule": "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/.build/x86_64-apple-macosx10.10/debug/UIKit.build/UIStoryboard~partial.swiftmodule",
+    "swift-dependencies": "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/.build/x86_64-apple-macosx10.10/debug/UIKit.build/UIStoryboard.swiftdeps"
+  },
+  "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/Sources/UIKit/UIView.swift": {
+    "dependencies": "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/.build/x86_64-apple-macosx10.10/debug/UIKit.build/UIView.d",
+    "object": "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/.build/x86_64-apple-macosx10.10/debug/UIKit.build/UIView.swift.o",
+    "swiftmodule": "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/.build/x86_64-apple-macosx10.10/debug/UIKit.build/UIView~partial.swiftmodule",
+    "swift-dependencies": "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/.build/x86_64-apple-macosx10.10/debug/UIKit.build/UIView.swiftdeps"
+  },
+  "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/Sources/UIKit/UIViewController.swift": {
+    "dependencies": "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/.build/x86_64-apple-macosx10.10/debug/UIKit.build/UIViewController.d",
+    "object": "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/.build/x86_64-apple-macosx10.10/debug/UIKit.build/UIViewController.swift.o",
+    "swiftmodule": "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/.build/x86_64-apple-macosx10.10/debug/UIKit.build/UIViewController~partial.swiftmodule",
+    "swift-dependencies": "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/.build/x86_64-apple-macosx10.10/debug/UIKit.build/UIViewController.swiftdeps"
+  },
+  "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/Sources/UIKit/UIWindow.swift": {
+    "dependencies": "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/.build/x86_64-apple-macosx10.10/debug/UIKit.build/UIWindow.d",
+    "object": "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/.build/x86_64-apple-macosx10.10/debug/UIKit.build/UIWindow.swift.o",
+    "swiftmodule": "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/.build/x86_64-apple-macosx10.10/debug/UIKit.build/UIWindow~partial.swiftmodule",
+    "swift-dependencies": "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/.build/x86_64-apple-macosx10.10/debug/UIKit.build/UIWindow.swiftdeps"
+  }
+}

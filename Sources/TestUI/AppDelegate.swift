@@ -20,15 +20,14 @@ import UIKit
 //@UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    var window: UIWindow?
-    
+    @objc var window: UIWindow? = nil
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         assert(window == nil)
         
+        window = UIWindow(frame: UIScreen.main.bounds )
         
-        window = Window(frame: UIScreen.main.bounds)
         
         window!.rootViewController = ViewController()
         
@@ -38,6 +37,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window!.makeKeyAndVisible()
         
+        
+        let win2 = UIWindow(frame: UIScreen.main.bounds)
+        assert(win2.next == UIApplication.shared)
         
         
         return true

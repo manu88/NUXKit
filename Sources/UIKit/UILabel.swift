@@ -18,7 +18,7 @@ class UILabel : UIView
         {
             _text = newValue
             
-            prepare()
+            _ = prepare()
         }
         get
         {
@@ -28,7 +28,7 @@ class UILabel : UIView
     override func prepare() -> Bool {
         if( _impl == nil)
         {
-            _impl = gtk_label_new("Test")
+            _impl = gtk_label_new( "" /*"Test"*/)
             g_object_ref(_impl)
         }
         

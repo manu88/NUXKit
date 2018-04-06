@@ -5,4 +5,5 @@
 
 #import "UIStoryBoard.h"
 #include "Gtk_SwiftGlue.h"
+#include "GtkDrawableContainer.h"
 #endif 

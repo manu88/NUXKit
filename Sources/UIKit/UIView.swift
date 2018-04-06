@@ -22,7 +22,7 @@ open class UIView : UIResponder/*, NSCoding, UIAppearance, UIAppearanceContainer
     {
         if (_impl == nil)
         {
-            _impl = gtk_fixed_new()// gtk_button_new()
+            _impl = toGtkWidget( GtkDrawableContainer_new() )// gtk_fixed_new()// gtk_button_new()
             g_object_ref(_impl)
             
             /*
@@ -46,11 +46,12 @@ open class UIView : UIResponder/*, NSCoding, UIAppearance, UIAppearanceContainer
         _frame = frame
         
     }
-    
+    /*
     public init?(coder aDecoder: NSCoder)
     {
         return nil
     }
+ */
     
     deinit
     {
@@ -61,6 +62,9 @@ open class UIView : UIResponder/*, NSCoding, UIAppearance, UIAppearanceContainer
         }
     }
     
+    
+    open func draw(_ rect: CGRect)
+    {}
     
     open func didAddSubview(_ subview: UIView)
     {
@@ -82,6 +86,8 @@ open class UIView : UIResponder/*, NSCoding, UIAppearance, UIAppearanceContainer
             return _superview
         }
     }
+    
+    
     
     // Temp Method!
     func setViewController( _ vc: UIViewController?)
@@ -148,20 +154,25 @@ extension UIView // Color and parameters
             
                 _ = prepare()
                 assert(_impl != nil)
-                
-                
+
                 let context = gtk_widget_get_style_context(_impl);
                 
                 let provider = gtk_css_provider_new()
                 
-                let cssStr = "button { color: red; background-color: yellow; }"
+                let vR = UInt8( newColor.red * 255 )
+                let vG = UInt8( newColor.green * 255 )
+                let vB = UInt8( newColor.blue * 255 )
+                let vA = UInt8( newColor.alpha * 255 )
                 
+                let cssStr = "window * { color: red; background-color: rgba(\(vR),\(vG),\(vB),\(vA)); }"
                 
                 gtk_css_provider_load_from_data( provider, cssStr ,-1,  nil)
                 
                 gtk_style_context_add_provider(context, toGtkStyleProvider(provider), guint(GTK_STYLE_PROVIDER_PRIORITY_USER))
                 
                 g_object_unref(provider)
+                
+                setNeedsDisplay()
                 
                 /*
                 gtk_style_context_add_provider_for_screen(gdk_display_get_default_screen(gdk_display_get_default()), toGtkStyleProvider(provider), guint(GTK_STYLE_PROVIDER_PRIORITY_USER))
@@ -209,9 +220,11 @@ extension UIView // Draw
 {
     open func setNeedsDisplay()
     {
-        print("gtk_widget_show")
+        //print("gtk_widget_show")
         gtk_widget_show(_impl)
     }
+    
+    
 }
 
 

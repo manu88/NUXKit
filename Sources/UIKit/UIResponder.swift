@@ -16,6 +16,7 @@ open class UIResponder : NSObject/*, UIResponderStandardEditActions */
     
     
     
+    
     open var canBecomeFirstResponder: Bool  // default is NO
         {
         get { return false }

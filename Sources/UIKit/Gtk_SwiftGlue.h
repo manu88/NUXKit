@@ -91,5 +91,10 @@ static inline GtkStyleProvider* toGtkStyleProvider( gpointer instance)
     return  G_TYPE_CHECK_INSTANCE_CAST ((instance), GTK_TYPE_CSS_PROVIDER, GtkStyleProvider);
 }
 
+static inline GtkWidget* toGtkWidget( gpointer instance)
+{
+    return (GtkWidget*) instance;// G_TYPE_CHECK_INSTANCE_CAST ((instance), GTK_TYPE_CSS_PROVIDER, GtkStyleProvider);
+}
+
 
 #endif /* test_h */

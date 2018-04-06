@@ -1,0 +1,4 @@
+module objc {
+    umbrella "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/Sources/objc/include"
+    export *
+}

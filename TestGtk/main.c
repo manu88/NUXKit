@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <gtk/gtk.h>
 #include <assert.h>
+#include <cairo.h>
+#include "CustomWidget.h"
 
 /* Create a new hbox with an image and a label packed into it
  * and return the box. */
@@ -28,12 +30,42 @@ static void callback( GtkWidget *widget,
 
 static void callbackToggle( GtkWidget *widget,
                            GParamSpec *pSpec,
-                     gpointer   data )
+                           gpointer   data )
 {
     assert(widget == toggle);
     assert(widget == data);
     
 }
+
+gboolean
+draw_callback (GtkWidget *widget, cairo_t *cr, gpointer data)
+{
+    guint width, height;
+    GdkRGBA color;
+    GtkStyleContext *context;
+    
+    context = gtk_widget_get_style_context (widget);
+    
+    width = gtk_widget_get_allocated_width (widget);
+    height = gtk_widget_get_allocated_height (widget);
+    
+    gtk_render_background (context, cr, 0, 0, width, height);
+    
+    cairo_arc (cr,
+               width / 2.0, height / 2.0,
+               MIN (width, height) / 2.0,
+               0, 2 * G_PI);
+    
+    gtk_style_context_get_color (context,
+                                 gtk_style_context_get_state (context),
+                                 &color);
+    gdk_cairo_set_source_rgba (cr, &color);
+    
+    cairo_fill (cr);
+    
+    return FALSE;
+}
+
 int main( int   argc,
          char *argv[] )
 {
@@ -41,9 +73,12 @@ int main( int   argc,
     GtkWidget *window;
     GtkWidget *window2;
     GtkWidget *button;
+    
     //GtkWidget *box;
     
     gtk_init (&argc, &argv);
+    
+    
     
     /* Create a new window */
     window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
@@ -86,8 +121,19 @@ int main( int   argc,
     g_signal_connect( GTK_SWITCH( toggle ), "notify::active", G_CALLBACK(callbackToggle), toggle);
     gtk_widget_show (toggle);
     
+    
+    GtkWidget *custom = gtk_drawing_area_new();
+    gtk_widget_set_size_request (custom, 100, 100);
+    g_signal_connect (G_OBJECT (custom), "draw",
+                      G_CALLBACK (draw_callback), NULL);
+    
+    
+    
+    gtk_widget_show (custom);
     gtk_fixed_put( GTK_FIXED(window2 ), button, 10, 10);// (GTK_CONTAINER (window2), button);
     gtk_fixed_put( GTK_FIXED(window2 ), toggle, 10, 100);// (GTK_CONTAINER (window2), button);
+    gtk_fixed_put( GTK_FIXED(window2 ), custom, 10, 200);
+    
     gtk_container_add (GTK_CONTAINER (window), window2);
     
     gtk_widget_show (window2);

@@ -48,6 +48,38 @@
 		59EB415D2071117D00F29CA5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EB415A2071117D00F29CA5 /* AppDelegate.swift */; };
 		59EB415E2071117D00F29CA5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EB415B2071117D00F29CA5 /* main.swift */; };
 		59EB4163207115AD00F29CA5 /* UIStoryBoard.mm in Sources */ = {isa = PBXBuildFile; fileRef = 59EB4162207115AD00F29CA5 /* UIStoryBoard.mm */; };
+		59F03B9F2076014C00E47867 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F03B9E2076014C00E47867 /* CustomView.swift */; };
+		59F03BA2207603D000E47867 /* CustomWidget.c in Sources */ = {isa = PBXBuildFile; fileRef = 59F03BA1207603D000E47867 /* CustomWidget.c */; };
+		59F03BA72076212500E47867 /* libcairo.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 59F03BA32076049C00E47867 /* libcairo.dylib */; };
+		59F03BAA207625D900E47867 /* GtkDrawableContainer.c in Sources */ = {isa = PBXBuildFile; fileRef = 59F03BA9207625D900E47867 /* GtkDrawableContainer.c */; };
+		59F03BAB207625D900E47867 /* GtkDrawableContainer.c in Sources */ = {isa = PBXBuildFile; fileRef = 59F03BA9207625D900E47867 /* GtkDrawableContainer.c */; };
+		59F03BCC2076AEFF00E47867 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594FE35B20727E5E0098613B /* UIButton.swift */; };
+		59F03BCD2076AEFF00E47867 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EB412D207110AD00F29CA5 /* UIView.swift */; };
+		59F03BCE2076AEFF00E47867 /* UIResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EB4131207110AD00F29CA5 /* UIResponder.swift */; };
+		59F03BCF2076AEFF00E47867 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EB4132207110AD00F29CA5 /* UIViewController.swift */; };
+		59F03BD02076AEFF00E47867 /* UIScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594FE37D207286550098613B /* UIScreen.swift */; };
+		59F03BD22076AEFF00E47867 /* UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EB4133207110AD00F29CA5 /* UIWindow.swift */; };
+		59F03BD42076AEFF00E47867 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594FE359207269430098613B /* UIColor.swift */; };
+		59F03BD52076AEFF00E47867 /* UISwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FC9132075219400FB6D6B /* UISwitch.swift */; };
+		59F03BD62076AEFF00E47867 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EB4134207110AD00F29CA5 /* UIApplication.swift */; };
+		59F03BD72076AEFF00E47867 /* UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EB4136207110AD00F29CA5 /* UIStoryboard.swift */; };
+		59F03BD82076AEFF00E47867 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594FE37F2072B9F50098613B /* UILabel.swift */; };
+		59F03BD92076AEFF00E47867 /* SB_Parameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59EB4138207110AD00F29CA5 /* SB_Parameters.cpp */; };
+		59F03BDB2076AEFF00E47867 /* UIStoryBoard.mm in Sources */ = {isa = PBXBuildFile; fileRef = 59EB4162207115AD00F29CA5 /* UIStoryBoard.mm */; };
+		59F03BDC2076AEFF00E47867 /* GtkDrawableContainer.c in Sources */ = {isa = PBXBuildFile; fileRef = 59F03BA9207625D900E47867 /* GtkDrawableContainer.c */; };
+		59F03BDE2076AEFF00E47867 /* SB_Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59EB4139207110AD00F29CA5 /* SB_Scene.cpp */; };
+		59F03BE02076AEFF00E47867 /* XMLDocument.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59EB413B207110AD00F29CA5 /* XMLDocument.cpp */; };
+		59F03BE22076AEFF00E47867 /* StoryboardDocument.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59EB413D207110AD00F29CA5 /* StoryboardDocument.cpp */; };
+		59F03BE32076AEFF00E47867 /* SB_View.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59EB413F207110AD00F29CA5 /* SB_View.cpp */; };
+		59F03BE42076AEFF00E47867 /* UIControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594FE35D20727E840098613B /* UIControl.swift */; };
+		59F03BE72076AEFF00E47867 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 59261BCA206EBB7A00BF9DB7 /* libxml2.2.dylib */; };
+		59F03BE82076AEFF00E47867 /* libgdk-3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 599930DE206FDF3D00102DDE /* libgdk-3.dylib */; };
+		59F03BE92076AEFF00E47867 /* libgtk-3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 599930DC206FDF2600102DDE /* libgtk-3.0.dylib */; };
+		59F03BEA2076AEFF00E47867 /* libglib-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 599930E2206FDFCC00102DDE /* libglib-2.0.0.dylib */; };
+		59F03BEB2076AEFF00E47867 /* libgobject-2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 599930E0206FDFA300102DDE /* libgobject-2.0.dylib */; };
+		59F03BF82076AF8100E47867 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F03BF62076AF8100E47867 /* AppDelegate.swift */; };
+		59F03BF92076AF8100E47867 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F03BF72076AF8100E47867 /* ViewController.swift */; };
+		59F03BFB2076AFAB00E47867 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F03BFA2076AFAB00E47867 /* main.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -70,6 +102,15 @@
 			runOnlyForDeploymentPostprocessing = 1;
 		};
 		599930BB206FDC5300102DDE /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		59F03BEC2076AEFF00E47867 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -123,6 +164,17 @@
 		59EB415B2071117D00F29CA5 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		59EB4161207115AD00F29CA5 /* UIStoryBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIStoryBoard.h; sourceTree = "<group>"; };
 		59EB4162207115AD00F29CA5 /* UIStoryBoard.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UIStoryBoard.mm; sourceTree = "<group>"; };
+		59F03B9E2076014C00E47867 /* CustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
+		59F03BA0207603D000E47867 /* CustomWidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomWidget.h; sourceTree = "<group>"; };
+		59F03BA1207603D000E47867 /* CustomWidget.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = CustomWidget.c; sourceTree = "<group>"; };
+		59F03BA32076049C00E47867 /* libcairo.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcairo.dylib; path = ../../../../../../usr/local/lib/libcairo.dylib; sourceTree = "<group>"; };
+		59F03BA5207604D100E47867 /* libgio-2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libgio-2.0.dylib"; path = "../../../../../../usr/local/lib/libgio-2.0.dylib"; sourceTree = "<group>"; };
+		59F03BA8207625D900E47867 /* GtkDrawableContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GtkDrawableContainer.h; sourceTree = "<group>"; };
+		59F03BA9207625D900E47867 /* GtkDrawableContainer.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = GtkDrawableContainer.c; sourceTree = "<group>"; };
+		59F03BF02076AEFF00E47867 /* TestUIStoryboard */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestUIStoryboard; sourceTree = BUILT_PRODUCTS_DIR; };
+		59F03BF62076AF8100E47867 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = TestUIStoryBoard/TestStoryBoard/AppDelegate.swift; sourceTree = "<group>"; };
+		59F03BF72076AF8100E47867 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = TestUIStoryBoard/TestStoryBoard/ViewController.swift; sourceTree = "<group>"; };
+		59F03BFA2076AFAB00E47867 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = main.swift; path = TestUIStoryBoard/TestStoryBoard/main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,7 +205,20 @@
 				599930DD206FDF2600102DDE /* libgtk-3.0.dylib in Frameworks */,
 				599930E4206FE03000102DDE /* libgdk-3.dylib in Frameworks */,
 				599930E3206FDFCC00102DDE /* libglib-2.0.0.dylib in Frameworks */,
+				59F03BA72076212500E47867 /* libcairo.dylib in Frameworks */,
 				599930E1206FDFA300102DDE /* libgobject-2.0.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		59F03BE62076AEFF00E47867 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59F03BE72076AEFF00E47867 /* libxml2.2.dylib in Frameworks */,
+				59F03BE82076AEFF00E47867 /* libgdk-3.dylib in Frameworks */,
+				59F03BE92076AEFF00E47867 /* libgtk-3.0.dylib in Frameworks */,
+				59F03BEA2076AEFF00E47867 /* libglib-2.0.0.dylib in Frameworks */,
+				59F03BEB2076AEFF00E47867 /* libgobject-2.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,6 +242,7 @@
 				59261BBC206EB9E100BF9DB7 /* StoryBoardParser */,
 				59261BD9206EE7F300BF9DB7 /* TestAPI */,
 				599930BD206FDC5300102DDE /* TestGtk */,
+				59F03BF02076AEFF00E47867 /* TestUIStoryboard */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -184,6 +250,8 @@
 		59261BC9206EBB7A00BF9DB7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				59F03BA5207604D100E47867 /* libgio-2.0.dylib */,
+				59F03BA32076049C00E47867 /* libcairo.dylib */,
 				599930E2206FDFCC00102DDE /* libglib-2.0.0.dylib */,
 				599930E0206FDFA300102DDE /* libgobject-2.0.dylib */,
 				599930DE206FDF3D00102DDE /* libgdk-3.dylib */,
@@ -196,6 +264,8 @@
 		59EB41242071107400F29CA5 /* TestGtk */ = {
 			isa = PBXGroup;
 			children = (
+				59F03BA0207603D000E47867 /* CustomWidget.h */,
+				59F03BA1207603D000E47867 /* CustomWidget.c */,
 				59EB41252071107400F29CA5 /* main.c */,
 			);
 			path = TestGtk;
@@ -212,6 +282,7 @@
 		59EB412A207110AD00F29CA5 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				59F03BF52076AF4A00E47867 /* TestUIStoryBoard */,
 				59EB415F207115AD00F29CA5 /* objc */,
 				59EB41582071117D00F29CA5 /* TestUI */,
 				59EB412C207110AD00F29CA5 /* UIKit */,
@@ -225,6 +296,8 @@
 			children = (
 				59EB412F207110AD00F29CA5 /* TestAPI-Bridging-Header.h */,
 				59EB412E207110AD00F29CA5 /* Gtk_SwiftGlue.h */,
+				59F03BA8207625D900E47867 /* GtkDrawableContainer.h */,
+				59F03BA9207625D900E47867 /* GtkDrawableContainer.c */,
 				59EB4131207110AD00F29CA5 /* UIResponder.swift */,
 				595FC9132075219400FB6D6B /* UISwitch.swift */,
 				594FE37D207286550098613B /* UIScreen.swift */,
@@ -261,6 +334,7 @@
 		59EB41582071117D00F29CA5 /* TestUI */ = {
 			isa = PBXGroup;
 			children = (
+				59F03B9E2076014C00E47867 /* CustomView.swift */,
 				59EB41592071117D00F29CA5 /* ViewController.swift */,
 				595FC90F2073A3CE00FB6D6B /* ViewController3.swift */,
 				594FE3832072BFD30098613B /* ViewController2.swift */,
@@ -286,6 +360,16 @@
 				59EB4161207115AD00F29CA5 /* UIStoryBoard.h */,
 			);
 			path = include;
+			sourceTree = "<group>";
+		};
+		59F03BF52076AF4A00E47867 /* TestUIStoryBoard */ = {
+			isa = PBXGroup;
+			children = (
+				59F03BFA2076AFAB00E47867 /* main.swift */,
+				59F03BF62076AF8100E47867 /* AppDelegate.swift */,
+				59F03BF72076AF8100E47867 /* ViewController.swift */,
+			);
+			name = TestUIStoryBoard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -342,6 +426,23 @@
 			productReference = 599930BD206FDC5300102DDE /* TestGtk */;
 			productType = "com.apple.product-type.tool";
 		};
+		59F03BCA2076AEFF00E47867 /* TestUIStoryboard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 59F03BED2076AEFF00E47867 /* Build configuration list for PBXNativeTarget "TestUIStoryboard" */;
+			buildPhases = (
+				59F03BCB2076AEFF00E47867 /* Sources */,
+				59F03BE62076AEFF00E47867 /* Frameworks */,
+				59F03BEC2076AEFF00E47867 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TestUIStoryboard;
+			productName = TestAPI;
+			productReference = 59F03BF02076AEFF00E47867 /* TestUIStoryboard */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -366,6 +467,9 @@
 						LastSwiftMigration = 0930;
 						ProvisioningStyle = Automatic;
 					};
+					59F03BCA2076AEFF00E47867 = {
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 59261BB7206EB9E100BF9DB7 /* Build configuration list for PBXProject "NUXKit" */;
@@ -383,6 +487,7 @@
 				59261BBB206EB9E100BF9DB7 /* StoryBoardParser */,
 				59261BD8206EE7F300BF9DB7 /* TestAPI */,
 				599930BC206FDC5300102DDE /* TestGtk */,
+				59F03BCA2076AEFF00E47867 /* TestUIStoryboard */,
 			);
 		};
 /* End PBXProject section */
@@ -421,10 +526,12 @@
 				59EB4151207110D800F29CA5 /* SB_Parameters.cpp in Sources */,
 				59EB415C2071117D00F29CA5 /* ViewController.swift in Sources */,
 				59EB4163207115AD00F29CA5 /* UIStoryBoard.mm in Sources */,
+				59F03BAA207625D900E47867 /* GtkDrawableContainer.c in Sources */,
 				594FE3842072BFD30098613B /* ViewController2.swift in Sources */,
 				59EB4152207110D800F29CA5 /* SB_Scene.cpp in Sources */,
 				59EB415E2071117D00F29CA5 /* main.swift in Sources */,
 				59EB4153207110D800F29CA5 /* XMLDocument.cpp in Sources */,
+				59F03B9F2076014C00E47867 /* CustomView.swift in Sources */,
 				59EB4154207110D800F29CA5 /* StoryboardDocument.cpp in Sources */,
 				59EB4155207110D800F29CA5 /* SB_View.cpp in Sources */,
 				594FE35E20727E840098613B /* UIControl.swift in Sources */,
@@ -436,7 +543,38 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59F03BAB207625D900E47867 /* GtkDrawableContainer.c in Sources */,
+				59F03BA2207603D000E47867 /* CustomWidget.c in Sources */,
 				59EB41262071107400F29CA5 /* main.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		59F03BCB2076AEFF00E47867 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59F03BCC2076AEFF00E47867 /* UIButton.swift in Sources */,
+				59F03BCD2076AEFF00E47867 /* UIView.swift in Sources */,
+				59F03BCE2076AEFF00E47867 /* UIResponder.swift in Sources */,
+				59F03BCF2076AEFF00E47867 /* UIViewController.swift in Sources */,
+				59F03BD02076AEFF00E47867 /* UIScreen.swift in Sources */,
+				59F03BD22076AEFF00E47867 /* UIWindow.swift in Sources */,
+				59F03BD42076AEFF00E47867 /* UIColor.swift in Sources */,
+				59F03BD52076AEFF00E47867 /* UISwitch.swift in Sources */,
+				59F03BF82076AF8100E47867 /* AppDelegate.swift in Sources */,
+				59F03BD62076AEFF00E47867 /* UIApplication.swift in Sources */,
+				59F03BD72076AEFF00E47867 /* UIStoryboard.swift in Sources */,
+				59F03BD82076AEFF00E47867 /* UILabel.swift in Sources */,
+				59F03BD92076AEFF00E47867 /* SB_Parameters.cpp in Sources */,
+				59F03BDB2076AEFF00E47867 /* UIStoryBoard.mm in Sources */,
+				59F03BDC2076AEFF00E47867 /* GtkDrawableContainer.c in Sources */,
+				59F03BDE2076AEFF00E47867 /* SB_Scene.cpp in Sources */,
+				59F03BE02076AEFF00E47867 /* XMLDocument.cpp in Sources */,
+				59F03BE22076AEFF00E47867 /* StoryboardDocument.cpp in Sources */,
+				59F03BFB2076AFAB00E47867 /* main.swift in Sources */,
+				59F03BF92076AF8100E47867 /* ViewController.swift in Sources */,
+				59F03BE32076AEFF00E47867 /* SB_View.cpp in Sources */,
+				59F03BE42076AEFF00E47867 /* UIControl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -711,6 +849,73 @@
 			};
 			name = Release;
 		};
+		59F03BEE2076AEFF00E47867 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YUR9BF3P45;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include/,
+					/usr/local/include/libxml2,
+					"/usr/local/lib/glib-2.0/include/",
+					/usr/local/include/,
+					/usr/local/include/libxml2,
+					"/usr/local/include/gtk-3.0/",
+					"/usr/local/include/glib-2.0/",
+					"/usr/local/include/pango-1.0/",
+					/usr/local/include/cairo/,
+					"/usr/local/include/gdk-pixbuf-2.0/",
+					"/usr/local/include/atk-1.0/",
+				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/usr/local/Cellar/gtk+3/3.22.29_1/lib",
+				);
+				MODULE_NAME = TestStoryBoard;
+				PRODUCT_MODULE_NAME = TestStoryBoard;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "Sources/UIKit/TestAPI-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		59F03BEF2076AEFF00E47867 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YUR9BF3P45;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include/,
+					/usr/local/include/libxml2,
+					"/usr/local/lib/glib-2.0/include/",
+					/usr/local/include/,
+					/usr/local/include/libxml2,
+					"/usr/local/include/gtk-3.0/",
+					"/usr/local/include/glib-2.0/",
+					"/usr/local/include/pango-1.0/",
+					/usr/local/include/cairo/,
+					"/usr/local/include/gdk-pixbuf-2.0/",
+					"/usr/local/include/atk-1.0/",
+				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/usr/local/Cellar/gtk+3/3.22.29_1/lib",
+				);
+				MODULE_NAME = TestStoryBoard;
+				PRODUCT_MODULE_NAME = TestStoryBoard;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Sources/UIKit/TestAPI-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -746,6 +951,15 @@
 			buildConfigurations = (
 				599930C2206FDC5300102DDE /* Debug */,
 				599930C3206FDC5300102DDE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		59F03BED2076AEFF00E47867 /* Build configuration list for PBXNativeTarget "TestUIStoryboard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				59F03BEE2076AEFF00E47867 /* Debug */,
+				59F03BEF2076AEFF00E47867 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

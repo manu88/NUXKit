@@ -1,0 +1,10 @@
+version: "Apple Swift version 4.1 (swiftlang-902.0.48 clang-902.0.37.1)"
+options: "b08e8147a108463328b9bcdc9ed2387a"
+build_time: [1522589474, 207447000]
+inputs:
+  "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/Sources/UIKit/UIApplication.swift": !dirty [1522533044, 0]
+  "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/Sources/UIKit/UIResponder.swift": [1522508460, 0]
+  "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/Sources/UIKit/UIStoryboard.swift": [1522525659, 0]
+  "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/Sources/UIKit/UIView.swift": !dirty [1522532414, 0]
+  "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/Sources/UIKit/UIViewController.swift": [1522532357, 0]
+  "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/Sources/UIKit/UIWindow.swift": !dirty [1522533039, 0]

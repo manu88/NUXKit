@@ -8,7 +8,7 @@
 
 import Foundation
 
-
+/*
 func bridgeRetained<T : AnyObject>(obj : T) -> UnsafeMutableRawPointer
 {
     return UnsafeMutableRawPointer(Unmanaged.passRetained(obj).toOpaque())
@@ -17,23 +17,17 @@ func bridgeRetained<T : AnyObject>(obj : T) -> UnsafeMutableRawPointer
 func bridgeTransfer<T : AnyObject>(ptr : UnsafeRawPointer) -> T {
     return Unmanaged<T>.fromOpaque(UnsafeRawPointer(ptr)).takeRetainedValue()
 }
-
+*/
 open class UIWindow : UIView
 {
-    // will go private
+    override open var next: UIResponder? { get { return UIApplication.shared}}
     
-    
-    
-    
-    /*
-    init()
+    deinit
     {
-        super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0) )
-    }
- */
-    
-    deinit {
-        gtk_widget_destroy( _windowImpl)
+        if( _windowImpl != nil)
+        {
+            gtk_widget_destroy( _windowImpl)
+        }
     }
     var _windowImpl : UnsafeMutablePointer<GtkWidget>? = nil
     
@@ -73,7 +67,7 @@ open class UIWindow : UIView
     {
 
         
-        UIApplication.shared.win = self
+        UIApplication.shared.window = self
         //rootViewController?.view._window = self
         didAddSubview(rootViewController!.view!)
         
@@ -101,7 +95,7 @@ open class UIWindow : UIView
             _vcList.append(rootViewController!)
             
             
-            doAddView( rootViewController! ,animationMode:  UIWindow.AnimationMode.PresentAnim)
+            doAddView( rootViewController! ,animationMode: flag ? .PresentAnim : .NoAnim)
             //gtk_container_add ( toGtkContainer( _impl), rootViewController!.view._impl);
             //gtk_widget_show_all( _impl )
             
@@ -113,15 +107,15 @@ open class UIWindow : UIView
 
     }
     
-    internal enum AnimationMode
+    internal enum AnimationMode : Int
     {
-        case NoAnim
+        case NoAnim = 0
         case PresentAnim
         case DismissAnim
         
         func isAnimated() -> Bool
         {
-            return self != UIWindow.AnimationMode.NoAnim
+            return self != .NoAnim
         }
     }
     
@@ -144,6 +138,8 @@ open class UIWindow : UIView
         
         if( flag.isAnimated() )// flag )
         {
+            assert(flag != .NoAnim)
+            
             class AnimContext
             {
                 static let DeltaMS :UInt32  = 25
@@ -226,7 +222,7 @@ open class UIWindow : UIView
                 _ = Unmanaged<AnimContext>.fromOpaque(data!).release()
             })
         
-        }
+        } //if( flag.isAnimated() )
         viewController.viewDidAppear( flag.isAnimated() )
     }
     open func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Swift.Void)? = nil)
@@ -248,7 +244,7 @@ open class UIWindow : UIView
         _vcList.append(rootViewController!)
         
         gtk_container_remove(toGtkContainer( _impl), lastViewController?.view._impl)
-        doAddView( rootViewController! ,animationMode:  UIWindow.AnimationMode.PresentAnim)
+        doAddView( rootViewController! ,animationMode: flag ?   .PresentAnim : .NoAnim)
         
         // configure old View
         lastViewController?.view._window = nil
@@ -293,7 +289,7 @@ open class UIWindow : UIView
         
         rootViewController = _vcList.last!
         
-        doAddView(rootViewController!, animationMode: UIWindow.AnimationMode.DismissAnim )
+        doAddView(rootViewController!, animationMode: flag ? .DismissAnim : .NoAnim )
         
         lastViewController.view._window = nil
         

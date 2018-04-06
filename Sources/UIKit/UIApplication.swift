@@ -92,7 +92,22 @@ extension UIApplicationDelegate
 class UIApplication : UIResponder
 {
     
-    var win : UIWindow? = nil
+    var _win : UIWindow? = nil
+    
+    @available(iOS 5.0, *)
+    public var window: UIWindow?
+    {   get
+        {
+            return _win
+        }
+        
+        set
+        {
+            _win = newValue
+        }
+        
+    }
+    
     
     
     static let _sharedInstance = UIApplication()
@@ -191,6 +206,30 @@ class UIApplication : UIResponder
         }
         */
         
+        
+        let createWindows = false // set to true if loaded from storyboard/Nib/Xib
+        
+        if( createWindows)
+        {
+            window = UIWindow(frame: UIScreen.main.bounds )
+            
+        }
+        
+        let d = delegate as! NSObject
+        
+        
+        if( d.responds(to: Selector(("setWindow:")) ))
+        {
+            //d.setValue(window, forKey: "window")
+            d.perform( Selector(("setWindow:") ), with: window)
+            //d.setValue(win as UIWindow?, forKey: "window")
+            
+        }
+        else
+        {
+            print("[Application] The app delegate must implement the window property if it wants to use a main storyboard file.")
+        }
+        
         if( delegate?.application(self, didFinishLaunchingWithOptions: nil) == false)
         {
             
@@ -198,7 +237,7 @@ class UIApplication : UIResponder
         
         
         
-        win!.presentRootViewController(animated: true) {
+        window!.presentRootViewController(animated: true) {
             self.delegate?.applicationDidBecomeActive(self)
         }
         

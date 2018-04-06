@@ -12,9 +12,14 @@
 		<key>TestAPI.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>3</integer>
 		</dict>
 		<key>TestGtk.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>TestUIStoryboard.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>2</integer>
@@ -23,6 +28,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>59261BBB206EB9E100BF9DB7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>599930BC206FDC5300102DDE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
