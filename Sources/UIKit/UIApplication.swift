@@ -100,6 +100,8 @@ extension UIApplicationDelegate
 class UIApplication : UIResponder
 {
     
+    fileprivate var storyboard : UIStoryboard! = nil
+    
     var _win : UIWindow? = nil
     
     @available(iOS 5.0, *)
@@ -119,7 +121,7 @@ class UIApplication : UIResponder
     
     
     static let _sharedInstance = UIApplication()
-    open class var shared: UIApplication
+    @objc open class var shared: UIApplication
         { get
             {
                 g_log_set_always_fatal( G_LOG_LEVEL_CRITICAL )
@@ -165,6 +167,17 @@ class UIApplication : UIResponder
         return true
     }
     
+    @objc fileprivate  func segueDestination( sender : AnyObject? )
+    {
+        /*
+        if let destID = storyboard.segueSenders.value(forKey: sender) as? String
+        {
+            
+        }
+ */
+        //window?.present(<#T##viewControllerToPresent: UIViewController##UIViewController#>, animated: <#T##Bool#>)
+    }
+    
     fileprivate func loadStoryboard(_ storyboardFile : String? ) -> Bool
     {
         guard let storyboardFile = storyboardFile else
@@ -172,8 +185,7 @@ class UIApplication : UIResponder
             return false
         }
         
-        
-        let storyboard =  UIStoryboard(name: storyboardFile, bundle: nil)
+        storyboard =  UIStoryboard(name: storyboardFile, bundle: nil)
         
         if let vc = storyboard.instantiateInitialViewController()
         {

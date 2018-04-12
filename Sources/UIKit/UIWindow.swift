@@ -218,7 +218,7 @@ open class UIWindow : UIView
                 return 1
             }, ptr, { (data) in
                 // GDestroyNotify
-                print("Anim ended")
+
                 _ = Unmanaged<AnimContext>.fromOpaque(data!).release()
             })
         

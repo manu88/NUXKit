@@ -12,6 +12,8 @@ import UIKit
 
 class TestCoder2 : NSCoder
 {
+    
+    
     var id  = ""
     var _coder : NSCoder?
     
@@ -76,7 +78,7 @@ class TestCoder2 : NSCoder
 
 class ViewController: UIViewController {
 
-    
+    @IBOutlet var mylabel : UILabel?
     required init?(coder aDecoder: NSCoder)
     {
         //let lol = TestCoder("UIViewController", coder: aDecoder)
@@ -114,9 +116,10 @@ class ViewController: UIViewController {
         assert(sender != nil)
         if let slider = sender
         {
+            mylabel?.text = "\(slider.value)"
             print("Slider value changed \(slider.value)")
         }
     }
-
+  
 }
 

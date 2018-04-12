@@ -340,7 +340,6 @@ extension UIView // Draw
 {
     open func setNeedsDisplay()
     {
-        //print("gtk_widget_show")
         gtk_widget_show(_impl)
     }
     

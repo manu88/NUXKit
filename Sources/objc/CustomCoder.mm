@@ -130,7 +130,6 @@ static CGRect parseCGRectNode(const XMLNode &node);
         {
             if( stateNode.first == "state")
             {
-                printf("Add a state %s\n" ,stateNode.second.getProperty("key").c_str() );
                 CustomCoder* decoder = [[CustomCoder alloc] initWithXMLNode: stateNode.second storyboard:_storyboard ] ;
                 
                 UIButtonContent* ct = [[UIButtonContent alloc] initWithCoder:decoder];
@@ -220,7 +219,6 @@ static CGRect parseCGRectNode(const XMLNode &node);
     
     if( xmlKey == nil)
     {
-        //NSLog(@"[decodeTopLevelObjectForKey] key translation not found for %@" , key);
         return nil;
     }
     
@@ -235,7 +233,9 @@ static CGRect parseCGRectNode(const XMLNode &node);
         
         CustomCoder* decoder = [[CustomCoder alloc] initWithXMLNode: viewNode storyboard:_storyboard] ;
         
-        return [[instanceClass alloc] initWithCoder: decoder ];
+        id view = [[instanceClass alloc] initWithCoder: decoder ];
+        [_storyboard addInstance:view forKey:[NSString stringWithFormat:@"%s" , viewNode.getProperty("id").c_str() ]];
+        return view;
     }
     else if( [key  isEqualToString: @"UISubviews"])
     {
@@ -258,6 +258,7 @@ static CGRect parseCGRectNode(const XMLNode &node);
                 
                 id view =[[instanceClass alloc] initWithCoder: decoder ];
                 
+                [_storyboard addInstance:view forKey:[NSString stringWithFormat:@"%s" , subV.second.getProperty("id").c_str() ]];
                 
                 if ([view isKindOfClass:[UIControl class] ])
                 {
@@ -266,47 +267,58 @@ static CGRect parseCGRectNode(const XMLNode &node);
                     {
                         for( const auto &connectNode : connectionListNode.getChildren() )
                         {
-                            const auto selectorName = connectNode.second.getProperty("selector");
-                            const auto destName = connectNode.second.getProperty("destination");
-                            const auto eventTypeName = connectNode.second.getProperty("eventType");
-                            
-                            NSLog(@"Got a connection selector %s type %s dest %s \n" , selectorName.c_str()  , eventTypeName.c_str() , destName.c_str() );
-                            
-                            UIViewController* attachedViewController = [_storyboard getViewControllerWithID:
-                                                                        [NSString stringWithFormat:@"%s" , destName.c_str()]
-                                                                        ];
-                            
-                            if( attachedViewController)
+                            if (connectNode.first == "action")
                             {
-                                SEL action = NSSelectorFromString([NSString stringWithFormat:@"%s" , selectorName.c_str()]);
+                                const auto selectorName = connectNode.second.getProperty("selector");
+                                const auto destName = connectNode.second.getProperty("destination");
+                                const auto eventTypeName = connectNode.second.getProperty("eventType");
+
                                 
+                                UIViewController* attachedViewController = [_storyboard getViewControllerWithID:
+                                                                            [NSString stringWithFormat:@"%s" , destName.c_str()]
+                                                                            ];
                                 
-                                
-                                auto controlEventStrToVal = []( const std::string &str) -> unsigned int
+                                if( attachedViewController)
                                 {
-                                         if( str == "touchDown")                return 1 << 0;
-                                    else if( str == "touchDownRepeat")          return 1 << 1;
-                                    else if( str == "touchDragInside")          return 1 << 2;
-                                    else if( str == "touchDragOutside")         return 1 << 3;
-                                    else if( str == "touchDragEnter")           return 1 << 4;
-                                    else if( str == "touchDragExit")            return 1 << 5;
-                                    else if( str == "touchUpInside")            return 1 << 6;
-                                    else if( str == "touchUpOutside")           return 1 << 7;
-                                    else if( str == "touchCancel")              return 1 << 8;
-                                    else if( str == "valueChanged")             return 1 << 12;
-                                    else if( str == "primaryActionTriggered")   return 1 << 13;
+                                    SEL action = NSSelectorFromString([NSString stringWithFormat:@"%s" , selectorName.c_str()]);
+
+                                    auto controlEventStrToVal = []( const std::string &str) -> unsigned int
+                                    {
+                                             if( str == "touchDown")                return 1 << 0;
+                                        else if( str == "touchDownRepeat")          return 1 << 1;
+                                        else if( str == "touchDragInside")          return 1 << 2;
+                                        else if( str == "touchDragOutside")         return 1 << 3;
+                                        else if( str == "touchDragEnter")           return 1 << 4;
+                                        else if( str == "touchDragExit")            return 1 << 5;
+                                        else if( str == "touchUpInside")            return 1 << 6;
+                                        else if( str == "touchUpOutside")           return 1 << 7;
+                                        else if( str == "touchCancel")              return 1 << 8;
+                                        else if( str == "valueChanged")             return 1 << 12;
+                                        else if( str == "primaryActionTriggered")   return 1 << 13;
+                                        
+                                        assert(false);
+                                        
+                                        return -1;
+                                    };
                                     
-                                    assert(false);
-                                    
-                                    return -1;
-                                };
+                                    [(UIControl*) view addTarget:attachedViewController action:action for:controlEventStrToVal(eventTypeName)];
+                                } // END if( attachedViewController)
+                            
+                            
+                            } // END if (connectNode.first == "action")
+                            else if( connectNode.first == "segue")
+                            {
+                                const auto destName = connectNode.second.getProperty("destination");
+                                const auto kindName = connectNode.second.getProperty("kind");
+                                const auto segueIdentifier = connectNode.second.getProperty("identifier");
                                 
-                                [(UIControl*) view addTarget:attachedViewController action:action for:controlEventStrToVal(eventTypeName)];
+                                NSLog(@" segue id %s kind %s to %s" , segueIdentifier.c_str() , kindName.c_str() , destName.c_str() );
+                                
+                                [_storyboard registerSegueSender:view destId:[NSString stringWithFormat:@"%s" , destName.c_str()] ];
+                                [(UIControl*) view addTarget:[UIApplication shared] action:NSSelectorFromString(@"segueDestinationWithSender:") for:1 << 6];
                             }
                             
-                            
-                            
-                        }
+                        } // END for( const auto &connectNode
                     }
                 }
                 if( view)
@@ -329,8 +341,6 @@ static CGRect parseCGRectNode(const XMLNode &node);
 
 - (nullable id)decodeObjectOfClasses:(nullable NSSet<Class> *)classes forKey:(NSString *)key
 {
-    //NSLog(@"decodeObjectOfClasses key = '%@' classes : %@" , key , classes.description);
-
     return nil;
 }
 

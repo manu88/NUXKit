@@ -28,10 +28,7 @@ open class UIScreen : NSObject/*, UITraitEnvironment*/
                     gdk_monitor_get_geometry(monitor, ptr)
                     
                 })
-                
-                print("Geometry : \(geometry.x) \(geometry.y)  \(geometry.width) \(geometry.height)  ")
-                
-                
+
                 s._bounds.origin = CGPoint()
                 s._bounds.size.width  = 400 //CGFloat( geometry.width)
                 s._bounds.size.height = 800 //CGFloat(  geometry.height )

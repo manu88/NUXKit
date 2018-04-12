@@ -26,8 +26,6 @@ class ViewController: UIViewController {
         assert(view.next != nil)
         assert(view.window  == nil)
         
-        print("\(String(describing: view.next?.description))")
-        
         
     }
     
@@ -40,11 +38,8 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) // Called when the view is about to made visible. Default does nothing
     {
-        print("ViewControler.viewWillAppear")
-        
         assert(view.window == nil)
         assert(view.next == self)
-        
     }
     
     override func viewDidAppear(_ animated: Bool) // Called when the view has been fully transitioned onto the screen. Default does nothing
@@ -52,18 +47,14 @@ class ViewController: UIViewController {
         assert(view.window != nil)
         assert(view.window!.next == UIApplication.shared)
         assert(view.next == self)
-        
-        print("ViewControler.viewDidAppear")
     }
     
     override func viewWillDisappear(_ animated: Bool) // Called when the view is dismissed, covered or otherwise hidden. Default does nothing
     {
-        print("ViewControler.viewWillDisappear")
     }
     
     override func viewDidDisappear(_ animated: Bool) // Called after the view was dismissed, covered or otherwise hidden. Default does nothing
     {
-        print("ViewControler.viewDidDisappear")
     }
     
     override func viewDidLoad()

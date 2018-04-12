@@ -83,13 +83,10 @@ open class UIButton : UIControl/*, NSCoding */
         
         if let states = aDecoder.decodeObject(forKey: "UIButtonStatefulContent") as? [UInt : UIButtonContent]
         {
-            
-            print("Got \(states.count) states")
-            
+
             for s in states
             {
                 let state = UIControlState(rawValue: s.key)
-                print("State \(state) title \(s.value.title)")
                 setTitle(s.value.title, for: state)
             }
         }

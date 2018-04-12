@@ -10,6 +10,7 @@
 #import "CustomCoder.h"
 #include "../StoryBoardParser/include/StoryboardDocument.hpp"
 #include "TestStoryBoard-Swift.h"
+//#include "TestNoStoryBoard-Swift.h"
 #include "XMLDocument.hpp"
 
 
@@ -20,6 +21,9 @@
     
     XMLNode scenesNode;
     XMLNode initialVCNode;
+    
+    NSMutableDictionary* _createdInstances;
+    NSMutableDictionary* _segueSenders;
     
     std::string initialViewControllerID;
     
@@ -33,6 +37,8 @@
     {
         self->doc = new XMLDocument( [ name cStringUsingEncoding:NSUTF8StringEncoding ] );
         
+        _createdInstances = [[NSMutableDictionary alloc] init];
+        _segueSenders     = [[NSMutableDictionary alloc] init];
         
         _viewControllers = [[NSMutableDictionary alloc] init];
         if (doc->isValid() == false)
@@ -48,6 +54,19 @@
     return nil;
 }
 
+-(BOOL) addInstance: (id) object forKey:(NSString*) key
+{
+    [_createdInstances setObject:object forKey:key];
+    
+    return [_createdInstances objectForKey:key] != nil;
+}
+
+-(BOOL) registerSegueSender: (id) object destId:(NSString*) destId
+{
+    [_segueSenders setObject:destId forKey:object];
+    
+    return [_segueSenders objectForKey:destId] != nil;
+}
 
 - (BOOL)prepareDoc
 {
@@ -77,7 +96,6 @@
     
     if (scenesNode.isValid() == false)
     {
-        printf("Error : no 'scene' node found\n");
         return NO;
     }
     
@@ -151,6 +169,28 @@
         [_viewControllers setObject:vc forKey:[NSString stringWithFormat:@"%s" , vdID.c_str()]];
         
         UIView* view = [decoder decodeTopLevelObjectForKey:@"UIView" error:nil];
+        
+        const auto connectionsNode = initialVCNode.getChildByName("connections");
+        if(connectionsNode.isValid() )
+        {
+            for( const auto &connecNode : connectionsNode.getChildren())
+            {
+                //<outlet property="mylabel" destination="XmU-Eo-b7z" id="EVj-Yf-qUO"/>
+                const auto propertyName = connecNode.second.getProperty("property");
+                const auto destinationID = connecNode.second.getProperty("destination");
+                const auto idName = connecNode.second.getProperty("id");
+
+                const NSString* idStr = [NSString stringWithFormat:@"%s" , destinationID.c_str()];
+                
+                NSObject* propValue = [_createdInstances objectForKey:idStr];
+
+                assert(propValue);
+                
+                NSString* propertyStr = [NSString stringWithFormat:@"%s" , propertyName.c_str()];
+                [vc setValue:propValue forKey:propertyStr];
+                
+            }
+        }
         
         assert(view);
         [vc setView:view];
