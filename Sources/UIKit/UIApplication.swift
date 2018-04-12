@@ -58,10 +58,18 @@ protocol UIApplicationDelegate //: NSObjectProtocol
     @available(iOS 2.0, *)
     /*optional public*/ func applicationDidFinishLaunching(_ application: UIApplication)
 
+    
+
+    /*
+     NO if the app cannot handle the URL resource or continue a user activity, or if the app should not perform the application:performActionForShortcutItem:completionHandler: method because you’re handling the invocation of a Home screen quick action in this method; otherwise return YES. The return value is ignored if the app is launched as a result of a remote notification.
+     */
     @available(iOS 6.0, *)
     /*optional public*/ func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?/* = nil*/) -> Bool
  
-    
+    /*
+     Return Value
+     NO if the app cannot handle the URL resource or continue a user activity, otherwise return YES. The return value is ignored if the app is launched as a result of a remote notification.
+     */
     @available(iOS 3.0, *)
     /*optional public*/ func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? /*= nil*/) -> Bool
     
@@ -133,7 +141,63 @@ class UIApplication : UIResponder
     
     /*unowned(unsafe)*/ open var delegate: UIApplicationDelegate?
     
+    fileprivate func createWindowIfNeeded() -> Bool
+    {
+
+        if( window == nil )
+        {
+            window = UIWindow(frame: UIScreen.main.bounds )
+        }
+
+        let d = delegate as! NSObject
+        
+        if( d.responds(to: Selector(("setWindow:")) ))
+        {
+            d.perform( Selector(("setWindow:") ), with: window)
+        }
+        else
+        {
+            print("[Application] The app delegate must implement the window property if it wants to use a main storyboard file.")
+            
+            return false
+        }
+        
+        return true
+    }
     
+    fileprivate func loadStoryboard(_ storyboardFile : String? ) -> Bool
+    {
+        guard let storyboardFile = storyboardFile else
+        {
+            return false
+        }
+        
+        
+        let storyboard =  UIStoryboard(name: storyboardFile, bundle: nil)
+        
+        if let vc = storyboard.instantiateInitialViewController()
+        {
+            print("Did find an initial view controller")
+            
+            //window = UIWindow(frame: UIScreen.main.bounds )
+            
+            if( createWindowIfNeeded() == false )
+            {
+                
+            }
+            window?.rootViewController = vc
+            
+            return true
+            
+        }
+        else
+        {
+            print("Did NOT find an initial view controller")
+        }
+        
+        
+        return false
+    }
     // If nil is specified for principalClassName, the value for NSPrincipalClass from the Info.plist is used. If there is no
     // NSPrincipalClass key specified, the UIApplication class is used. The delegate class will be instantiated using init.
     public func UIApplicationMain(_ argc: Int32, _ argv: UnsafeMutablePointer<UnsafeMutablePointer<Int8>>!, _ principalClassName: String?, _ delegateClassName: String?) -> Int32
@@ -188,25 +252,30 @@ class UIApplication : UIResponder
         }, ptrToSelf, nil, GConnectFlags(rawValue: 0) )
         */
         
+        
+        
+        let storyboardURL = "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/Sources/TestUIStoryBoard/TestStoryBoard/Base.lproj/Main.storyboard"
+        
+        if( loadStoryboard( storyboardURL ) )
+        {
+            print("Storyboard load OK")
+            
+        }
+        else
+        {
+            print("Storyboard load ERROR")
+        }
+        
+        
+        /*
+          We only care of returned values IF the application was invoked from another app, or service.
+         For a 'normal' launch ( or remote) discard the returned value
+         */
         if( delegate?.application(self, willFinishLaunchingWithOptions: nil) == false )
         {
             
         }
-        
-        
-        
-        
-        // UIStoryboard.instantiateInitialViewController here
 
-        
-        /*
-        if  as? UIViewController
-        {
-            
-        }
-        */
-        
-        
         let createWindows = false // set to true if loaded from storyboard/Nib/Xib
         
         if( createWindows)
@@ -215,8 +284,8 @@ class UIApplication : UIResponder
             
         }
         
+        /*
         let d = delegate as! NSObject
-        
         
         if( d.responds(to: Selector(("setWindow:")) ))
         {
@@ -229,7 +298,7 @@ class UIApplication : UIResponder
         {
             print("[Application] The app delegate must implement the window property if it wants to use a main storyboard file.")
         }
-        
+        */
         if( delegate?.application(self, didFinishLaunchingWithOptions: nil) == false)
         {
             

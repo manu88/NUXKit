@@ -18,7 +18,7 @@ class XMLDocument
 {
 public:
     
-    
+    XMLDocument();
     XMLDocument( const std::string& file);
     ~XMLDocument();
     bool test();
@@ -28,6 +28,7 @@ public:
     XMLNode getRoot() const;
     
 private:
+    
     void* _impl;
 };
 
@@ -60,6 +61,8 @@ public:
     
     Children getChildren() const;
 private:
+    
+    
     
     XMLNode( void* data);
     

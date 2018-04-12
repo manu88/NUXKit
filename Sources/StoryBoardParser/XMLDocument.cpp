@@ -34,6 +34,10 @@ static bool loadFile( xmlDocPtr *docPtr, const std::string &file)
     return true;
 }
 
+XMLDocument::XMLDocument():
+_impl(nullptr)
+{}
+
 XMLDocument::XMLDocument( const std::string&file):
 _impl(nullptr)
 {
@@ -47,15 +51,17 @@ _impl(nullptr)
 
 XMLDocument::~XMLDocument()
 {
+    //printf("[Warning] mem leak : XMLDocument.xmlFreeDoc not called\n");
     if( _impl)
     {
+        
         xmlFreeDoc( static_cast<xmlDocPtr>( _impl ) );
     }
 }
 
 bool XMLDocument::isValid() const noexcept
 {
-    return _impl;
+    return _impl != nullptr;
 }
 
 bool test()

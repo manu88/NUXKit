@@ -9,8 +9,10 @@
 import Foundation
 
 
-open class UIView : UIResponder/*, NSCoding, UIAppearance, UIAppearanceContainer, UIDynamicItem, UITraitEnvironment, UICoordinateSpace, UIFocusItem, CALayerDelegate*/
+open class UIView : UIResponder, NSCoding/*, UIAppearance, UIAppearanceContainer, UIDynamicItem, UITraitEnvironment, UICoordinateSpace, UIFocusItem, CALayerDelegate*/
 {
+    
+    
     
     
     //open class var layerClass: Swift.AnyClass { get } // default is [CALayer class]. Used when creating the underlying layer for the view.
@@ -46,12 +48,72 @@ open class UIView : UIResponder/*, NSCoding, UIAppearance, UIAppearanceContainer
         _frame = frame
         
     }
-    /*
-    public init?(coder aDecoder: NSCoder)
+    
+    public required init?(coder aDecoder: NSCoder)
     {
-        return nil
+        super.init()
+        
+        if( aDecoder.containsValue(forKey: "UIFrame"))
+        {
+                assert(false) // todo :)
+        }
+        
+        let bounds_ = aDecoder.decodeRect(forKey: "UIBounds")
+        if( bounds_ != CGRect.zero)
+        {
+            _frame = bounds_
+        }
+    
+        if let center = aDecoder.decodeObject(of: NSString.self, forKey: "UICenter")
+        {
+            assert(false && (center != center) ) // todo :)
+        }
+        if let transform = aDecoder.decodeObject(of: NSString.self, forKey: "UITransform")
+        {
+            assert(false && (transform != transform) ) // todo :)
+        }
+        
+        let deepDrawRect = aDecoder.decodeBool(forKey: "UIDeepDrawRect")
+        assert(deepDrawRect == true) // temp! don't know what to do with this one...
+        
+        
+        if let tintCol = aDecoder.decodeObject( forKey: "UITintColor") as? UIColor
+        {
+            _tintColor = tintCol
+        }
+    
+        do
+        {
+            if let subViews = try aDecoder.decodeTopLevelObject( forKey: "UISubviews") as? [UIView]
+            {
+                //self._subviews = subViews
+                
+                for v in subViews
+                {
+                    addSubview(v)
+                }
+            }
+        }
+        catch
+        {
+            
+        }
+        
+        isHidden = aDecoder.decodeBool(forKey: "UIHidden")
+        
+        
+        if let backCol = aDecoder.decodeObject(forKey: "UIBackgroundColor") as? UIColor
+        {
+            backgroundColor = backCol
+        }
+        //return self
     }
- */
+ 
+    public func encode(with aCoder: NSCoder)
+    {
+        fatalError("Implement me :)")
+        
+    }
     
     deinit
     {
@@ -105,6 +167,11 @@ open class UIView : UIResponder/*, NSCoding, UIAppearance, UIAppearanceContainer
     private var _bounds = CGRect()
     private var _frame = CGRect()
     private var _tag = 0
+    
+    private var _opaque = true
+    private var _hidden = false
+    
+    internal var _tintColor : UIColor? = nil
 }
 
 extension UIView // Color and parameters
@@ -115,22 +182,45 @@ extension UIView // Color and parameters
         set { _tag = newValue }
         
     }
+    
+    open var isOpaque: Bool // default is YES. opaque views must fill their entire bounds or the results are undefined. the active CGContext in drawRect: will not have been cleared and may have non-zeroed pixels
+    {
+        get
+        {
+            return _opaque;
+        }
+        set
+        {
+            _opaque = newValue
+        }
+    }
     open var isHidden: Bool // default is NO. doesn't check superviews
     {
         get
         {
-            return gtk_widget_get_visible( _impl) == 0   
+            if( _impl != nil)
+            {
+                return gtk_widget_get_visible( _impl) == 0
+            }
+            return _hidden
         }
         
         set
         {
-            if( newValue == true)
+            if( _impl != nil)
             {
-                gtk_widget_set_visible(_impl, 0 )
+                if( newValue == true)
+                {
+                    gtk_widget_set_visible(_impl, 0 )
+                }
+                else
+                {
+                    gtk_widget_set_visible(_impl, 1 )
+                }
             }
             else
             {
-                gtk_widget_set_visible(_impl, 1 )
+                _hidden = newValue
             }
             
         }
@@ -181,6 +271,32 @@ extension UIView // Color and parameters
 
                 
             }
+            
+        }
+    }
+    
+    
+    /*
+     -tintColor always returns a color. The color returned is the first non-default value in the receiver's superview chain (starting with itself).
+     If no non-default value is found, a system-defined color is returned.
+     If this view's -tintAdjustmentMode returns Dimmed, then the color that is returned for -tintColor will automatically be dimmed.
+     If your view subclass uses tintColor in its rendering, override -tintColorDidChange in order to refresh the rendering if the color changes.
+     */
+    @available(iOS 7.0, *)
+    open var tintColor: UIColor!
+    {
+        get
+        {
+            if let tint = _tintColor
+            {
+                return tint
+            }
+            if let superV = _superview
+            {
+                return superV.tintColor
+            }
+            
+            return UIColor.white
             
         }
     }

@@ -14,14 +14,14 @@
 static bool traverseFile( Storyboard::Document &sb , const XMLDocument&doc);
 static bool traverseScene( Storyboard::Scene &sc , const XMLNode &scenes);
 
-static bool ParseFile( Storyboard::Document& sb, const std::string &file)
+/*static*/ bool Storyboard::Document::ParseFile( Storyboard::Document& sb, const std::string &file)
 {
-    XMLDocument doc(file);
+    sb._doc = XMLDocument(file);
     
-    if( doc.isValid() == false)
+    if( sb._doc.isValid() == false)
         return false;
 
-    return traverseFile(sb, doc);
+    return traverseFile(sb, sb._doc);
     
 }
 
@@ -88,12 +88,12 @@ static bool traverseScene( Storyboard::Scene &sc , const XMLNode &scene)
     if( viewControler.isValid() == false)
         return false;
     
+    sc.setViewController(viewControler);
+    Storyboard::ViewController *vc = sc.getViewController();
     
-    Storyboard::ViewController vc;
-    
-    vc.setID( viewControler.getProperty("id"));
-    vc.customClass = viewControler.getProperty("customClass");
-    vc.customModule = viewControler.getProperty("customModule");
+    vc->setID( viewControler.getProperty("id"));
+    vc->customClass = viewControler.getProperty("customClass");
+    vc->customModule = viewControler.getProperty("customModule");
     
     
     const auto viewNode = viewControler.getChildByName("view");
@@ -106,14 +106,12 @@ static bool traverseScene( Storyboard::Scene &sc , const XMLNode &scene)
     
     Storyboard::View view;
     
-    vc.view = view;
+    vc->view = view;
     
-    vc.view.name = viewNode.getName();
+    vc->view.name = viewNode.getName();
     
     const auto subViewsNode = viewNode.getChildByName("subviews");
-    
-    
-    
+
     if( subViewsNode.isValid())
     {
         for( const auto &subV : subViewsNode.getChildren())
@@ -162,11 +160,11 @@ static bool traverseScene( Storyboard::Scene &sc , const XMLNode &scene)
             {
                 
             }
-            vc.view.addSubView( view );
+            vc->view.addSubView( view );
             
         }
     }
-    sc.setViewController(vc);
+    //sc->setViewController(vc);
     
     return true;
 }
@@ -221,8 +219,13 @@ const Storyboard::ViewController* Storyboard::Document::getInitialViewController
 {
     for( const auto&s : getScenes() )
     {
-        if( s.getViewController().getID() == initialViewControllerID)
-            return &s.getViewController();//.customModule + "." + s.getViewController().customClass;
+        if( s.getViewController()->getID() == initialViewControllerID)
+            return s.getViewController();//.customModule + "." + s.getViewController().customClass;
     }
     return nullptr;
+}
+
+XMLNode Storyboard::Document::getRootNode()
+{
+    return _doc.getRoot();
 }

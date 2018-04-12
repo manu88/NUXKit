@@ -20,22 +20,22 @@ int main(int argc, const char * argv[])
     printf("targetRuntime : %s\n" , sboard.getTargetRuntime().c_str() );
     printf("type : %s\n" , sboard.getType().c_str() );
     printf("Got %zi scenes \n" , sboard.getScenes().size() );
-    printf("Initial view Controller '%s' \n" , sboard.getInitialViewController().c_str() );
+    printf("Initial view Controller '%s' \n" , sboard.getInitialViewController()->getID().c_str() );
     for( const auto &scene : sboard.getScenes() )
     {
         printf("+Scene id '%s'\n" , scene.getID().c_str() );
         
-        printf("\t\tView Controller '%s'" , scene.getViewController().getID().c_str() );
+        printf("\t\tView Controller '%s'" , scene.getViewController()->getID().c_str() );
         
-        if( scene.getViewController().getID() == sboard.getInitialViewController() )
+        if( scene.getViewController()->getID() == sboard.getInitialViewController()->getID() )
         {
             printf(" <- initial view controller");
         }
         printf("\n");
         
-        printf("\t\t View: '%s' %zi subviews\n", scene.getViewController().view.name.c_str() , scene.getViewController().view.getSubViewsCount() );
+        printf("\t\t View: '%s' %zi subviews\n", scene.getViewController()->view.name.c_str() , scene.getViewController()->view.getSubViewsCount() );
         
-        for( const auto &v : scene.getViewController().view.getSubViews())
+        for( const auto &v : scene.getViewController()->view.getSubViews())
         {
             printf("\t\t\t%s (%zi properties)\n" , v.name.c_str() , v.parameters.size() );
             

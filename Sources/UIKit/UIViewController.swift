@@ -41,8 +41,79 @@ open class UIViewController : UIResponder, NSCoding /*,UIAppearanceContainer, UI
         
     }
     
-    public required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder)
+    {
+        super.init()
         
+        /*
+         Ask for decodeObject: UIView
+         Ask for decodeObject: UITitle
+         Ask for decodeObject: UITabBarItem
+         Ask for decodeObject: UINavigationItem
+         Ask for decodeObject: UIParentViewController
+         Ask for decodeBool: UIWantsFullScreenLayout
+         Ask for containsValue: UIAutoresizesArchivedViewToFullSize
+         Ask for decodeBool: UIAutoresizesArchivedViewToFullSize
+         Ask for decodeObject: UIStoryboardSegueTemplates
+         Ask for decodeObject: UIStoryboardPreviewSegueTemplates
+         Ask for decodeObject: UIStoryboardCommitSegueTemplates
+         Ask for decodeObject: UIStoryboardPreviewingRegistrants
+         Ask for decodeObject: UIExternalObjectsTableForViewLoading
+         Ask for decodeObject: UITopLevelObjectsToKeepAliveFromStoryboard
+         Ask for decodeObject: UINibName
+         Ask for containsValue: UINibBundleIdentifier
+         Ask for decodeObject: UINibBundleIdentifier
+         Ask for decodeObject: UIToolbarItems
+         Ask for decodeObject: UIChildViewControllers
+         Ask for containsValue: UIDefinesPresentationContext
+         Ask for decodeBool: UIDefinesPresentationContext
+         Ask for decodeBool: UIProvidesPresentationContextTransitionStyle
+         Ask for containsValue: UIRestoresFocusAfterTransition
+         Ask for decodeBool: UIRestoresFocusAfterTransition
+         Ask for containsValue: UIModalTransitionStyle
+         Ask for decodeInt64: UIModalTransitionStyle
+         Ask for containsValue: UIModalPresentationStyle
+         Ask for decodeInt64: UIModalPresentationStyle
+         Ask for decodeBool: UIHidesBottomBarWhenPushed
+         Ask for containsValue: UIContentSizeForViewInPopover
+         Ask for decodeObject: UIContentSizeForViewInPopover
+         Ask for containsValue: UIPreferredContentSize
+         Ask for decodeObject: UIPreferredContentSize
+         Ask for decodeObject: UIRestorationIdentifier
+         Ask for decodeObject: UIStoryboardIdentifier
+         Ask for containsValue: UIKeyCommands
+         Ask for decodeObject: UIKeyCommands
+         Ask for containsValue: UIAddedKeyCommands
+         Ask for decodeObject: UIAddedKeyCommands
+         Ask for containsValue: UIKeyEdgesForExtendedLayout
+         Ask for decodeInt64: UIKeyEdgesForExtendedLayout
+         Ask for containsValue: UIKeyExtendedLayoutIncludesOpaqueBars
+         Ask for decodeInt64: UIKeyExtendedLayoutIncludesOpaqueBars
+         Ask for containsValue: UIKeyAutomaticallyAdjustsScrollViewInsets
+         Ask for decodeInt64: UIKeyAutomaticallyAdjustsScrollViewInsets
+         Ask for containsValue: UIViewControllerViewRespectsSystemMinimumLayoutMargins
+         Ask for decodeBool: UIViewControllerViewRespectsSystemMinimumLayoutMargins
+         Ask for decodeObject: UIViewControllerTopLayoutGuide
+         Ask for decodeObject: UIViewControllerBottomLayoutGuide
+         */
+        
+        do
+        {
+            if let view = try aDecoder.decodeTopLevelObject( forKey: "UIView") as? UIView
+            {
+                self.view = view
+            }
+            else
+            {
+                return nil
+            }
+            
+        }
+        catch
+        {
+            return nil
+        }
+        //self.view = UIView(coder: aDecoder.va)
     }
     
     

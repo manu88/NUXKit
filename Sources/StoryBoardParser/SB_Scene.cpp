@@ -9,6 +9,18 @@
 #include "include/SB_Scene.hpp"
 
 
+Storyboard::Scene::Scene():
+_viewController(nullptr)
+{
+    
+}
+Storyboard::Scene::~Scene()
+{
+    if( _viewController)
+        delete _viewController;
+}
+
+
 void Storyboard::Scene::setID( const std::string &id)
 {
     _id = id;
@@ -21,11 +33,18 @@ std::string Storyboard::Scene::getID() const noexcept
 
 
 
-void Storyboard::Scene::setViewController( Storyboard::ViewController& vc)
+void Storyboard::Scene::setViewController( const XMLNode& node)
 {
-    _viewController = vc;
+    _viewController = new Storyboard::ViewController(node);
 }
-const Storyboard::ViewController& Storyboard::Scene::getViewController() const
+
+Storyboard::ViewController* Storyboard::Scene::getViewController() const
 {
     return _viewController;
+}
+
+Storyboard::ViewController::ViewController(const XMLNode &node):
+node(node)
+{
+    
 }

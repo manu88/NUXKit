@@ -12,6 +12,9 @@
 #include <string>
 #include <set>
 #include "SB_Scene.hpp"
+#include "XMLDocument.hpp"
+
+//class XMLNode;
 
 namespace Storyboard
 {
@@ -36,7 +39,13 @@ namespace Storyboard
         
         void setInitialViewControllerID( const std::string &t);
         const Storyboard::ViewController* getInitialViewController() const noexcept;
+        
+        XMLNode getRootNode();
     private:
+        
+        static bool ParseFile( Document& sb, const std::string &file);
+        
+        XMLDocument _doc;
         Scenes _scenes;
         
         std::string targetRuntime;

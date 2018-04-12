@@ -9,7 +9,7 @@
 import Foundation
 
 
-open class UIColor : NSObject /*, NSSecureCoding , NSCopying*/
+@objc open class UIColor : NSObject /*, NSSecureCoding , NSCopying*/
 {
     var red   = CGFloat(0.0)
     var green = CGFloat(0.0)
@@ -26,7 +26,7 @@ open class UIColor : NSObject /*, NSSecureCoding , NSCopying*/
     
     //public init(hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat)
     
-    public init(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat)
+    @objc public init(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat)
     {
         self.red   = red
         self.green = green

@@ -7,33 +7,145 @@
 //
 
 #import  "UIStoryBoard.h"
+#import "CustomCoder.h"
 #include "../StoryBoardParser/include/StoryboardDocument.hpp"
 //#include "TestNoStoryboard-Swift.h"
+#include "XMLDocument.hpp"
 
 
 @implementation UIStoryboard
 {
-    Storyboard::Document* _doc;
+    //Storyboard::Document* _doc;
+    XMLDocument *doc;
+    
+    XMLNode scenesNode;
+    XMLNode initialVCNode;
+    
+    std::string initialViewControllerID;
+    
 }
 
 -(nonnull id) initWithName:(NSString*)name bundle: (NSBundle*) bundle
 {
     if ( self = [super init])
     {
-        _doc = new Storyboard::Document( [ name cStringUsingEncoding:NSUTF8StringEncoding ] );
+        self->doc = new XMLDocument( [ name cStringUsingEncoding:NSUTF8StringEncoding ] );
+        
+        if (doc->isValid() == false)
+        {
+            return nil;
+        }
+        //initialViewControllerID = nil;
+        
+        
         
         return self;
     }
     return nil;
 }
 
+
+- (BOOL)prepareDoc
+{
+    assert(initialViewControllerID.empty());
+    
+    assert(doc);
+    assert(doc->isValid());
+    
+    
+    if( doc->getRoot().getName() != "document")
+        return NO;
+    
+    
+    if( doc->getRoot().hasProperty("targetRuntime"))
+    {
+        //sb.setTargetRuntime( doc.getRoot().getProperty("targetRuntime") );
+    }
+    
+    if( doc->getRoot().hasProperty("initialViewController"))
+    {
+        initialViewControllerID = doc->getRoot().getProperty("initialViewController");
+        
+        //sb.setInitialViewControllerID( doc.getRoot().getProperty("initialViewController") );
+    }
+    
+    scenesNode = doc->getRoot().getChildByName("scenes");
+    
+    if (scenesNode.isValid() == false)
+    {
+        printf("Error : no 'scene' node found\n");
+        return NO;
+    }
+    
+    
+    for( const auto &scene : scenesNode.getChildren())
+    {
+        const auto objects = scene.second.getChildByName("objects");
+        
+        if( objects.isValid() == false)
+        {
+            return false;
+        }
+        
+        const auto viewControlerNode = objects.getChildByName("viewController");
+        
+        if( viewControlerNode.isValid() == false)
+        {
+            return false;
+        }
+        
+        if( viewControlerNode.getProperty("id") == initialViewControllerID)
+        {
+            initialVCNode = viewControlerNode;
+        }
+        
+        
+    }
+    
+    
+    return initialVCNode.isValid();
+}
+
+
+
 -(void)dealloc
 {
-    delete _doc;
+    delete doc;
 }
 
 - (__kindof UIViewController *_Nullable )instantiateInitialViewController
 {
+    
+    if( initialViewControllerID.empty())
+    {
+        if( [self prepareDoc] == NO)
+        {
+            return nil;
+        }
+    }
+    
+    assert(initialViewControllerID.empty() == false);
+    assert(initialVCNode.isValid());
+    
+    const auto initialVCName = initialVCNode.getProperty("customClass");
+    const auto initialVCModuleName = initialVCNode.getProperty("customModule");
+    
+    assert( initialVCName.empty() == false);
+    assert( initialVCModuleName.empty() == false); // Sure?
+    
+    const auto initialVCFullName = initialVCModuleName + "." + initialVCName;
+    
+    Class instanceClass = NSClassFromString( [NSString stringWithFormat:@"%s", initialVCFullName.c_str() ] );
+    
+    if( instanceClass )
+    {
+        NSCoder* decoder = [[CustomCoder alloc] initWithXMLNode: initialVCNode ];
+        UIViewController * vc =[ [instanceClass alloc] initWithCoder:decoder];
+        
+        return vc;
+    }
+    //NSLog(@"VCName = %s , VCModule = %s " , initialVCName.c_str() , initialVCModuleName.c_str());
+    /*
     const auto initialVC =  _doc->getInitialViewController();
     const auto initialVCName = initialVC->customModule + "." + initialVC ->customClass;
     
@@ -43,55 +155,13 @@
     
     if( instanceClass )
     {
-        UIViewController * vc = [[instanceClass alloc] init];
-        
-        if( vc)
-        {
-            
-        }
-        
+        NSCoder* decoder = [[CustomCoder alloc] initWithXMLNode: _doc->getRootNode() ];
+        UIViewController * vc =[ [instanceClass alloc] initWithCoder:decoder];
+
         return vc;
     }
+     */
     return nil;
 }
 
-
-
-/*
--(bool) loadStoryboard:(  NSString*) file
-{
-    Storyboard::Document sboard([ file cStringUsingEncoding:NSUTF8StringEncoding ] );
-    
-    
-    printf("------------------------------\n");
-    
-    printf("targetRuntime : %s\n" , sboard.getTargetRuntime().c_str() );
-    printf("type : %s\n" , sboard.getType().c_str() );
-    printf("Got %zi scenes \n" , sboard.getScenes().size() );
-    printf("Initial view Controller '%s' \n" , sboard.getInitialViewController().c_str() );
-    for( const auto &scene : sboard.getScenes() )
-    {
-        printf("+Scene id '%s'\n" , scene.getID().c_str() );
-        
-        printf("\t\tView Controller '%s'" , scene.getViewController().getID().c_str() );
-        
-        if( scene.getViewController().getID() == sboard.getInitialViewController() )
-        {
-            printf(" <- initial view controller");
-        }
-        printf("\n");
-        
-        printf("\t\t View: '%s' %zi subviews\n", scene.getViewController().view.name.c_str() , scene.getViewController().view.getSubViewsCount() );
-        
-        for( const auto &v : scene.getViewController().view.getSubViews())
-        {
-            printf("\t\t\t%s\n" , v.name.c_str());
-        }
-        
-    }
-
-    
-    return false;
-}
-*/
 @end

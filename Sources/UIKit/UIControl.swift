@@ -133,4 +133,11 @@ open class UIControl : UIView
         }
         //if let action = _actions[
     }
+    
+    
+    open var isEnabled: Bool = true // default is YES. if NO, ignores touch events and subclasses may draw differently
+    
+    open var isSelected: Bool = false // default is NO may be used by some subclasses or by application
+    
+    open var isHighlighted: Bool = false // default is NO. this gets set/cleared automatically when touch enters/exits during tracking and cleared on up
 }

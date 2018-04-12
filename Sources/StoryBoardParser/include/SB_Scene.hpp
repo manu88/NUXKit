@@ -12,11 +12,16 @@
 #include <string>
 #include "SB_View.hpp"
 
+
+class XMLNode;
+
 namespace Storyboard
 {
     class ViewController
     {
     public:
+        
+        ViewController(const XMLNode &node);
         void setID( const std::string &id)
         {
             _id = id;
@@ -32,6 +37,8 @@ namespace Storyboard
         std::string customModule;
         
         Storyboard::Color backGroundColor;
+        
+        const XMLNode &node;
     private:
         std::string _id;
         
@@ -42,6 +49,8 @@ namespace Storyboard
     {
     public:
         
+        Scene();
+        ~Scene();
         bool operator<( const Scene& rhs) const
         {
             return _id < rhs._id;
@@ -51,13 +60,13 @@ namespace Storyboard
         std::string getID() const noexcept;
         
         
-        void setViewController( Storyboard::ViewController& vc);
+        void setViewController( const XMLNode& node);
         //Storyboard::ViewController& getViewController();
-        const Storyboard::ViewController& getViewController() const;
+        Storyboard::ViewController* getViewController() const;
     private:
         std::string _id;
         
-        Storyboard::ViewController _viewController;
+        Storyboard::ViewController *_viewController;
     };
     
     
