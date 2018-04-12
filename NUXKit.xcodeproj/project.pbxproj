@@ -24,23 +24,18 @@
 		596900DD207B289E00A25EA4 /* CustomCoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 596900DB207B289E00A25EA4 /* CustomCoder.mm */; };
 		596900EF207B2BFC00A25EA4 /* SB_Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 596900EA207B2BFC00A25EA4 /* SB_Scene.cpp */; };
 		596900F0207B2BFC00A25EA4 /* SB_Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 596900EA207B2BFC00A25EA4 /* SB_Scene.cpp */; };
-		596900F1207B2BFC00A25EA4 /* SB_Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 596900EA207B2BFC00A25EA4 /* SB_Scene.cpp */; };
 		596900F2207B2BFC00A25EA4 /* SB_Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 596900EA207B2BFC00A25EA4 /* SB_Scene.cpp */; };
 		596900F3207B2BFC00A25EA4 /* SB_View.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 596900EB207B2BFC00A25EA4 /* SB_View.cpp */; };
 		596900F4207B2BFC00A25EA4 /* SB_View.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 596900EB207B2BFC00A25EA4 /* SB_View.cpp */; };
-		596900F5207B2BFC00A25EA4 /* SB_View.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 596900EB207B2BFC00A25EA4 /* SB_View.cpp */; };
 		596900F6207B2BFC00A25EA4 /* SB_View.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 596900EB207B2BFC00A25EA4 /* SB_View.cpp */; };
 		596900F7207B2BFC00A25EA4 /* SB_Parameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 596900EC207B2BFC00A25EA4 /* SB_Parameters.cpp */; };
 		596900F8207B2BFC00A25EA4 /* SB_Parameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 596900EC207B2BFC00A25EA4 /* SB_Parameters.cpp */; };
-		596900F9207B2BFC00A25EA4 /* SB_Parameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 596900EC207B2BFC00A25EA4 /* SB_Parameters.cpp */; };
 		596900FA207B2BFC00A25EA4 /* SB_Parameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 596900EC207B2BFC00A25EA4 /* SB_Parameters.cpp */; };
 		596900FB207B2BFC00A25EA4 /* StoryboardDocument.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 596900ED207B2BFC00A25EA4 /* StoryboardDocument.cpp */; };
 		596900FC207B2BFC00A25EA4 /* StoryboardDocument.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 596900ED207B2BFC00A25EA4 /* StoryboardDocument.cpp */; };
-		596900FD207B2BFC00A25EA4 /* StoryboardDocument.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 596900ED207B2BFC00A25EA4 /* StoryboardDocument.cpp */; };
 		596900FE207B2BFC00A25EA4 /* StoryboardDocument.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 596900ED207B2BFC00A25EA4 /* StoryboardDocument.cpp */; };
 		596900FF207B2BFC00A25EA4 /* XMLDocument.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 596900EE207B2BFC00A25EA4 /* XMLDocument.cpp */; };
 		59690100207B2BFC00A25EA4 /* XMLDocument.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 596900EE207B2BFC00A25EA4 /* XMLDocument.cpp */; };
-		59690101207B2BFC00A25EA4 /* XMLDocument.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 596900EE207B2BFC00A25EA4 /* XMLDocument.cpp */; };
 		59690102207B2BFC00A25EA4 /* XMLDocument.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 596900EE207B2BFC00A25EA4 /* XMLDocument.cpp */; };
 		599930DD206FDF2600102DDE /* libgtk-3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 599930DC206FDF2600102DDE /* libgtk-3.0.dylib */; };
 		599930E1206FDFA300102DDE /* libgobject-2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 599930E0206FDFA300102DDE /* libgobject-2.0.dylib */; };
@@ -50,6 +45,7 @@
 		599930E6206FE8FB00102DDE /* libgobject-2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 599930E0206FDFA300102DDE /* libgobject-2.0.dylib */; };
 		599930E7206FE8FC00102DDE /* libgdk-3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 599930DE206FDF3D00102DDE /* libgdk-3.dylib */; };
 		599930E8206FE8FE00102DDE /* libgtk-3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 599930DC206FDF2600102DDE /* libgtk-3.0.dylib */; };
+		59E60C5D207F8C890006CEB6 /* UISlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E60C5B207F8C890006CEB6 /* UISlider.swift */; };
 		59EB41262071107400F29CA5 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 59EB41252071107400F29CA5 /* main.c */; };
 		59EB41292071109B00F29CA5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59EB41282071109B00F29CA5 /* main.cpp */; };
 		59EB414A207110D800F29CA5 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EB412D207110AD00F29CA5 /* UIView.swift */; };
@@ -162,6 +158,7 @@
 		599930DE206FDF3D00102DDE /* libgdk-3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libgdk-3.dylib"; path = "../../../../../../../usr/local/lib/libgdk-3.dylib"; sourceTree = "<group>"; };
 		599930E0206FDFA300102DDE /* libgobject-2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libgobject-2.0.dylib"; path = "../../../../../../../usr/local/lib/libgobject-2.0.dylib"; sourceTree = "<group>"; };
 		599930E2206FDFCC00102DDE /* libglib-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libglib-2.0.0.dylib"; path = "../../../../../../../usr/local/lib/libglib-2.0.0.dylib"; sourceTree = "<group>"; };
+		59E60C5B207F8C890006CEB6 /* UISlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISlider.swift; sourceTree = "<group>"; };
 		59EB41252071107400F29CA5 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		59EB41282071109B00F29CA5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		59EB412D207110AD00F29CA5 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
@@ -328,6 +325,7 @@
 				594FE37D207286550098613B /* UIScreen.swift */,
 				594FE35B20727E5E0098613B /* UIButton.swift */,
 				594FE37F2072B9F50098613B /* UILabel.swift */,
+				59E60C5B207F8C890006CEB6 /* UISlider.swift */,
 				594FE35D20727E840098613B /* UIControl.swift */,
 				594FE359207269430098613B /* UIColor.swift */,
 				59EB412D207110AD00F29CA5 /* UIView.swift */,
@@ -570,14 +568,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				59690101207B2BFC00A25EA4 /* XMLDocument.cpp in Sources */,
-				596900F5207B2BFC00A25EA4 /* SB_View.cpp in Sources */,
 				59F03BAB207625D900E47867 /* GtkDrawableContainer.c in Sources */,
 				59F03BA2207603D000E47867 /* CustomWidget.c in Sources */,
 				59EB41262071107400F29CA5 /* main.c in Sources */,
-				596900F9207B2BFC00A25EA4 /* SB_Parameters.cpp in Sources */,
-				596900FD207B2BFC00A25EA4 /* StoryboardDocument.cpp in Sources */,
-				596900F1207B2BFC00A25EA4 /* SB_Scene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -585,6 +578,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59E60C5D207F8C890006CEB6 /* UISlider.swift in Sources */,
 				59F03BCC2076AEFF00E47867 /* UIButton.swift in Sources */,
 				596900F2207B2BFC00A25EA4 /* SB_Scene.cpp in Sources */,
 				59F03BCD2076AEFF00E47867 /* UIView.swift in Sources */,

@@ -99,6 +99,8 @@ class ViewController: UIViewController {
     @IBAction func testButton(lol : AnyObject?)
     {
         print("Yeaaah 😊")
+        
+        
     }
     
     /*@IBAction*/ @objc func testButton2()
@@ -106,6 +108,15 @@ class ViewController: UIViewController {
         print("Yoooo 😊")
     }
 
+    
+    @IBAction/* @objc*/ func sliderChanged(sender : UISlider?)
+    {
+        assert(sender != nil)
+        if let slider = sender
+        {
+            print("Slider value changed \(slider.value)")
+        }
+    }
 
 }
 

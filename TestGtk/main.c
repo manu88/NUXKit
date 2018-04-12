@@ -134,6 +134,19 @@ int main( int   argc,
     gtk_fixed_put( GTK_FIXED(window2 ), toggle, 10, 100);// (GTK_CONTAINER (window2), button);
     gtk_fixed_put( GTK_FIXED(window2 ), custom, 10, 200);
     
+    
+    GtkWidget* scale = gtk_scale_new(GTK_ORIENTATION_HORIZONTAL, NULL);
+    gtk_range_set_show_fill_level(scale , 1);
+    
+    GtkAdjustment* adj = gtk_range_get_adjustment (  scale);
+    gtk_adjustment_set_lower(adj, 0.0);
+    gtk_adjustment_set_upper(adj, 1.0);
+    gtk_range_set_adjustment(scale, adj);
+    gtk_widget_set_size_request(scale , 200 , 50 );
+    gtk_range_set_value(scale, 0.5);
+    gtk_fixed_put( GTK_FIXED(window2 ), scale, 10, 400);
+    
+    gtk_widget_show (scale);
     gtk_container_add (GTK_CONTAINER (window), window2);
     
     gtk_widget_show (window2);

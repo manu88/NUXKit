@@ -91,10 +91,22 @@ static inline GtkStyleProvider* toGtkStyleProvider( gpointer instance)
     return  G_TYPE_CHECK_INSTANCE_CAST ((instance), GTK_TYPE_CSS_PROVIDER, GtkStyleProvider);
 }
 
+static inline GtkRange* toGtkRange( gpointer instance)
+{
+    return  G_TYPE_CHECK_INSTANCE_CAST ((instance), GTK_TYPE_RANGE, GtkRange);
+}
+
+static inline GtkScale* toGtkScale( gpointer instance)
+{
+    return  G_TYPE_CHECK_INSTANCE_CAST ((instance), GTK_TYPE_SCALE, GtkScale);
+}
+
 static inline GtkWidget* toGtkWidget( gpointer instance)
 {
     return (GtkWidget*) instance;// G_TYPE_CHECK_INSTANCE_CAST ((instance), GTK_TYPE_CSS_PROVIDER, GtkStyleProvider);
 }
+
+
 
 
 #endif /* test_h */
