@@ -93,6 +93,10 @@ open class UIView : UIResponder, NSCoding/*, UIAppearance, UIAppearanceContainer
                     addSubview(v)
                 }
             }
+            else
+            {
+                
+            }
         }
         catch
         {

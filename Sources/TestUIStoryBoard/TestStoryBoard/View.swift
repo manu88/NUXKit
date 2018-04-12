@@ -12,8 +12,8 @@ class View: UIView {
 
     required init?(coder aDecoder: NSCoder)
     {
-        let lol = TestCoder("View", coder: aDecoder)
-        super.init(coder: lol)
+        //let lol = TestCoder("View", coder: aDecoder)
+        super.init(coder: aDecoder)
         
     }
     /*

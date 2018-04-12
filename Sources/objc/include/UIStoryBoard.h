@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (__kindof UIViewController * _Nullable)instantiateInitialViewController;
 
 
-
+- (__kindof UIViewController * _Nullable)getViewControllerWithID:(NSString*) id_;
 
 //-(bool) loadStoryboard:(  NSString* _Nullable) file;
 

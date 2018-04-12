@@ -80,8 +80,10 @@ class ViewController: UIViewController {
     required init?(coder aDecoder: NSCoder)
     {
         //let lol = TestCoder("UIViewController", coder: aDecoder)
-        
         super.init(coder: aDecoder)
+        
+        
+        print("ViewController.init did END")
     }
 
     override func viewDidLoad() {
@@ -92,6 +94,16 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func testButton(lol : AnyObject?)
+    {
+        print("Yeaaah 😊")
+    }
+    
+    /*@IBAction*/ @objc func testButton2()
+    {
+        print("Yoooo 😊")
     }
 
 

@@ -96,7 +96,7 @@ open class UIViewController : UIResponder, NSCoding /*,UIAppearanceContainer, UI
          Ask for decodeObject: UIViewControllerTopLayoutGuide
          Ask for decodeObject: UIViewControllerBottomLayoutGuide
          */
-        
+        /*
         do
         {
             if let view = try aDecoder.decodeTopLevelObject( forKey: "UIView") as? UIView
@@ -113,12 +113,13 @@ open class UIViewController : UIResponder, NSCoding /*,UIAppearanceContainer, UI
         {
             return nil
         }
-        //self.view = UIView(coder: aDecoder.va)
+ */
+
     }
     
     
     private var _view : UIView! = nil
-    open var view: UIView! // The getter first invokes [self loadView] if the view hasn't been set yet. Subclasses must call super if they override the setter or getter.
+    @objc open var view: UIView! // The getter first invokes [self loadView] if the view hasn't been set yet. Subclasses must call super if they override the setter or getter.
     {
         get
         {
@@ -132,6 +133,7 @@ open class UIViewController : UIResponder, NSCoding /*,UIAppearanceContainer, UI
         set
         {
             _view = newValue
+            
         }
     }
     open func loadView() // This is where subclasses should create their custom view hierarchy if they aren't using a nib. Should never be called directly.

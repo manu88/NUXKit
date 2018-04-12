@@ -15,12 +15,7 @@ class Label: UILabel {
         //let lol = TestCoder("Label" , coder: aDecoder )
         
         super.init(coder: aDecoder)
-        
-        let test = aDecoder.decodeCGRect(forKey: "Lolz")
-        
-        print("Test invalid CGRect \(test) \(CGRect.zero)")
-        
-        
+
     }
     /*
     // Only override draw() if you perform custom drawing.

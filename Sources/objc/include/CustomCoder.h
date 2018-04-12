@@ -10,6 +10,7 @@
 
 
 class XMLNode;
+@class UIStoryboard;
 
 @interface CustomCoder : NSCoder
 
@@ -18,7 +19,7 @@ class XMLNode;
 @property (readonly) BOOL requiresSecureCoding;
 @property (readonly) BOOL allowsKeyedCoding;
 
-- (nonnull id) initWithXMLNode:( const XMLNode& ) node;
+- (nonnull id) initWithXMLNode:( const XMLNode& ) node storyboard:(UIStoryboard*_Nonnull) storyboard;
 - (nullable id)decodeObjectForKey:(NSString *_Nonnull)key;
 - (nullable id)decodeTopLevelObjectForKey:(NSString *_Nonnull)key error:(NSError *_Nullable*_Nullable)error API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 

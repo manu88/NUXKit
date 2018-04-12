@@ -17,30 +17,43 @@ public struct UIControlEvents : OptionSet {
         self.rawValue = rawValue
     }
     
-    
-    public static var touchDown: UIControlEvents { get {return UIControlEvents(rawValue: 1)} } // on all touch downs
-    
-    public static var touchDownRepeat: UIControlEvents { get {return UIControlEvents(rawValue: 2)}} // on multiple touchdowns (tap count > 1)
-    
-    public static var touchDragInside: UIControlEvents { get  {return UIControlEvents(rawValue: 4)}}
-    
-    public static var touchDragOutside: UIControlEvents { get {return UIControlEvents(rawValue: 8)}}
-    
-    public static var touchDragEnter: UIControlEvents { get {return UIControlEvents(rawValue: 16)}}
-    
-    public static var touchDragExit: UIControlEvents { get {return UIControlEvents(rawValue: 32)}}
-    
-    public static var touchUpInside: UIControlEvents { get {return UIControlEvents(rawValue: 64)}}
-    
-    public static var touchUpOutside: UIControlEvents { get {return UIControlEvents(rawValue: 128)}}
-    
-    public static var touchCancel: UIControlEvents { get {return UIControlEvents(rawValue: 128)}}
+    /*
+
+     UIControlEventEditingDidBegin                                   = 1 << 16,     // UITextField
+     UIControlEventEditingChanged                                    = 1 << 17,
+     UIControlEventEditingDidEnd                                     = 1 << 18,
+     UIControlEventEditingDidEndOnExit                               = 1 << 19,     // 'return key' ending editing
+     
+     UIControlEventAllTouchEvents                                    = 0x00000FFF,  // for touch events
+     UIControlEventAllEditingEvents                                  = 0x000F0000,  // for UITextField
+     UIControlEventApplicationReserved                               = 0x0F000000,  // range available for application use
+     UIControlEventSystemReserved                                    = 0xF0000000,  // range reserved for internal framework use
+     UIControlEventAllEvents                                         = 0xFFFFFFFF
+     */
     
     
-    public static var valueChanged: UIControlEvents { get {return UIControlEvents(rawValue: 4096)}} // sliders, etc.
+    public static var touchDown: UIControlEvents        { get {return UIControlEvents(rawValue: 1 << 0)} } // on all touch downs
+    
+    public static var touchDownRepeat: UIControlEvents  { get {return UIControlEvents(rawValue: 1 << 1)}} // on multiple touchdowns (tap count > 1)
+    
+    public static var touchDragInside: UIControlEvents  { get {return UIControlEvents(rawValue: 1 << 2)}}
+    
+    public static var touchDragOutside: UIControlEvents { get {return UIControlEvents(rawValue: 1 << 3)}}
+    
+    public static var touchDragEnter: UIControlEvents   { get {return UIControlEvents(rawValue: 1 << 4)}}
+    
+    public static var touchDragExit: UIControlEvents    { get {return UIControlEvents(rawValue: 1 << 5)}}
+    
+    public static var touchUpInside: UIControlEvents    { get {return UIControlEvents(rawValue: 1 << 6)}}
+    
+    public static var touchUpOutside: UIControlEvents   { get {return UIControlEvents(rawValue: 1 << 7)}}
+    
+    public static var touchCancel: UIControlEvents      { get {return UIControlEvents(rawValue: 1 << 8)}}
+    
+    public static var valueChanged: UIControlEvents     { get {return UIControlEvents(rawValue: 1 << 12)}} // sliders, etc.
     
     @available(iOS 9.0, *)
-    public static var primaryActionTriggered: UIControlEvents { get {return UIControlEvents(rawValue: 8192)}} // semantic action: for buttons, etc.
+    public static var primaryActionTriggered: UIControlEvents { get {return UIControlEvents(rawValue: 1 << 13)}} // semantic action: for buttons, etc.
     
     /*
     public static var editingDidBegin: UIControlEvents { get } // UITextField
@@ -98,6 +111,7 @@ open class UIControl : UIView
     {
         var target : AnyObject? = nil
         var select : Selector!
+        var needsArgument = false
     }
     
     private var _actions = [Int/*this is the UIControlEvents*/ : [ActionCall] ]()
@@ -110,6 +124,9 @@ open class UIControl : UIView
         act.select = action
         act.target = target as AnyObject
         
+        // hackish
+        act.needsArgument = action.description.range(of: "With") != nil ? true : false
+        
         if var list = _actions[Int(controlEvents.rawValue)]
         {
             list.append(act)
@@ -121,14 +138,27 @@ open class UIControl : UIView
         }
     }
     
+    @objc open func addTarget(_ target: Any?, action: Selector, for controlEvents: UInt)
+    {
+        addTarget(target, action: action, for: UIControlEvents(rawValue: controlEvents))
+    }
+    
     func invokeAction( controlEvent : UIControlEvents)
     {
         if let list = _actions[Int( controlEvent.rawValue)]
         {
             for action in list
             {
+                if( action.needsArgument)
+                {
+                    _ = action.target?.perform(action.select, with: self )
+                }
+                else
+                {
+                    _ = action.target?.perform(action.select/*, with: self*/)
+                }
                 
-                _ = action.target?.perform(action.select)
+                //_ = action.target?.perform(action.select)
             }
         }
         //if let action = _actions[

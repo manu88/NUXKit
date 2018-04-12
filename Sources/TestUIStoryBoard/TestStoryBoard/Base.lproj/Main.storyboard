@@ -23,6 +23,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="LOL"/>
                                 <state key="disabled" title="Disabled"/>
+                                <connections>
+                                    <action selector="testButtonWithLol:" destination="BYZ-38-t0r" eventType="touchUpInside" id="k84-0t-ALH"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XmU-Eo-b7z" customClass="Label" customModule="TestStoryBoard" customModuleProvider="target">
                                 <rect key="frame" x="33" y="97" width="42" height="21"/>
@@ -38,6 +41,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3JE-UZ-K69">
+                                <rect key="frame" x="188" y="43" width="38" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Test2"/>
+                                <connections>
+                                    <action selector="testButton2" destination="BYZ-38-t0r" eventType="touchUpInside" id="ORF-Mx-E02"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>

@@ -90,6 +90,11 @@
         //UIButtonStatefulContent
     }
     
+    if( [key isEqualToString:@"_UITouchedSelectors"])
+    {
+        
+    }
+    
     NSLog(@"%@ decodeObjectForKey %@ -> %@" , name , key , ((NSObject*) ret).description);
     return ret;
 }
@@ -140,5 +145,11 @@
     return ret;
 }
 
+-(id) decodeTopLevelObjectForKey:(NSString *)key error:(NSError * _Nullable __autoreleasing *)error
+{
+    NSLog(@"decodeTopLevelObjectForKey %@" , key);
+    
+    return [coder decodeTopLevelObjectForKey:key error:error];
+}
 
 @end

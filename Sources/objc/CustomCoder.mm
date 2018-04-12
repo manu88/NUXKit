@@ -10,8 +10,10 @@
 #import "UIButtonContent.h"
 #include "SB_Scene.hpp"
 #include "XMLDocument.hpp"
-//#include "TestStoryBoard-Swift.h"
-#include "TestNoStoryboard-Swift.h"
+
+#import "UIStoryBoard.h"
+#include "TestStoryBoard-Swift.h"
+//#include "TestNoStoryboard-Swift.h"
 
 //@class UIButtonContent;
 
@@ -21,6 +23,7 @@ static CGRect parseCGRectNode(const XMLNode &node);
 
 @implementation CustomCoder
 {
+    UIStoryboard* _storyboard;
     XMLNode _node;
     
     NSMutableDictionary* keyTranslationsNS_to_XML;
@@ -29,12 +32,12 @@ static CGRect parseCGRectNode(const XMLNode &node);
     
 }
 
-- (nonnull id) initWithXMLNode:( const XMLNode& ) node
+- (nonnull id) initWithXMLNode:( const XMLNode& ) node storyboard:(UIStoryboard*_Nonnull) storyboard;
 {
     if( self = [super init ] )
     {
         self->_node = node;
-        
+        self->_storyboard = storyboard;
         _allowsKeyedCoding = YES;
         //self.allowsKeyedCoding = YES;
         _requiresSecureCoding = YES;
@@ -127,7 +130,7 @@ static CGRect parseCGRectNode(const XMLNode &node);
             if( stateNode.first == "state")
             {
                 printf("Add a state %s\n" ,stateNode.second.getProperty("key").c_str() );
-                CustomCoder* decoder = [[CustomCoder alloc] initWithXMLNode: stateNode.second ] ;
+                CustomCoder* decoder = [[CustomCoder alloc] initWithXMLNode: stateNode.second storyboard:_storyboard ] ;
                 
                 UIButtonContent* ct = [[UIButtonContent alloc] initWithCoder:decoder];
                 
@@ -229,7 +232,7 @@ static CGRect parseCGRectNode(const XMLNode &node);
         const auto viewNode = _node.getChildByName( [ xmlKey cStringUsingEncoding:NSUTF8StringEncoding ]);
         assert( viewNode.isValid() );
         
-        CustomCoder* decoder = [[CustomCoder alloc] initWithXMLNode: viewNode ] ;
+        CustomCoder* decoder = [[CustomCoder alloc] initWithXMLNode: viewNode storyboard:_storyboard] ;
         
         return [[instanceClass alloc] initWithCoder: decoder ];
     }
@@ -250,15 +253,63 @@ static CGRect parseCGRectNode(const XMLNode &node);
             Class instanceClass = NSClassFromString([self getClassNameFromXMLName:subV.first ]);// @"TestStoryBoard.UIView" );
             if( instanceClass)
             {
-                
-                
-                CustomCoder* decoder = [[CustomCoder alloc] initWithXMLNode: subV.second] ;
+                CustomCoder* decoder = [[CustomCoder alloc] initWithXMLNode: subV.second storyboard:_storyboard ] ;
                 
                 id view =[[instanceClass alloc] initWithCoder: decoder ];
                 
+                
+                if ([view isKindOfClass:[UIControl class] ])
+                {
+                    const auto connectionListNode = subV.second.getChildByName("connections");
+                    if( connectionListNode.isValid())
+                    {
+                        for( const auto &connectNode : connectionListNode.getChildren() )
+                        {
+                            const auto selectorName = connectNode.second.getProperty("selector");
+                            const auto destName = connectNode.second.getProperty("destination");
+                            const auto eventTypeName = connectNode.second.getProperty("eventType");
+                            
+                            NSLog(@"Got a connection selector %s type %s dest %s \n" , selectorName.c_str()  , eventTypeName.c_str() , destName.c_str() );
+                            
+                            UIViewController* attachedViewController = [_storyboard getViewControllerWithID:
+                                                                        [NSString stringWithFormat:@"%s" , destName.c_str()]
+                                                                        ];
+                            
+                            if( attachedViewController)
+                            {
+                                SEL action = NSSelectorFromString([NSString stringWithFormat:@"%s" , selectorName.c_str()]);
+                                
+                                
+                                
+                                auto controlEventStrToVal = []( const std::string &str) -> unsigned int
+                                {
+                                         if( str == "touchDown")                return 1 << 0;
+                                    else if( str == "touchDownRepeat")          return 1 << 1;
+                                    else if( str == "touchDragInside")          return 1 << 2;
+                                    else if( str == "touchDragOutside")         return 1 << 3;
+                                    else if( str == "touchDragEnter")           return 1 << 4;
+                                    else if( str == "touchDragExit")            return 1 << 5;
+                                    else if( str == "touchUpInside")            return 1 << 6;
+                                    else if( str == "touchUpOutside")           return 1 << 7;
+                                    else if( str == "touchCancel")              return 1 << 8;
+                                    else if( str == "valueChanged")             return 1 << 12;
+                                    else if( str == "primaryActionTriggered")   return 1 << 13;
+                                    
+                                    assert(false);
+                                    
+                                    return -1;
+                                };
+                                
+                                [(UIControl*) view addTarget:attachedViewController action:action for:controlEventStrToVal(eventTypeName)];
+                            }
+                            
+                            
+                            
+                        }
+                    }
+                }
                 if( view)
                 {
-                    
                     [subviews addObject:view];
                 }
             }

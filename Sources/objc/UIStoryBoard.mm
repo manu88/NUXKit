@@ -9,7 +9,7 @@
 #import  "UIStoryBoard.h"
 #import "CustomCoder.h"
 #include "../StoryBoardParser/include/StoryboardDocument.hpp"
-//#include "TestNoStoryboard-Swift.h"
+#include "TestStoryBoard-Swift.h"
 #include "XMLDocument.hpp"
 
 
@@ -23,6 +23,8 @@
     
     std::string initialViewControllerID;
     
+    NSMutableDictionary *_viewControllers;
+    
 }
 
 -(nonnull id) initWithName:(NSString*)name bundle: (NSBundle*) bundle
@@ -31,6 +33,8 @@
     {
         self->doc = new XMLDocument( [ name cStringUsingEncoding:NSUTF8StringEncoding ] );
         
+        
+        _viewControllers = [[NSMutableDictionary alloc] init];
         if (doc->isValid() == false)
         {
             return nil;
@@ -129,6 +133,7 @@
     
     const auto initialVCName = initialVCNode.getProperty("customClass");
     const auto initialVCModuleName = initialVCNode.getProperty("customModule");
+    const auto vdID = initialVCNode.getProperty("id");
     
     assert( initialVCName.empty() == false);
     assert( initialVCModuleName.empty() == false); // Sure?
@@ -139,29 +144,25 @@
     
     if( instanceClass )
     {
-        NSCoder* decoder = [[CustomCoder alloc] initWithXMLNode: initialVCNode ];
+        NSCoder* decoder = [[CustomCoder alloc] initWithXMLNode: initialVCNode storyboard:self];
+        
         UIViewController * vc =[ [instanceClass alloc] initWithCoder:decoder];
+        
+        [_viewControllers setObject:vc forKey:[NSString stringWithFormat:@"%s" , vdID.c_str()]];
+        
+        UIView* view = [decoder decodeTopLevelObjectForKey:@"UIView" error:nil];
+        
+        assert(view);
+        [vc setView:view];
         
         return vc;
     }
-    //NSLog(@"VCName = %s , VCModule = %s " , initialVCName.c_str() , initialVCModuleName.c_str());
-    /*
-    const auto initialVC =  _doc->getInitialViewController();
-    const auto initialVCName = initialVC->customModule + "." + initialVC ->customClass;
-    
-    Class instanceClass = NSClassFromString( [NSString stringWithFormat:@"%s", initialVCName.c_str() ] );
-    
-    NSLog(@"InitialVCName is '%s'" ,initialVCName.c_str());
-    
-    if( instanceClass )
-    {
-        NSCoder* decoder = [[CustomCoder alloc] initWithXMLNode: _doc->getRootNode() ];
-        UIViewController * vc =[ [instanceClass alloc] initWithCoder:decoder];
 
-        return vc;
-    }
-     */
     return nil;
 }
 
+- (__kindof UIViewController * _Nullable)getViewControllerWithID:(NSString*) id_
+{
+    return [_viewControllers objectForKey:id_];
+}
 @end
