@@ -30,7 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(BOOL) addInstance: (id) object forKey:(NSString*) key;
 
--(BOOL) registerSegueSender: (id) object destId:(NSString*) destId;
+-(BOOL) registerSegueSender: (id ) object destId:(NSString*) destId;
+-(NSString* _Nullable) getSegueTargetIDFromSender: (id) sender;
 //-(bool) loadStoryboard:(  NSString* _Nullable) file;
 
 @end

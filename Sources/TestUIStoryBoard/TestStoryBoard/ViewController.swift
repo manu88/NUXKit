@@ -79,6 +79,7 @@ class TestCoder2 : NSCoder
 class ViewController: UIViewController {
 
     @IBOutlet var mylabel : UILabel?
+    @IBOutlet var mySlider : UISlider?
     required init?(coder aDecoder: NSCoder)
     {
         //let lol = TestCoder("UIViewController", coder: aDecoder)
@@ -114,6 +115,8 @@ class ViewController: UIViewController {
     @IBAction/* @objc*/ func sliderChanged(sender : UISlider?)
     {
         assert(sender != nil)
+        assert(sender == mySlider)
+        
         if let slider = sender
         {
             mylabel?.text = "\(slider.value)"

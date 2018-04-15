@@ -61,11 +61,21 @@
     return [_createdInstances objectForKey:key] != nil;
 }
 
+-(NSString*) getSegueTargetIDFromSender: (id) sender
+{
+    NSValue *myKey = [NSValue valueWithNonretainedObject:sender];
+    return [_segueSenders objectForKey:myKey];
+}
+
+
 -(BOOL) registerSegueSender: (id) object destId:(NSString*) destId
 {
-    [_segueSenders setObject:destId forKey:object];
     
-    return [_segueSenders objectForKey:destId] != nil;
+    NSValue *myKey = [NSValue valueWithNonretainedObject:object];
+    
+    [_segueSenders setObject:destId forKey:myKey];
+    
+    return [_segueSenders objectForKey:myKey] != nil;
 }
 
 - (BOOL)prepareDoc

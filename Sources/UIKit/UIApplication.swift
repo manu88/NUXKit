@@ -167,16 +167,6 @@ class UIApplication : UIResponder
         return true
     }
     
-    @objc fileprivate  func segueDestination( sender : AnyObject? )
-    {
-        /*
-        if let destID = storyboard.segueSenders.value(forKey: sender) as? String
-        {
-            
-        }
- */
-        //window?.present(<#T##viewControllerToPresent: UIViewController##UIViewController#>, animated: <#T##Bool#>)
-    }
     
     fileprivate func loadStoryboard(_ storyboardFile : String? ) -> Bool
     {
@@ -355,5 +345,28 @@ class UIApplication : UIResponder
     private func quitSignal()
     {
         gtk_main_quit()
+    }
+    
+    
+    @objc fileprivate func segueDestination(sender : AnyObject)
+    {
+        
+        
+        if let senderID = storyboard.getSegueTargetIDFromSender(sender)
+        {
+            print("Do segue to \( senderID)")
+        }
+        
+    /*
+    
+    assert(sender);
+    NSValue *myKey = [NSValue valueWithNonretainedObject:sender];
+    
+    NSString* destId = [_segueSenders objectForKey: myKey];
+    assert(destId);
+    
+    NSLog(@"Dest id is %@ " , destId);
+    
+    */
     }
 }

@@ -69,6 +69,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="mySlider" destination="b0P-Zg-P0Q" id="OZe-B0-jsf"/>
                         <outlet property="mylabel" destination="XmU-Eo-b7z" id="EVj-Yf-qUO"/>
                     </connections>
                 </viewController>

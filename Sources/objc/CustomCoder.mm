@@ -315,7 +315,11 @@ static CGRect parseCGRectNode(const XMLNode &node);
                                 NSLog(@" segue id %s kind %s to %s" , segueIdentifier.c_str() , kindName.c_str() , destName.c_str() );
                                 
                                 [_storyboard registerSegueSender:view destId:[NSString stringWithFormat:@"%s" , destName.c_str()] ];
-                                [(UIControl*) view addTarget:[UIApplication shared] action:NSSelectorFromString(@"segueDestinationWithSender:") for:1 << 6];
+
+                                
+                                [(UIControl*) view addTarget:[UIApplication shared] /*_storyboard*/
+                                                   action:NSSelectorFromString(@"segueDestinationWithSender:")
+                                                   for:1 << 6]; // This is a touchup inside
                             }
                             
                         } // END for( const auto &connectNode
