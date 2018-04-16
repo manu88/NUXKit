@@ -106,6 +106,11 @@ static inline GtkWidget* toGtkWidget( gpointer instance)
     return (GtkWidget*) instance;// G_TYPE_CHECK_INSTANCE_CAST ((instance), GTK_TYPE_CSS_PROVIDER, GtkStyleProvider);
 }
 
+static inline GtkEntry* toGtkEntry( gpointer instance)
+{
+    return  G_TYPE_CHECK_INSTANCE_CAST ((instance), GTK_TYPE_ENTRY, GtkEntry);
+}
+
 
 
 

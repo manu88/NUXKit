@@ -75,6 +75,7 @@ static CGRect parseCGRectNode(const XMLNode &node);
     [classTranslationsXML_to_NS setObject:@"UIButton" forKey:@"button"];
     [classTranslationsXML_to_NS setObject:@"UILabel"  forKey:@"label"];
     [classTranslationsXML_to_NS setObject:@"UISlider" forKey:@"slider"];
+    [classTranslationsXML_to_NS setObject:@"UITextField" forKey:@"textField"];
     
 }
 -(void) populateTranslationKeys

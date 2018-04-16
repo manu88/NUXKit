@@ -193,15 +193,26 @@
         
         if( viewControlerNode.getProperty("id") == [vcID cStringUsingEncoding: NSUTF8StringEncoding ])
         {
-            const auto initialVCName = viewControlerNode.getProperty("customClass");
-            const auto initialVCModuleName = viewControlerNode.getProperty("customModule");
+            Class instanceClass = nil;
             
+            if (viewControlerNode.hasProperty("customClass") == false ) // no custom class, failback to UIViewController base class.
+            {
+                //TestStoryBoard
+                const std::string initialVCFullName = std::string("TestStoryBoard")  + "." + "UIViewController";
+                instanceClass =  NSClassFromString( [NSString stringWithFormat:@"%s", initialVCFullName.c_str() ] );
+                
+                assert( instanceClass );
+            }
+            else
+            {
+                const auto initialVCName = viewControlerNode.getProperty("customClass");
+                const auto initialVCModuleName = viewControlerNode.getProperty("customModule");
             
+
+                const auto initialVCFullName = initialVCModuleName + "." + initialVCName;
             
-            const auto initialVCFullName = initialVCModuleName + "." + initialVCName;
-            
-            Class instanceClass = NSClassFromString( [NSString stringWithFormat:@"%s", initialVCFullName.c_str() ] );
-            
+                instanceClass = NSClassFromString( [NSString stringWithFormat:@"%s", initialVCFullName.c_str() ] );
+            }
             if( instanceClass )
             {
                 NSCoder* decoder = [[CustomCoder alloc] initWithXMLNode: viewControlerNode storyboard:self];
