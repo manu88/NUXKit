@@ -264,6 +264,8 @@ static CGRect parseCGRectNode(const XMLNode &node);
                 if ([view isKindOfClass:[UIControl class] ])
                 {
                     const auto connectionListNode = subV.second.getChildByName("connections");
+                    
+                    
                     if( connectionListNode.isValid())
                     {
                         for( const auto &connectNode : connectionListNode.getChildren() )
@@ -361,6 +363,26 @@ static CGRect parseCGRectNode(const XMLNode &node);
     if( [key isEqualToString:@"UIDeepDrawRect"])
         return YES;
     
+    if( [key isEqualToString:@"UIHidden"] &&  _node.hasProperty("hidden"))
+        return _node.getProperty("hidden") == "YES";
+    
+    if( [key isEqualToString:@"UIDisabled"])
+    {
+        if( _node.hasProperty("enabled"))
+            return _node.getProperty("enabled") == "NO";
+        
+        return NO;
+    }
+    
+    if( [key isEqualToString:@"UIHighlighted"])
+    {
+        if( _node.hasProperty("highlighted"))
+            return _node.getProperty("highlighted") == "YES";
+        
+        return YES;
+    }
+        
+                         
     return NO;
 }
 

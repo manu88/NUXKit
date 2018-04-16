@@ -11,9 +11,11 @@ import Foundation
 
 open class UISlider : UIControl /*, NSCoding*/
 {
+    /*
     public override init(frame: CGRect) {
         super.init(frame: frame)
     }
+ */
     
     required public init?(coder aDecoder: NSCoder)
     {

@@ -37,17 +37,17 @@ open class UIButton : UIControl/*, NSCoding */
     
     var _buttonType = UIButtonType.system
     
-    
+    /*
     public override init(frame: CGRect) {
         super.init(frame: frame)
     }
+     */
+    
     public required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
         
-        isHighlighted =  aDecoder.decodeBool(forKey: "UIHighlighted")
-        isSelected    =  aDecoder.decodeBool(forKey: "UISelected")
-        isEnabled     = !aDecoder.decodeBool(forKey: "UIDisabled")
+        
         
         
         if( aDecoder.containsValue(forKey: "UIContentVerticalAlignment"))

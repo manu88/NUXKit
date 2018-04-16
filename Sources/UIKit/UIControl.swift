@@ -107,12 +107,26 @@ public struct UIControlState : OptionSet {
 
 open class UIControl : UIView
 {
+    
+    private var _isHighlighted = false
+//    private var _isEnabled = true
+    private var _isSelected = false
+    
+    required public init?(coder aDecoder: NSCoder)
+    {
+        super.init(coder: aDecoder)
+        
+        _isHighlighted = aDecoder.decodeBool(forKey: "UIHighlighted")
+        _isSelected    =  aDecoder.decodeBool(forKey: "UISelected")
+        isEnabled     = !aDecoder.decodeBool(forKey: "UIDisabled")
+    }
     private struct ActionCall
     {
         var target : AnyObject? = nil
         var select : Selector!
         var needsArgument = false
     }
+ 
     
     private var _actions = [Int/*this is the UIControlEvents*/ : [ActionCall] ]()
     // add target/action for particular event. you can call this multiple times and you can specify multiple target/actions for a particular event.
@@ -165,9 +179,36 @@ open class UIControl : UIView
     }
     
     
-    open var isEnabled: Bool = true // default is YES. if NO, ignores touch events and subclasses may draw differently
+    open var isEnabled: Bool // default is YES. if NO, ignores touch events and subclasses may draw differently
+    {
+        get
+        {
+            //return _isEnabled;
+            
+            return gtk_widget_get_sensitive( _impl) == 1;
+        }
+        set
+        {
+            prepare()
+            gtk_widget_set_sensitive( _impl, newValue == true ? 1 : 0)
+            
+        }
+    }
     
-    open var isSelected: Bool = false // default is NO may be used by some subclasses or by application
+    open var isSelected: Bool  // default is NO may be used by some subclasses or by application
+    {
+        get
+        {
+            return _isSelected;
+        }
+    }
     
-    open var isHighlighted: Bool = false // default is NO. this gets set/cleared automatically when touch enters/exits during tracking and cleared on up
+    
+    open var isHighlighted: Bool  // default is NO. this gets set/cleared automatically when touch enters/exits during tracking and cleared on up
+    {
+        get
+        {
+            return _isHighlighted;
+        }
+    }
 }

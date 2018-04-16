@@ -10,6 +10,16 @@ import UIKit
 
 class TextField: UITextField {
 
+    
+    required init?(coder aDecoder: NSCoder)
+    {
+        let lol = TestCoder("TextField" , coder: aDecoder )
+        
+        
+        super.init(coder: lol )
+        
+        
+    }
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
