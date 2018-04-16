@@ -46,6 +46,7 @@
 		599930E7206FE8FC00102DDE /* libgdk-3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 599930DE206FDF3D00102DDE /* libgdk-3.dylib */; };
 		599930E8206FE8FE00102DDE /* libgtk-3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 599930DC206FDF2600102DDE /* libgtk-3.0.dylib */; };
 		59E60C5D207F8C890006CEB6 /* UISlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E60C5B207F8C890006CEB6 /* UISlider.swift */; };
+		59E60C61208482430006CEB6 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E60C60208482420006CEB6 /* SecondViewController.swift */; };
 		59EB41262071107400F29CA5 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 59EB41252071107400F29CA5 /* main.c */; };
 		59EB41292071109B00F29CA5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59EB41282071109B00F29CA5 /* main.cpp */; };
 		59EB414A207110D800F29CA5 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EB412D207110AD00F29CA5 /* UIView.swift */; };
@@ -53,7 +54,6 @@
 		59EB414C207110D800F29CA5 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EB4132207110AD00F29CA5 /* UIViewController.swift */; };
 		59EB414D207110D800F29CA5 /* UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EB4133207110AD00F29CA5 /* UIWindow.swift */; };
 		59EB414E207110D800F29CA5 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EB4134207110AD00F29CA5 /* UIApplication.swift */; };
-		59EB4150207110D800F29CA5 /* UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EB4136207110AD00F29CA5 /* UIStoryboard.swift */; };
 		59EB415C2071117D00F29CA5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EB41592071117D00F29CA5 /* ViewController.swift */; };
 		59EB415D2071117D00F29CA5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EB415A2071117D00F29CA5 /* AppDelegate.swift */; };
 		59EB415E2071117D00F29CA5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EB415B2071117D00F29CA5 /* main.swift */; };
@@ -72,7 +72,6 @@
 		59F03BD42076AEFF00E47867 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594FE359207269430098613B /* UIColor.swift */; };
 		59F03BD52076AEFF00E47867 /* UISwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FC9132075219400FB6D6B /* UISwitch.swift */; };
 		59F03BD62076AEFF00E47867 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EB4134207110AD00F29CA5 /* UIApplication.swift */; };
-		59F03BD72076AEFF00E47867 /* UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EB4136207110AD00F29CA5 /* UIStoryboard.swift */; };
 		59F03BD82076AEFF00E47867 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594FE37F2072B9F50098613B /* UILabel.swift */; };
 		59F03BDB2076AEFF00E47867 /* UIStoryBoard.mm in Sources */ = {isa = PBXBuildFile; fileRef = 59EB4162207115AD00F29CA5 /* UIStoryBoard.mm */; };
 		59F03BDC2076AEFF00E47867 /* GtkDrawableContainer.c in Sources */ = {isa = PBXBuildFile; fileRef = 59F03BA9207625D900E47867 /* GtkDrawableContainer.c */; };
@@ -159,6 +158,7 @@
 		599930E0206FDFA300102DDE /* libgobject-2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libgobject-2.0.dylib"; path = "../../../../../../../usr/local/lib/libgobject-2.0.dylib"; sourceTree = "<group>"; };
 		599930E2206FDFCC00102DDE /* libglib-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libglib-2.0.0.dylib"; path = "../../../../../../../usr/local/lib/libglib-2.0.0.dylib"; sourceTree = "<group>"; };
 		59E60C5B207F8C890006CEB6 /* UISlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISlider.swift; sourceTree = "<group>"; };
+		59E60C60208482420006CEB6 /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SecondViewController.swift; path = TestUIStoryBoard/TestStoryBoard/SecondViewController.swift; sourceTree = "<group>"; };
 		59EB41252071107400F29CA5 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		59EB41282071109B00F29CA5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		59EB412D207110AD00F29CA5 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
@@ -168,7 +168,6 @@
 		59EB4132207110AD00F29CA5 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		59EB4133207110AD00F29CA5 /* UIWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIWindow.swift; sourceTree = "<group>"; };
 		59EB4134207110AD00F29CA5 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
-		59EB4136207110AD00F29CA5 /* UIStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboard.swift; sourceTree = "<group>"; };
 		59EB41592071117D00F29CA5 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		59EB415A2071117D00F29CA5 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		59EB415B2071117D00F29CA5 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -332,7 +331,6 @@
 				59EB4132207110AD00F29CA5 /* UIViewController.swift */,
 				59EB4133207110AD00F29CA5 /* UIWindow.swift */,
 				59EB4134207110AD00F29CA5 /* UIApplication.swift */,
-				59EB4136207110AD00F29CA5 /* UIStoryboard.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -391,6 +389,7 @@
 				59F03BFA2076AFAB00E47867 /* main.swift */,
 				59F03BF62076AF8100E47867 /* AppDelegate.swift */,
 				59F03BF72076AF8100E47867 /* ViewController.swift */,
+				59E60C60208482420006CEB6 /* SecondViewController.swift */,
 			);
 			name = TestUIStoryBoard;
 			sourceTree = "<group>";
@@ -547,7 +546,6 @@
 				595FC9142075219400FB6D6B /* UISwitch.swift in Sources */,
 				596900F4207B2BFC00A25EA4 /* SB_View.cpp in Sources */,
 				59EB414E207110D800F29CA5 /* UIApplication.swift in Sources */,
-				59EB4150207110D800F29CA5 /* UIStoryboard.swift in Sources */,
 				594FE3802072B9F50098613B /* UILabel.swift in Sources */,
 				59690100207B2BFC00A25EA4 /* XMLDocument.cpp in Sources */,
 				596900DC207B289E00A25EA4 /* CustomCoder.mm in Sources */,
@@ -581,6 +579,7 @@
 				59E60C5D207F8C890006CEB6 /* UISlider.swift in Sources */,
 				59F03BCC2076AEFF00E47867 /* UIButton.swift in Sources */,
 				596900F2207B2BFC00A25EA4 /* SB_Scene.cpp in Sources */,
+				59E60C61208482430006CEB6 /* SecondViewController.swift in Sources */,
 				59F03BCD2076AEFF00E47867 /* UIView.swift in Sources */,
 				59F03BCE2076AEFF00E47867 /* UIResponder.swift in Sources */,
 				59F03BCF2076AEFF00E47867 /* UIViewController.swift in Sources */,
@@ -592,7 +591,6 @@
 				596900DD207B289E00A25EA4 /* CustomCoder.mm in Sources */,
 				59F03BF82076AF8100E47867 /* AppDelegate.swift in Sources */,
 				59F03BD62076AEFF00E47867 /* UIApplication.swift in Sources */,
-				59F03BD72076AEFF00E47867 /* UIStoryboard.swift in Sources */,
 				59F03BD82076AEFF00E47867 /* UILabel.swift in Sources */,
 				59F03BDB2076AEFF00E47867 /* UIStoryBoard.mm in Sources */,
 				596900F6207B2BFC00A25EA4 /* SB_View.cpp in Sources */,

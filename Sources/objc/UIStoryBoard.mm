@@ -14,6 +14,29 @@
 #include "XMLDocument.hpp"
 
 
+
+
+@implementation UISegue
+
+
+-(id) initWithIdentifier : (NSString*) iden destinationID:(NSString*) destID kind:(NSString*) kind sender:(id) sender
+{
+    if( self = [super init])
+    {
+        _identifier = iden;
+        _destinationID = destID;
+        _kind = kind;
+        _sender = sender;
+        return self;
+    }
+    
+    return nil;
+}
+@end
+
+/* **** **** **** **** **** **** **** **** **** **** **** **** **** **** **** **** **** */
+/* **** **** **** **** **** **** **** **** **** **** **** **** **** **** **** **** **** */
+
 @implementation UIStoryboard
 {
     //Storyboard::Document* _doc;
@@ -61,19 +84,19 @@
     return [_createdInstances objectForKey:key] != nil;
 }
 
--(NSString*) getSegueTargetIDFromSender: (id) sender
+-(UISegue*) getSegueTargetFromSender: (id) sender
 {
     NSValue *myKey = [NSValue valueWithNonretainedObject:sender];
     return [_segueSenders objectForKey:myKey];
 }
 
-
--(BOOL) registerSegueSender: (id) object destId:(NSString*) destId
+-(BOOL) registerSegueSender: (id ) object segue:(UISegue* ) segue
+//-(BOOL) registerSegueSender: (UISegue*) object destId:(NSString*) destId
 {
-    
+
     NSValue *myKey = [NSValue valueWithNonretainedObject:object];
-    
-    [_segueSenders setObject:destId forKey:myKey];
+
+    [_segueSenders setObject:segue forKey:myKey];
     
     return [_segueSenders objectForKey:myKey] != nil;
 }
@@ -116,14 +139,14 @@
         
         if( objects.isValid() == false)
         {
-            return false;
+            return false; // invalid Document here
         }
         
         const auto viewControlerNode = objects.getChildByName("viewController");
         
         if( viewControlerNode.isValid() == false)
         {
-            return false;
+            return false; // invalid Document here
         }
         
         if( viewControlerNode.getProperty("id") == initialViewControllerID)
@@ -145,6 +168,88 @@
     delete doc;
 }
 
+
+- (__kindof UIViewController * _Nullable)instantiateViewControllerWithID:(NSString*) vcID
+{
+    assert(doc);
+    assert(doc->isValid());
+    
+    
+    scenesNode = doc->getRoot().getChildByName("scenes");
+    
+    for( const auto &scene : scenesNode.getChildren())
+    {
+        const auto objects = scene.second.getChildByName("objects");
+        
+        if( objects.isValid() == false)
+        {
+            assert(false);
+            return nil; // invalid Document here
+        }
+        
+        const auto viewControlerNode = objects.getChildByName("viewController");
+        
+        /* ***** ***** ***** ***** ***** ***** ***** ***** */
+        
+        if( viewControlerNode.getProperty("id") == [vcID cStringUsingEncoding: NSUTF8StringEncoding ])
+        {
+            const auto initialVCName = viewControlerNode.getProperty("customClass");
+            const auto initialVCModuleName = viewControlerNode.getProperty("customModule");
+            
+            
+            
+            const auto initialVCFullName = initialVCModuleName + "." + initialVCName;
+            
+            Class instanceClass = NSClassFromString( [NSString stringWithFormat:@"%s", initialVCFullName.c_str() ] );
+            
+            if( instanceClass )
+            {
+                NSCoder* decoder = [[CustomCoder alloc] initWithXMLNode: viewControlerNode storyboard:self];
+                
+                UIViewController * vc =[ [instanceClass alloc] initWithCoder:decoder];
+                
+                [_viewControllers setObject:vc forKey: vcID ];
+                
+                UIView* view = [decoder decodeTopLevelObjectForKey:@"UIView" error:nil];
+                
+                const auto connectionsNode = viewControlerNode.getChildByName("connections");
+                if(connectionsNode.isValid() )
+                {
+                    for( const auto &connecNode : connectionsNode.getChildren())
+                    {
+                        //<outlet property="mylabel" destination="XmU-Eo-b7z" id="EVj-Yf-qUO"/>
+                        const auto propertyName = connecNode.second.getProperty("property");
+                        const auto destinationID = connecNode.second.getProperty("destination");
+                        const auto idName = connecNode.second.getProperty("id");
+                        
+                        const NSString* idStr = [NSString stringWithFormat:@"%s" , destinationID.c_str()];
+                        
+                        NSObject* propValue = [_createdInstances objectForKey:idStr];
+                        
+                        assert(propValue);
+                        
+                        NSString* propertyStr = [NSString stringWithFormat:@"%s" , propertyName.c_str()];
+                        [vc setValue:propValue forKey:propertyStr];
+                        
+                    }
+                }
+                
+                assert(view);
+                [vc setView:view];
+                
+                return vc;
+            } // END if( instanceClass )
+            
+            return nil;
+            
+            
+            /* ***** ***** ***** ***** ***** ***** ***** ***** */
+        }
+    }
+    return nil;
+}
+
+
 - (__kindof UIViewController *_Nullable )instantiateInitialViewController
 {
     
@@ -158,6 +263,8 @@
     
     assert(initialViewControllerID.empty() == false);
     assert(initialVCNode.isValid());
+    
+    /* *** *** *** *** *** *** */
     
     const auto initialVCName = initialVCNode.getProperty("customClass");
     const auto initialVCModuleName = initialVCNode.getProperty("customModule");

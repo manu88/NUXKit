@@ -352,9 +352,20 @@ class UIApplication : UIResponder
     {
         
         
-        if let senderID = storyboard.getSegueTargetIDFromSender(sender)
+        if let segue = storyboard.getSegueTargetFromSender(sender)
         {
-            print("Do segue to \( senderID)")
+            
+            print("Do segue to \( segue.destinationID) type : \(segue.kind)")
+            
+            
+            if let newVC = storyboard.instantiateViewController(withID: segue.destinationID)
+            {
+                _win?.present(newVC, animated: true)
+            }
+            else
+            {
+                print("Unable to find viewController with id :\(segue.destinationID)")
+            }
         }
         
     /*

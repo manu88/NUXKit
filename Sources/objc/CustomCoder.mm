@@ -311,10 +311,17 @@ static CGRect parseCGRectNode(const XMLNode &node);
                                 const auto destName = connectNode.second.getProperty("destination");
                                 const auto kindName = connectNode.second.getProperty("kind");
                                 const auto segueIdentifier = connectNode.second.getProperty("identifier");
+                                const auto segueID = connectNode.second.getProperty("id");
                                 
                                 NSLog(@" segue id %s kind %s to %s" , segueIdentifier.c_str() , kindName.c_str() , destName.c_str() );
                                 
-                                [_storyboard registerSegueSender:view destId:[NSString stringWithFormat:@"%s" , destName.c_str()] ];
+                                UISegue* segue = [[UISegue alloc] initWithIdentifier:[NSString stringWithFormat:@"%s" , segueIdentifier.c_str()]
+                                                                  destinationID:[NSString stringWithFormat:@"%s" , destName.c_str()]
+                                                                  kind:[NSString stringWithFormat:@"%s" , kindName.c_str()]
+                                                                 sender:view
+                                                  ];
+                                
+                                [_storyboard registerSegueSender:view segue: segue/*[NSString stringWithFormat:@"%s" , segueID.c_str()]*/ ];
 
                                 
                                 [(UIControl*) view addTarget:[UIApplication shared] /*_storyboard*/

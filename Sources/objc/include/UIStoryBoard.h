@@ -14,6 +14,27 @@
  */
 NS_ASSUME_NONNULL_BEGIN
 
+@interface UISegue : NSObject
+{
+    //NSString* _id;
+    NSString* _identifier;
+    NSString* _destinationID;
+    NSString* _kind;
+    id        _sender;
+}
+
+-(id) initWithIdentifier : (NSString*) iden destinationID:(NSString*) destID kind:(NSString*) kind sender:(id) sender;
+
+@property (readonly) NSString* identifier;
+@property (readonly) NSString* destinationID;
+@property (readonly) NSString* kind;
+@property (readonly) id        sender;
+@end
+
+
+/* **** **** **** **** **** **** **** **** **** **** **** **** **** **** **** **** **** */
+/* **** **** **** **** **** **** **** **** **** **** **** **** **** **** **** **** **** */
+
 @interface UIStoryboard : NSObject
 
 @property (readonly) NSMutableDictionary* segueSenders;
@@ -24,14 +45,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (__kindof UIViewController * _Nullable)instantiateInitialViewController;
 
+- (__kindof UIViewController * _Nullable)instantiateViewControllerWithID:(NSString*) vcID;
+
 
 - (__kindof UIViewController * _Nullable)getViewControllerWithID:(NSString*) id_;
 
 
 -(BOOL) addInstance: (id) object forKey:(NSString*) key;
 
--(BOOL) registerSegueSender: (id ) object destId:(NSString*) destId;
--(NSString* _Nullable) getSegueTargetIDFromSender: (id) sender;
+-(BOOL) registerSegueSender: (id ) object segue:(nonnull UISegue* ) segue;
+
+-(UISegue* _Nullable) getSegueTargetFromSender: (id) sender;
 //-(bool) loadStoryboard:(  NSString* _Nullable) file;
 
 @end
