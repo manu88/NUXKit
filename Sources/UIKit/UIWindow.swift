@@ -225,6 +225,15 @@ open class UIWindow : UIView
         } //if( flag.isAnimated() )
         viewController.viewDidAppear( flag.isAnimated() )
     }
+    
+    
+    var currentViewController : UIViewController?
+    {
+        get
+        {
+            return _vcList.last
+        }
+    }
     open func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Swift.Void)? = nil)
     {
         // at this point 'prepare' MUST have been called

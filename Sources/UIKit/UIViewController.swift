@@ -176,4 +176,24 @@ open class UIViewController : UIResponder, NSCoding /*,UIAppearanceContainer, UI
     {}
     open func viewDidDisappear(_ animated: Bool) // Called after the view was dismissed, covered or otherwise hidden. Default does nothing
     {}
+    
+    
+    
+    @available(iOS 5.0, *)
+    open func performSegue(withIdentifier identifier: String, sender: Any?)
+    {
+        
+    }
+    
+    @available(iOS 6.0, *)
+    open func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool // Invoked immediately prior to initiating a segue. Return NO to prevent the segue from firing. The default implementation returns YES. This method is not invoked when -performSegueWithIdentifier:sender: is used.
+    {
+        return true
+    }
+    
+    @available(iOS 5.0, *)
+    open func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        
+    }
 }

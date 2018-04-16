@@ -350,16 +350,27 @@ class UIApplication : UIResponder
     
     @objc fileprivate func segueDestination(sender : AnyObject)
     {
-        
-        
         if let segue = storyboard.getSegueTargetFromSender(sender)
         {
             
             print("Do segue to \( segue.destinationID) type : \(segue.kind)")
             
+            let currentVC = _win!.currentViewController! // this CAN'T FAIL
+            
+            // 1 ask for current view controller permission
+            if( currentVC.shouldPerformSegue(withIdentifier: segue.identifier, sender: sender) == false)
+            {
+                // nothing else to do
+            }
             
             if let newVC = storyboard.instantiateViewController(withID: segue.destinationID)
             {
+                // 2 call prepare:forSegue
+                
+                let storyboardSegue = UIStoryboardSegue(identifier: segue.identifier, source: currentVC, destination: newVC )
+                
+                currentVC.prepare(for: storyboardSegue, sender: sender)
+                
                 _win?.present(newVC, animated: true)
             }
             else

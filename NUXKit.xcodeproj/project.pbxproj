@@ -47,6 +47,8 @@
 		599930E8206FE8FE00102DDE /* libgtk-3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 599930DC206FDF2600102DDE /* libgtk-3.0.dylib */; };
 		59E60C5D207F8C890006CEB6 /* UISlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E60C5B207F8C890006CEB6 /* UISlider.swift */; };
 		59E60C61208482430006CEB6 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E60C60208482420006CEB6 /* SecondViewController.swift */; };
+		59E60C63208484240006CEB6 /* UIStoryboardSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E60C62208484240006CEB6 /* UIStoryboardSegue.swift */; };
+		59E60C64208484240006CEB6 /* UIStoryboardSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E60C62208484240006CEB6 /* UIStoryboardSegue.swift */; };
 		59EB41262071107400F29CA5 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 59EB41252071107400F29CA5 /* main.c */; };
 		59EB41292071109B00F29CA5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59EB41282071109B00F29CA5 /* main.cpp */; };
 		59EB414A207110D800F29CA5 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EB412D207110AD00F29CA5 /* UIView.swift */; };
@@ -159,6 +161,7 @@
 		599930E2206FDFCC00102DDE /* libglib-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libglib-2.0.0.dylib"; path = "../../../../../../../usr/local/lib/libglib-2.0.0.dylib"; sourceTree = "<group>"; };
 		59E60C5B207F8C890006CEB6 /* UISlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISlider.swift; sourceTree = "<group>"; };
 		59E60C60208482420006CEB6 /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SecondViewController.swift; path = TestUIStoryBoard/TestStoryBoard/SecondViewController.swift; sourceTree = "<group>"; };
+		59E60C62208484240006CEB6 /* UIStoryboardSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboardSegue.swift; sourceTree = "<group>"; };
 		59EB41252071107400F29CA5 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		59EB41282071109B00F29CA5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		59EB412D207110AD00F29CA5 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
@@ -330,6 +333,7 @@
 				59EB412D207110AD00F29CA5 /* UIView.swift */,
 				59EB4132207110AD00F29CA5 /* UIViewController.swift */,
 				59EB4133207110AD00F29CA5 /* UIWindow.swift */,
+				59E60C62208484240006CEB6 /* UIStoryboardSegue.swift */,
 				59EB4134207110AD00F29CA5 /* UIApplication.swift */,
 			);
 			path = UIKit;
@@ -534,6 +538,7 @@
 			files = (
 				594FE35C20727E5E0098613B /* UIButton.swift in Sources */,
 				59EB414A207110D800F29CA5 /* UIView.swift in Sources */,
+				59E60C63208484240006CEB6 /* UIStoryboardSegue.swift in Sources */,
 				59EB414B207110D800F29CA5 /* UIResponder.swift in Sources */,
 				59EB414C207110D800F29CA5 /* UIViewController.swift in Sources */,
 				594FE37E207286550098613B /* UIScreen.swift in Sources */,
@@ -586,6 +591,7 @@
 				59F03BD02076AEFF00E47867 /* UIScreen.swift in Sources */,
 				59F03BD22076AEFF00E47867 /* UIWindow.swift in Sources */,
 				59F03BD42076AEFF00E47867 /* UIColor.swift in Sources */,
+				59E60C64208484240006CEB6 /* UIStoryboardSegue.swift in Sources */,
 				59F03BD52076AEFF00E47867 /* UISwitch.swift in Sources */,
 				59390883207E5EB70066746C /* UIButtonContent.m in Sources */,
 				596900DD207B289E00A25EA4 /* CustomCoder.mm in Sources */,
