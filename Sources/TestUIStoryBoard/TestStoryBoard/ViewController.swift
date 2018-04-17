@@ -80,6 +80,7 @@ class ViewController: UIViewController {
 
     @IBOutlet var mylabel : UILabel?
     @IBOutlet var mySlider : UISlider?
+    @IBOutlet var myText : UITextField?
     required init?(coder aDecoder: NSCoder)
     {
         //let lol = TestCoder("UIViewController", coder: aDecoder)
@@ -140,12 +141,19 @@ class ViewController: UIViewController {
         assert(sender != nil)
      }
     
+    @IBAction func textEditDidEnd(sender : AnyObject? )
+    {
+        assert( myText!.isEqual(sender))
+        print("Text Ended \(myText!.text!)")
+        
+    }
     @IBAction func textChanged(sender : AnyObject? )
     {
-        if let text = sender as? UITextField
-        {
-            print("TextChanged \(text.text!)")
-        }
+        assert( myText!.isEqual(sender))
+        
+        
+        print("TextChanged \(myText!.text!)")
+
     }
 
 }

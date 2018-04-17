@@ -48,6 +48,7 @@ class UILabel : UIView
          decodeObjectForKey UIAttributedText -> (null)
          */
         self.text = aDecoder.decodeObject(forKey: "UIText") as? String
+        
         /*
          containsValueForKey UIDisableUpdateTextColorOnTraitCollectionChange : YES
          decodeBoolForKey UIDisableUpdateTextColorOnTraitCollectionChange -> NO
@@ -82,6 +83,9 @@ class UILabel : UIView
             _textColor = newValue
         }
     }
+    
+    
+    
     override func prepare() -> Bool {
         if( _impl == nil)
         {

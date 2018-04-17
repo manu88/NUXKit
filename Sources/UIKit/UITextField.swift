@@ -51,6 +51,57 @@ open class UITextField : UIControl
     public required init?(coder aDecoder : NSCoder)
     {
         super.init(coder: aDecoder)
+        
+        /*
+         TextField containsValueForKey UIContentVerticalAlignment : NO
+         TextField containsValueForKey UIContentHorizontalAlignment : YES
+         TextField decodeInt64ForKey UIContentHorizontalAlignment -> 1
+         TextField containsValueForKey UIRoundedRectBackgroundCornerRadius : NO
+         TextField containsValueForKey UIAllowsEditingTextAttributes : NO
+         */
+        
+         text = aDecoder.decodeObject(forKey: "UIText") as? String
+        
+         //TextField decodeObjectForKey UIAttributedText -> (null)
+        /*
+         TextField containsValueForKey UITextAlignment : YES
+         TextField decodeInt64ForKey UITextAlignment -> 4
+         TextField decodeObjectForKey UIFont -> <UICTFont: 0x7fcf0af057f0> font-family: ".SFUIText"; font-weight: normal; font-style: normal; font-size: 14.00pt
+         TextField decodeObjectForKey UITextColor -> UIExtendedGrayColorSpace 0 1
+         TextField containsValueForKey UIAdjustsFontForContentSizeCategory : NO
+         TextField decodeObjectForKey UIDelegate -> (null)
+         TextField decodeBoolForKey UIClearsOnBeginEditing -> NO
+         TextField decodeBoolForKey UIAdjustsFontSizeToFit -> YES
+         TextField decodeInt64ForKey UIMinimumFontSize -> 17.000000
+         TextField containsValueForKey UIBorderStyle : YES
+         TextField decodeInt64ForKey UIBorderStyle -> 3
+         TextField containsValueForKey UIClearButtonMode : NO
+         */
+        placeholder = aDecoder.decodeObject(forKey: "UIPlaceholder") as? String
+        /*
+         TextField decodeObjectForKey UILeftView -> (null)
+         TextField decodeObjectForKey UIRightView -> (null)
+         TextField decodeObjectForKey UITextFieldBackground -> (null)
+         TextField decodeObjectForKey UITextFieldDisabledBackground -> (null)
+         TextField containsValueForKey UIBecomesFirstResponderOnClearButtonTap : NO
+         TextField decodeCGPointForKey UIClearButtonOffset -> {3.000000 1.000000 }
+         TextField decodeObjectOfClass NSString key : UIPadding -> (null)
+         TextField containsValueForKey UIAutocapitalizationType : NO
+         TextField containsValueForKey UIAutocorrectionType : NO
+         TextField containsValueForKey UISpellCheckingType : NO
+         TextField containsValueForKey UIDisableTextColorUpdateOnTraitCollectionChange : YES
+         TextField decodeBoolForKey UIDisableTextColorUpdateOnTraitCollectionChange -> NO
+         TextField containsValueForKey UIKeyboardAppearance : NO
+         TextField containsValueForKey UIKeyboardType : NO
+         TextField containsValueForKey UIReturnKeyType : NO
+         TextField decodeBoolForKey UIEnablesReturnKeyAutomatically -> NO
+         TextField decodeObjectOfClass NSString key : UITextContentType -> (null)
+         TextField containsValueForKey UITextSmartInsertDeleteType : NO
+         TextField containsValueForKey UITextSmartQuotesType : NO
+         TextField containsValueForKey UITextSmartDashesType : NO
+         TextField decodeBoolForKey UISecureTextEntry -> NO
+         TextField decodeObjectForKey UIIcon -> (null)
+         */
     }
     
     open var text: String?  // default is nil
@@ -58,6 +109,10 @@ open class UITextField : UIControl
         get
         {
             return String(cString:  gtk_entry_get_text( toGtkEntry(_impl)) )
+        }
+        set
+        {
+            gtk_entry_set_text(toGtkEntry(_impl), newValue )
         }
     }
     
@@ -90,6 +145,7 @@ open class UITextField : UIControl
             
             let ptr = UnsafeMutableRawPointer(Unmanaged.passUnretained(self).toOpaque())
             
+            /* editingChanged callback */
             g_signal_connect_with_data(_impl, "changed", { (widget, data) in
                 
                 if let data = data
@@ -101,7 +157,18 @@ open class UITextField : UIControl
                 
             }, ptr, nil, GConnectFlags(rawValue: 0))
             
+            /* editingDidEndOnExit callback */
             
+            g_signal_connect_with_data(_impl, "activate", { (widget, data) in
+                
+                if let data = data
+                {
+                    let this = Unmanaged<UIButton>.fromOpaque(data).takeUnretainedValue()
+                    assert(widget == this._impl)
+                    this.invokeAction(controlEvent: .editingDidEndOnExit)
+                }
+                
+            }, ptr, nil, GConnectFlags(rawValue: 0))
             
         }
         

@@ -89,6 +89,7 @@ static CGRect parseCGRectNode(const XMLNode &node);
     [keyTranslationsNS_to_XML setObject:@"backgroundColor"  forKey: @"UIBackgroundColor"];
     
     [keyTranslationsNS_to_XML setObject:@"rect"             forKey: @"UIBounds"];
+    [keyTranslationsNS_to_XML setObject:@"placeholder"             forKey: @"UIPlaceholder"];
     //[keyTranslationsNS_to_XML setObject:@"rect"             forKey: @"UIFrame"];
     
 }
@@ -157,6 +158,17 @@ static CGRect parseCGRectNode(const XMLNode &node);
         return nil;
     }
     else if( [key isEqualToString:@"UIText"])
+    {
+        const char* rawKey = [xmlKey cStringUsingEncoding: NSUTF8StringEncoding ];
+        
+        if( _node.hasProperty( rawKey ))
+        {
+            return [NSString stringWithFormat:@"%s" , _node.getProperty( rawKey ).c_str() ];
+        }
+        return nil;
+    }
+    
+    else if( [key isEqualToString:@"UIPlaceholder"])
     {
         const char* rawKey = [xmlKey cStringUsingEncoding: NSUTF8StringEncoding ];
         
