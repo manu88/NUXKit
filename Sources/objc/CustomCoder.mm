@@ -89,15 +89,79 @@ static CGRect parseCGRectNode(const XMLNode &node);
     [keyTranslationsNS_to_XML setObject:@"backgroundColor"  forKey: @"UIBackgroundColor"];
     
     [keyTranslationsNS_to_XML setObject:@"rect"             forKey: @"UIBounds"];
-    [keyTranslationsNS_to_XML setObject:@"placeholder"             forKey: @"UIPlaceholder"];
+    [keyTranslationsNS_to_XML setObject:@"placeholder"      forKey: @"UIPlaceholder"];
+    
+    [keyTranslationsNS_to_XML setObject:@"textAlignment"    forKey: @"UITextAlignment"];
+    //[keyTranslationsNS_to_XML setObject:@"contentHorizontalAlignment"     forKey: @"UIContentHorizontalAlignment"];
+    
     //[keyTranslationsNS_to_XML setObject:@"rect"             forKey: @"UIFrame"];
     
 }
 
 -(BOOL) containsValueForKey:(NSString *)key
 {
-    return [keyTranslationsNS_to_XML objectForKey:key] != nil;
-    //return [keyTranslationsNS_to_XML doesContain:key] ;
+    const NSString* xmlKey = [keyTranslationsNS_to_XML valueForKey: key];
+    
+    if( xmlKey == nil)
+        return NO;
+    
+    const char* rawKey = [xmlKey cStringUsingEncoding: NSUTF8StringEncoding ];
+    
+    return _node.hasProperty(rawKey) || _node.getChildByName(rawKey).isValid();
+}
+
+
+static int64_t NSTextAlignmentNameToValue( const std::string &name)
+{
+    if ( name  == "left")
+    {
+        return 0;
+    }
+    else if ( name  == "center")
+    {
+        return 1;
+    }
+    else if ( name  == "right")
+    {
+        return 2;
+    }
+    else if ( name  == "justified")
+    {
+        return 3;
+    }
+    else if ( name  == "natural")
+    {
+        return 4;
+    }
+    
+    assert(0);
+    
+    return -1;
+    /*
+     case left // Visually left aligned
+     case center // Visually centered
+     case right // Visually right aligned
+     case justified // Fully-justified. The last line in a paragraph is natural-aligned.
+     case natural // Indicates the default alignment for script
+     */
+}
+
+
+- (int64_t)decodeInt64ForKey:(NSString *)key
+{
+    const NSString* xmlKey = [keyTranslationsNS_to_XML valueForKey: key];
+    
+
+    if( [key isEqualToString:@"UITextAlignment"])
+    {
+        
+        return NSTextAlignmentNameToValue( _node.getProperty([xmlKey cStringUsingEncoding:NSUTF8StringEncoding ]));
+    }
+    if (_node.hasProperty([xmlKey cStringUsingEncoding:NSUTF8StringEncoding ]))
+    {
+        return std::stoll( _node.getProperty([xmlKey cStringUsingEncoding:NSUTF8StringEncoding ]) );
+    }
+    return 0;
 }
 
 - (nullable id)decodeObjectForKey:(NSString *)key

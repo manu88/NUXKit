@@ -52,20 +52,30 @@ open class UITextField : UIControl
     {
         super.init(coder: aDecoder)
         
+        
+        
+    
+        
+        
+        
         /*
-         TextField containsValueForKey UIContentVerticalAlignment : NO
-         TextField containsValueForKey UIContentHorizontalAlignment : YES
-         TextField decodeInt64ForKey UIContentHorizontalAlignment -> 1
          TextField containsValueForKey UIRoundedRectBackgroundCornerRadius : NO
          TextField containsValueForKey UIAllowsEditingTextAttributes : NO
          */
         
          text = aDecoder.decodeObject(forKey: "UIText") as? String
         
+        print("UITextField Text is \(text)")
+        
          //TextField decodeObjectForKey UIAttributedText -> (null)
+        
+        if ( aDecoder.containsValue(forKey: "UITextAlignment"))
+        {
+            textAlignment = NSTextAlignment(rawValue: Int( aDecoder.decodeInt64(forKey: "UITextAlignment") ) )!
+        }
+        
         /*
-         TextField containsValueForKey UITextAlignment : YES
-         TextField decodeInt64ForKey UITextAlignment -> 4
+         
          TextField decodeObjectForKey UIFont -> <UICTFont: 0x7fcf0af057f0> font-family: ".SFUIText"; font-weight: normal; font-style: normal; font-size: 14.00pt
          TextField decodeObjectForKey UITextColor -> UIExtendedGrayColorSpace 0 1
          TextField containsValueForKey UIAdjustsFontForContentSizeCategory : NO
@@ -112,7 +122,23 @@ open class UITextField : UIControl
         }
         set
         {
-            gtk_entry_set_text(toGtkEntry(_impl), newValue )
+            if (newValue != nil)
+            {
+                gtk_entry_set_text(toGtkEntry(_impl), newValue )
+            }
+        }
+    }
+    
+    
+    open var placeholder: String? // default is nil. string is drawn 70% gray
+    {
+        get
+        {
+            return String(cString:  gtk_entry_get_placeholder_text( toGtkEntry(_impl)) )
+        }
+        set
+        {
+            gtk_entry_set_placeholder_text(toGtkEntry(_impl), newValue )
         }
     }
     
@@ -123,15 +149,58 @@ open class UITextField : UIControl
     
     //open var font: UIFont? // default is nil. use system font 12 pt
     
-    open var textAlignment: NSTextAlignment = .left // default is NSLeftTextAlignment
+    open var textAlignment: NSTextAlignment  // default is NSLeftTextAlignment
+    {
+        get
+        {
+            /*
+             The horizontal alignment, from 0 (left) to 1 (right). Reversed for RTL layouts
+             */
+            let rawVal = gtk_entry_get_alignment( toGtkEntry(_impl))
+            
+            switch rawVal
+            {
+            case 0.0..<0.4:
+                return .left
+            case 0.4..<0.6:
+                return .center
+            case 0.6..<1.0:
+                return .right
+            default:
+                assert(false)
+                return .left
+            }
+
+        }
+        set
+        {
+            var val : Float = -1.0
+            
+            switch newValue
+            {
+            case .left:
+                val = 0.0
+            case .center:
+                val = 0.5
+            case .right:
+                val = 1.0
+            default:
+                assert(false)
+            }
+            
+            gtk_entry_set_alignment( toGtkEntry(_impl) , val)
+            
+        }
+    }
     
     open var borderStyle: UITextBorderStyle = .none // default is UITextBorderStyleNone. If set to UITextBorderStyleRoundedRect, custom background images are ignored.
     
+    /*
     @available(iOS 7.0, *)
-    //open var defaultTextAttributes: [String : Any] // applies attributes to the full range of text. Unset attributes act like default values.
+    open var defaultTextAttributes: [String : Any] // applies attributes to the full range of text. Unset attributes act like default values.
+    */
     
     
-    open var placeholder: String? = nil // default is nil. string is drawn 70% gray
     
     @available(iOS 6.0, *)
     @NSCopying open var attributedPlaceholder: NSAttributedString? = nil // default is nil

@@ -24,6 +24,6 @@ class XMLNode;
 - (nullable id)decodeTopLevelObjectForKey:(NSString *_Nonnull)key error:(NSError *_Nullable*_Nullable)error API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 - (nullable id)decodeObjectOfClasses:(nullable NSSet<Class> *)classes forKey:(NSString *_Nonnull)key;
-
+- (int64_t)decodeInt64ForKey:(NSString *)key;
 
 @end

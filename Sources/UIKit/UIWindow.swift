@@ -50,8 +50,8 @@ open class UIWindow : UIView
             
             var color = GdkRGBA()
             color.alpha = 0.0
-            gtk_widget_override_background_color( _impl, GTK_STATE_FLAG_NORMAL, &color)
-            gtk_widget_override_background_color( _windowImpl, GTK_STATE_FLAG_NORMAL, &color)
+            //gtk_widget_override_background_color( _impl, GTK_STATE_FLAG_NORMAL, &color)
+            //gtk_widget_override_background_color( _windowImpl, GTK_STATE_FLAG_NORMAL, &color)
             
             gtk_container_add (toGtkContainer(_windowImpl), _impl);
         }

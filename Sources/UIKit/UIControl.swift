@@ -86,6 +86,39 @@ public struct UIControlEvents : OptionSet {
 }
 
 
+public enum UIControlContentVerticalAlignment : Int
+{
+    
+    
+    case center
+    
+    case top
+    
+    case bottom
+    
+    case fill
+}
+
+public enum UIControlContentHorizontalAlignment : Int
+{
+    
+    
+    case center
+    
+    case left
+    
+    case right
+    
+    case fill
+    
+    @available(iOS 11.0, *)
+    case leading
+    
+    @available(iOS 11.0, *)
+    case trailing
+}
+
+
 public struct UIControlState : OptionSet {
     public var rawValue: UInt
     
@@ -217,6 +250,29 @@ open class UIControl : UIView
         get
         {
             return _isHighlighted;
+        }
+    }
+    
+    private var _contentVerticalAlignment = UIControlContentVerticalAlignment.center
+    private var _contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
+    
+    open var contentVerticalAlignment: UIControlContentVerticalAlignment // how to position content vertically inside control. default is center
+    {
+        get { return _contentVerticalAlignment}
+        
+        set
+        {
+            _contentVerticalAlignment = newValue
+        }
+    }
+    
+    open var contentHorizontalAlignment: UIControlContentHorizontalAlignment // how to position content horizontally inside control. default is center
+        {
+        get { return _contentHorizontalAlignment}
+        
+        set
+        {
+            _contentHorizontalAlignment = newValue
         }
     }
 }
