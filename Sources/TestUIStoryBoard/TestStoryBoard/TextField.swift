@@ -18,7 +18,6 @@ class TextField: UITextField {
         
         super.init(coder: lol )
         
-        UIControlContentVerticalAlignment
     }
     /*
     // Only override draw() if you perform custom drawing.

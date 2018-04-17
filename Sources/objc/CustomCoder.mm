@@ -34,6 +34,12 @@ static CGRect parseCGRectNode(const XMLNode &node);
 
 - (nonnull id) initWithXMLNode:( const XMLNode& ) node storyboard:(UIStoryboard*_Nonnull) storyboard;
 {
+    
+    NSString* fullClassName = NSStringFromClass([self class]);
+    
+    NSLog(@"class name %@" , fullClassName);
+    
+    
     if( self = [super init ] )
     {
         self->_node = node;
@@ -71,11 +77,14 @@ static CGRect parseCGRectNode(const XMLNode &node);
 
 -(void) populateClasseNames
 {
-    [classTranslationsXML_to_NS setObject:@"UIView"   forKey:@"view"];
-    [classTranslationsXML_to_NS setObject:@"UIButton" forKey:@"button"];
-    [classTranslationsXML_to_NS setObject:@"UILabel"  forKey:@"label"];
-    [classTranslationsXML_to_NS setObject:@"UISlider" forKey:@"slider"];
+    [classTranslationsXML_to_NS setObject:@"UIView"      forKey:@"view"];
+    [classTranslationsXML_to_NS setObject:@"UIButton"    forKey:@"button"];
+    [classTranslationsXML_to_NS setObject:@"UILabel"     forKey:@"label"];
+    [classTranslationsXML_to_NS setObject:@"UISlider"    forKey:@"slider"];
     [classTranslationsXML_to_NS setObject:@"UITextField" forKey:@"textField"];
+    [classTranslationsXML_to_NS setObject:@"UISwitch"    forKey:@"switch"];
+    [classTranslationsXML_to_NS setObject:@"UIImageView" forKey:@"imageView"];
+    
     
 }
 -(void) populateTranslationKeys

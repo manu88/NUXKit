@@ -51,21 +51,13 @@ open class UITextField : UIControl
     public required init?(coder aDecoder : NSCoder)
     {
         super.init(coder: aDecoder)
-        
-        
-        
-    
-        
-        
-        
+
         /*
          TextField containsValueForKey UIRoundedRectBackgroundCornerRadius : NO
          TextField containsValueForKey UIAllowsEditingTextAttributes : NO
          */
         
          text = aDecoder.decodeObject(forKey: "UIText") as? String
-        
-        print("UITextField Text is \(text)")
         
          //TextField decodeObjectForKey UIAttributedText -> (null)
         
@@ -113,6 +105,9 @@ open class UITextField : UIControl
          TextField decodeObjectForKey UIIcon -> (null)
          */
     }
+    
+    
+    weak open var delegate: UITextFieldDelegate? = nil // default is nil. weak reference
     
     open var text: String?  // default is nil
     {
@@ -244,3 +239,33 @@ open class UITextField : UIControl
         return _impl != nil
     }
 }
+    
+public protocol UITextFieldDelegate : NSObjectProtocol {
+    
+    
+    @available(iOS 2.0, *)
+    /*optional public*/ func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool // return NO to disallow editing.
+    
+    @available(iOS 2.0, *)
+    /*optional public*/ func textFieldDidBeginEditing(_ textField: UITextField) // became first responder
+    
+    @available(iOS 2.0, *)
+    /*optional public*/ func textFieldShouldEndEditing(_ textField: UITextField) -> Bool // return YES to allow editing to stop and to resign first responder status. NO to disallow the editing session to end
+    
+    @available(iOS 2.0, *)
+    /*optional public*/ func textFieldDidEndEditing(_ textField: UITextField) // may be called if forced even if shouldEndEditing returns NO (e.g. view removed from window) or endEditing:YES called
+    
+    @available(iOS 10.0, *)
+    /*optional public*/ func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) // if implemented, called in place of textFieldDidEndEditing:
+    
+    
+    @available(iOS 2.0, *)
+    /*optional public*/ func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool // return NO to not change text
+    
+    
+    @available(iOS 2.0, *)
+    /*optional public*/ func textFieldShouldClear(_ textField: UITextField) -> Bool // called when clear button pressed. return NO to ignore (no notifications)
+    
+    @available(iOS 2.0, *)
+    /*optional public*/ func textFieldShouldReturn(_ textField: UITextField) -> Bool // called when 'return' key pressed. return NO to ignore.
+    }

@@ -25,8 +25,9 @@ open class UIImageView : UIView
         super.init(frame: CGRect.infinite)
     }
     
-    public required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    public required init?(coder aDecoder: NSCoder)
+    {
+        super.init(coder: aDecoder)
     }
     
     
