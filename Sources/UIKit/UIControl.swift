@@ -55,26 +55,34 @@ public struct UIControlEvents : OptionSet {
     @available(iOS 9.0, *)
     public static var primaryActionTriggered: UIControlEvents { get {return UIControlEvents(rawValue: 1 << 13)}} // semantic action: for buttons, etc.
     
+    
+    public static var editingDidBegin: UIControlEvents     { get {return UIControlEvents(rawValue: 1 << 16)} } // UITextField
+    
+    public static var editingChanged: UIControlEvents      { get {return UIControlEvents(rawValue: 1 << 17)} }
+    
+    public static var editingDidEnd: UIControlEvents       { get {return UIControlEvents(rawValue: 1 << 18)} }
+    
+    public static var editingDidEndOnExit: UIControlEvents { get {return UIControlEvents(rawValue: 1 << 19) } } // 'return key' ending editing
+    
+    
     /*
-    public static var editingDidBegin: UIControlEvents { get } // UITextField
+     UIControlEventAllTouchEvents                                    = 0x00000FFF,  // for touch events
+     UIControlEventAllEditingEvents                                  = 0x000F0000,  // for UITextField
+     UIControlEventApplicationReserved                               = 0x0F000000,  // range available for application use
+     UIControlEventSystemReserved                                    = 0xF0000000,  // range reserved for internal framework use
+     UIControlEventAllEvents                                         = 0xFFFFFFFF
+     */
     
-    public static var editingChanged: UIControlEvents { get }
+    public static var allTouchEvents: UIControlEvents       { get {return UIControlEvents(rawValue: 0x00000FFF ) } } // for touch events
     
-    public static var editingDidEnd: UIControlEvents { get }
+    public static var allEditingEvents: UIControlEvents     { get {return UIControlEvents(rawValue: 0x000F0000 ) } } // for UITextField
     
-    public static var editingDidEndOnExit: UIControlEvents { get } // 'return key' ending editing
+    public static var applicationReserved: UIControlEvents  { get {return UIControlEvents(rawValue: 0x0F000000 ) } } // range available for application use
     
+    public static var systemReserved: UIControlEvents       { get {return UIControlEvents(rawValue: 0xF0000000 ) } } // range reserved for internal framework use
     
-    public static var allTouchEvents: UIControlEvents { get } // for touch events
-    
-    public static var allEditingEvents: UIControlEvents { get } // for UITextField
-    
-    public static var applicationReserved: UIControlEvents { get } // range available for application use
-    
-    public static var systemReserved: UIControlEvents { get } // range reserved for internal framework use
-    
-    public static var allEvents: UIControlEvents { get }
- */
+    public static var allEvents: UIControlEvents            { get {return UIControlEvents(rawValue: 0xFFFFFFFF ) } }
+ 
 }
 
 

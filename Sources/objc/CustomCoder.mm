@@ -299,6 +299,27 @@ static CGRect parseCGRectNode(const XMLNode &node);
                                         else if( str == "valueChanged")             return 1 << 12;
                                         else if( str == "primaryActionTriggered")   return 1 << 13;
                                         
+                                        else if( str == "editingDidBegin")       return 1 << 16;
+                                        else if( str == "editingChanged")        return 1 << 17;
+                                        else if( str == "editingDidEnd")         return 1 << 18;
+                                        else if( str == "editingDidEndOnExit")   return 1 << 19;
+                                        
+                                        else if( str == "allTouchEvents")       return 0x00000FFF;
+                                        else if( str == "allEditingEvents")     return 0x000F0000;
+                                        else if( str == "allEditingEvents")     return 0x000F0000;
+                                        
+                                        /*
+                                        public static var allEditingEvents: UIControlEvents     { get {return UIControlEvents(rawValue: 0x000F0000 ) } }
+                                        
+                                        public static var applicationReserved: UIControlEvents  { get {return UIControlEvents(rawValue: 0x0F000000 ) } }  application use
+                                        
+                                        public static var systemReserved: UIControlEvents       { get {return UIControlEvents(rawValue: 0xF0000000 ) } }  internal framework use
+                                        
+                                        public static var allEvents: UIControlEvents            { get {return UIControlEvents(rawValue: 0xFFFFFFFF ) } }
+                                        */
+                                        
+                                        
+                                        
                                         assert(false);
                                         
                                         return -1;

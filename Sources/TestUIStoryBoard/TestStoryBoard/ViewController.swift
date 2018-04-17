@@ -139,6 +139,14 @@ class ViewController: UIViewController {
      {
         assert(sender != nil)
      }
+    
+    @IBAction func textChanged(sender : AnyObject? )
+    {
+        if let text = sender as? UITextField
+        {
+            print("TextChanged \(text.text!)")
+        }
+    }
 
 }
 

@@ -12,8 +12,7 @@ import Foundation
 @available(iOS 2.0, *)
 open class UIImageView : UIView
 {
-    
-    
+
     public init(image: UIImage?)
     {
         super.init(frame: CGRect.infinite)

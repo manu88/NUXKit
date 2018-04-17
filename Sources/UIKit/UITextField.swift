@@ -53,7 +53,13 @@ open class UITextField : UIControl
         super.init(coder: aDecoder)
     }
     
-    open var text: String? = nil // default is nil
+    open var text: String?  // default is nil
+    {
+        get
+        {
+            return String(cString:  gtk_entry_get_text( toGtkEntry(_impl)) )
+        }
+    }
     
     @available(iOS 6.0, *)
     @NSCopying open var attributedText: NSAttributedString? // default is nil
@@ -81,6 +87,22 @@ open class UITextField : UIControl
         if( _impl == nil)
         {
             _impl = gtk_entry_new()
+            
+            let ptr = UnsafeMutableRawPointer(Unmanaged.passUnretained(self).toOpaque())
+            
+            g_signal_connect_with_data(_impl, "changed", { (widget, data) in
+                
+                if let data = data
+                {
+                    let this = Unmanaged<UIButton>.fromOpaque(data).takeUnretainedValue()
+                    assert(widget == this._impl)
+                    this.invokeAction(controlEvent: .editingChanged)
+                }
+                
+            }, ptr, nil, GConnectFlags(rawValue: 0))
+            
+            
+            
         }
         
         return _impl != nil
