@@ -1,4 +1,0 @@
-module StoryBoardParser {
-    umbrella "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/Sources/StoryBoardParser/include"
-    export *
-}

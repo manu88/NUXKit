@@ -1,7 +1,0 @@
-version: "Apple Swift version 4.1 (swiftlang-902.0.48 clang-902.0.37.1)"
-options: "2d880f7d9884afa145b58d78f6047681"
-build_time: [1522589091, 415857000]
-inputs:
-  "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/Sources/TestUI/AppDelegate.swift": !dirty [1522513364, 0]
-  "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/Sources/TestUI/ViewController.swift": !dirty [1522583791, 0]
-  "/Users/manueldeneu/Documents/projets/TestPortUIKit/NUXKit/Sources/TestUI/main.swift": !dirty [1522518703, 0]
