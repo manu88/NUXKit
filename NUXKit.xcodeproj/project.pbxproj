@@ -53,6 +53,10 @@
 		59E60C69208513290006CEB6 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E60C67208513290006CEB6 /* UITextField.swift */; };
 		59E60C6B208513F20006CEB6 /* NSText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E60C6A208513F20006CEB6 /* NSText.swift */; };
 		59E60C6C208513F20006CEB6 /* NSText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E60C6A208513F20006CEB6 /* NSText.swift */; };
+		59E60C6E2085C0080006CEB6 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E60C6D2085C0080006CEB6 /* UIImage.swift */; };
+		59E60C6F2085C0080006CEB6 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E60C6D2085C0080006CEB6 /* UIImage.swift */; };
+		59E60C712085C0420006CEB6 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E60C702085C0420006CEB6 /* UIImageView.swift */; };
+		59E60C722085C0420006CEB6 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E60C702085C0420006CEB6 /* UIImageView.swift */; };
 		59EB41262071107400F29CA5 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 59EB41252071107400F29CA5 /* main.c */; };
 		59EB41292071109B00F29CA5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59EB41282071109B00F29CA5 /* main.cpp */; };
 		59EB414A207110D800F29CA5 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EB412D207110AD00F29CA5 /* UIView.swift */; };
@@ -168,6 +172,8 @@
 		59E60C62208484240006CEB6 /* UIStoryboardSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboardSegue.swift; sourceTree = "<group>"; };
 		59E60C67208513290006CEB6 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		59E60C6A208513F20006CEB6 /* NSText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSText.swift; sourceTree = "<group>"; };
+		59E60C6D2085C0080006CEB6 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		59E60C702085C0420006CEB6 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		59EB41252071107400F29CA5 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		59EB41282071109B00F29CA5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		59EB412D207110AD00F29CA5 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
@@ -337,6 +343,8 @@
 				59E60C5B207F8C890006CEB6 /* UISlider.swift */,
 				59E60C67208513290006CEB6 /* UITextField.swift */,
 				594FE35D20727E840098613B /* UIControl.swift */,
+				59E60C6D2085C0080006CEB6 /* UIImage.swift */,
+				59E60C702085C0420006CEB6 /* UIImageView.swift */,
 				594FE359207269430098613B /* UIColor.swift */,
 				59EB412D207110AD00F29CA5 /* UIView.swift */,
 				59EB4132207110AD00F29CA5 /* UIViewController.swift */,
@@ -552,11 +560,13 @@
 				594FE37E207286550098613B /* UIScreen.swift in Sources */,
 				595FC9102073A3CE00FB6D6B /* ViewController3.swift in Sources */,
 				59E60C68208513290006CEB6 /* UITextField.swift in Sources */,
+				59E60C712085C0420006CEB6 /* UIImageView.swift in Sources */,
 				596900F0207B2BFC00A25EA4 /* SB_Scene.cpp in Sources */,
 				59EB414D207110D800F29CA5 /* UIWindow.swift in Sources */,
 				59EB415D2071117D00F29CA5 /* AppDelegate.swift in Sources */,
 				596900FC207B2BFC00A25EA4 /* StoryboardDocument.cpp in Sources */,
 				594FE35A207269430098613B /* UIColor.swift in Sources */,
+				59E60C6E2085C0080006CEB6 /* UIImage.swift in Sources */,
 				595FC9142075219400FB6D6B /* UISwitch.swift in Sources */,
 				596900F4207B2BFC00A25EA4 /* SB_View.cpp in Sources */,
 				59EB414E207110D800F29CA5 /* UIApplication.swift in Sources */,
@@ -607,9 +617,11 @@
 				59F03BD52076AEFF00E47867 /* UISwitch.swift in Sources */,
 				59390883207E5EB70066746C /* UIButtonContent.m in Sources */,
 				596900DD207B289E00A25EA4 /* CustomCoder.mm in Sources */,
+				59E60C722085C0420006CEB6 /* UIImageView.swift in Sources */,
 				59F03BF82076AF8100E47867 /* AppDelegate.swift in Sources */,
 				59F03BD62076AEFF00E47867 /* UIApplication.swift in Sources */,
 				59F03BD82076AEFF00E47867 /* UILabel.swift in Sources */,
+				59E60C6F2085C0080006CEB6 /* UIImage.swift in Sources */,
 				59F03BDB2076AEFF00E47867 /* UIStoryBoard.mm in Sources */,
 				596900F6207B2BFC00A25EA4 /* SB_View.cpp in Sources */,
 				59F03BDC2076AEFF00E47867 /* GtkDrawableContainer.c in Sources */,
